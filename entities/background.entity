@@ -1,0 +1,1 @@
+{"class":"Background","sprite":"background","__CODE":"self.unbind 'draw'\nself.bind 'draw', (canvas) ->\n  I.sprite.fill(canvas, -16, -16, App.width, App.height)","uuid":"background","zIndex":-1}

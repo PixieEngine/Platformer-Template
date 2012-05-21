@@ -1,0 +1,123 @@
+# HEY LISTEN!
+# This file is auto-generated, so editing it directly is a bad idea.
+# Modify the entity that generated it instead!
+Player = (I={}) ->
+  Object.reverseMerge I, {"class":"Player","__CODE":"self.include Debuggable\n\nself.debug\n  filter: 'changed'\n  bounds: false\n  velocity: false\n  x: 35\n  y: 35\n  \nphysics =\n  acceleration:\n    x: 1\n    y: 3\n  jumpPower: -20\n  velocity:\n    xMin: -6\n    xMax: 6\n    yMin: -13\n    yMax: 10\n\nphysics.jumpGravity = physics.acceleration.y * 0.3\n\nphysics.friction = physics.velocity.xMax / (physics.velocity.xMax + physics.acceleration.x)\nphysics.minSpeed = physics.acceleration.x * physics.friction\n\nself.bind 'update', ->\n  self.playerInput()\n  \n  vel = I.velocity\n  \n  self.applyGravity(vel)\n  self.resolveCollisions(vel)\n\n  I.hflip = I.facing.x < 0 \n    \n  vel.x = vel.x * physics.friction\n      \n  self.clampVelocity(vel)\n  \nself.extend\n  applyGravity: (velocity) ->\n    if I.jumping\n      velocity.y += physics.jumpGravity\n    else\n      velocity.y += physics.acceleration.y\n      \n  clampVelocity: (velocity) ->\n    velocity.x = velocity.x.clamp(physics.velocity.xMin, physics.velocity.xMax)\n    velocity.y = velocity.y.clamp(physics.velocity.yMin, physics.velocity.yMax) \n    \n    velocity.x = 0 if velocity.x.abs() < physics.minSpeed\n\n  collide: (xOffset, yOffset, className) ->\n    engine.find(className).inject false, (hit, block) ->\n      hit || Collision.rectangular(self.bounds(xOffset, yOffset), block.bounds())\n\n  jump: ->\n    I.jumping = true\n    I.landed = false\n    I.velocity.y = physics.jumpPower   \n    \n  land: ->\n    I.landed = true\n    \n    Sound.play 'land'\n    \n    engine.add\n      class: \"Emitter\"\n      duration: 3\n      particleCount: 20\n      batchSize: 5\n      x: I.x\n      y: I.y + I.height / 2\n      zIndex: 50\n      generator:\n        includedModules: [\"Dust\"]\n        radius: (n) ->\n          [2, 3, 1].wrap(n)\n      \n  playerInput: ->\n    if keydown.left\n      I.velocity.x -= physics.acceleration.x\n  \n      I.facing = Point(-1, 0)\n    else if keydown.right\n      I.velocity.x += physics.acceleration.x\n     \n      I.facing = Point(1, 0)\n    else\n      I.velocity.x = I.velocity.x.approach(0, physics.acceleration.x)\n      \n    if justPressed.z and I.landed    \n      self.jump()\n      \n    I.jumping = false unless keydown.z\n      \n  resolveCollisions: (velocity) ->\n    xSign = velocity.x.sign()\n    ySign = velocity.y.sign()\n    \n    velocity.x.abs().times ->\n      if self.collide(xSign, 0, \".solid\")\n        velocity.x = 0\n      else\n        I.x += xSign\n\n    velocity.y.abs().times ->   \n      if self.collide(0, ySign, \".solid\")                  \n        velocity.y = 0\n        unless I.landed\n          self.land()\n      else\n        I.y += ySign       ","uuid":"player","facing":"Point(1, 0)","jumping":false,"landed":true,"onWall":false,"velocity":"{x: 0, y: 0}","sprite":"raptor"}
+
+  self = GameObject(I)
+
+  self.include Debuggable
+  
+  self.debug
+    filter: 'changed'
+    bounds: false
+    velocity: false
+    x: 35
+    y: 35
+    
+  physics =
+    acceleration:
+      x: 1
+      y: 3
+    jumpPower: -20
+    velocity:
+      xMin: -6
+      xMax: 6
+      yMin: -13
+      yMax: 10
+  
+  physics.jumpGravity = physics.acceleration.y * 0.3
+  
+  physics.friction = physics.velocity.xMax / (physics.velocity.xMax + physics.acceleration.x)
+  physics.minSpeed = physics.acceleration.x * physics.friction
+  
+  self.bind 'update', ->
+    self.playerInput()
+    
+    vel = I.velocity
+    
+    self.applyGravity(vel)
+    self.resolveCollisions(vel)
+  
+    I.hflip = I.facing.x < 0 
+      
+    vel.x = vel.x * physics.friction
+        
+    self.clampVelocity(vel)
+    
+  self.extend
+    applyGravity: (velocity) ->
+      if I.jumping
+        velocity.y += physics.jumpGravity
+      else
+        velocity.y += physics.acceleration.y
+        
+    clampVelocity: (velocity) ->
+      velocity.x = velocity.x.clamp(physics.velocity.xMin, physics.velocity.xMax)
+      velocity.y = velocity.y.clamp(physics.velocity.yMin, physics.velocity.yMax) 
+      
+      velocity.x = 0 if velocity.x.abs() < physics.minSpeed
+  
+    collide: (xOffset, yOffset, className) ->
+      engine.find(className).inject false, (hit, block) ->
+        hit || Collision.rectangular(self.bounds(xOffset, yOffset), block.bounds())
+  
+    jump: ->
+      I.jumping = true
+      I.landed = false
+      I.velocity.y = physics.jumpPower   
+      
+    land: ->
+      I.landed = true
+      
+      Sound.play 'land'
+      
+      engine.add
+        class: "Emitter"
+        duration: 3
+        particleCount: 20
+        batchSize: 5
+        x: I.x
+        y: I.y + I.height / 2
+        zIndex: 50
+        generator:
+          includedModules: ["Dust"]
+          radius: (n) ->
+            [2, 3, 1].wrap(n)
+        
+    playerInput: ->
+      if keydown.left
+        I.velocity.x -= physics.acceleration.x
+    
+        I.facing = Point(-1, 0)
+      else if keydown.right
+        I.velocity.x += physics.acceleration.x
+       
+        I.facing = Point(1, 0)
+      else
+        I.velocity.x = I.velocity.x.approach(0, physics.acceleration.x)
+        
+      if justPressed.z and I.landed    
+        self.jump()
+        
+      I.jumping = false unless keydown.z
+        
+    resolveCollisions: (velocity) ->
+      xSign = velocity.x.sign()
+      ySign = velocity.y.sign()
+      
+      velocity.x.abs().times ->
+        if self.collide(xSign, 0, ".solid")
+          velocity.x = 0
+        else
+          I.x += xSign
+  
+      velocity.y.abs().times ->   
+        if self.collide(0, ySign, ".solid")                  
+          velocity.y = 0
+          unless I.landed
+            self.land()
+        else
+          I.y += ySign       
+
+  return self

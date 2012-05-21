@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+    <title>TextScreen</title>
+    <link href='/assets/spacedocs/docs.css' media='screen, projection' rel='stylesheet' type='text/css' />
+  </head>
+  <body>
+    <pre></pre>
+    <nav>
+      <a href='Ageable.html'>Ageable</a>
+      <a href='Array.html'>Array</a>
+      <a href='Bindable.html'>Bindable</a>
+      <a href='Boolean.html'>Boolean</a>
+      <a href='Bounded.html'>Bounded</a>
+      <a href='Camera.html'>Camera</a>
+      <a href='Clampable.html'>Clampable</a>
+      <a href='Collidable.html'>Collidable</a>
+      <a href='Collision.html'>Collision</a>
+      <a href='Color.html'>Color</a>
+      <a href='Controllable.html'>Controllable</a>
+      <a href='Cooldown.html'>Cooldown</a>
+      <a href='Core.html'>Core</a>
+      <a href='Date.html'>Date</a>
+      <a href='Debuggable.html'>Debuggable</a>
+      <a href='Drawable.html'>Drawable</a>
+      <a href='Engine.html'>Engine</a>
+      <a href='Engine.Joysticks.html'>Engine.Joysticks</a>
+      <a href='Expirable.html'>Expirable</a>
+      <a href='Fadeable.html'>Fadeable</a>
+      <a href='Flickerable.html'>Flickerable</a>
+      <a href='Follow.html'>Follow</a>
+      <a href='Framerate.html'>Framerate</a>
+      <a href='Function.html'>Function</a>
+      <a href='GameObject.html'>GameObject</a>
+      <a href='GameOver.html'>GameOver</a>
+      <a href='GameState.html'>GameState</a>
+      <a href='LevelState.html'>LevelState</a>
+      <a href='Local.html'>Local</a>
+      <a href='Math.html'>Math</a>
+      <a href='Matrix.html'>Matrix</a>
+      <a href='Metered.html'>Metered</a>
+      <a href='Movable.html'>Movable</a>
+      <a href='Music.html'>Music</a>
+      <a href='Number.html'>Number</a>
+      <a href='Object.html'>Object</a>
+      <a href='Oscillator.html'>Oscillator</a>
+      <a href='PixieCanvas.html'>PixieCanvas</a>
+      <a href='Point.html'>Point</a>
+      <a href='PowerCanvas.html'>PowerCanvas</a>
+      <a href='Random.html'>Random</a>
+      <a href='RegExp.html'>RegExp</a>
+      <a href='ResourceLoader.html'>ResourceLoader</a>
+      <a href='Rotatable.html'>Rotatable</a>
+      <a href='Sound.html'>Sound</a>
+      <a href='Sprite.html'>Sprite</a>
+      <a href='String.html'>String</a>
+      <a href='TextEffect.html'>TextEffect</a>
+      <a class='active' href='TextScreen.html'>TextScreen</a>
+      <a href='TimedEvents.html'>TimedEvents</a>
+      <a href='TitleScreen.html'>TitleScreen</a>
+      <a href='Tween.html'>Tween</a>
+      <a href='jQuery.html'>jQuery</a>
+      <a href='justPressed.html'>justPressed</a>
+      <a href='keydown.html'>keydown</a>
+      <a href='mouseDown.html'>mouseDown</a>
+      <a href='mousePressed.html'>mousePressed</a>
+      <a href='requestAnimationFrame.html'>requestAnimationFrame</a>
+      <a href='window.html'>window</a>
+    </nav>
+    <section class='method_list'>
+      <h3>TextScreen Methods</h3>
+      <div class='methods'>
+        <a href='TextScreen.html##centerText'>#centerText</a>
+      </div>
+    </section>
+    <div class='documentation'>
+      <a name='#centerText'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>TextScreen#centerText(canvas, text, options)</h1>
+      <div class='description'>
+        <section class='summary'>
+          <p>Draw center aligned text at the given y position.</p>
+          
+          <p><code><pre><br />screen = TextScreen()<br />screen.centerText canvas, 'Centering text is easy'<br /></pre></code></p>
+        </section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          
+        </section>
+        <section class='parameters'>
+          <h3>Parameters</h3>
+          <ul>
+            <li>
+              <span class='param_name'>canvas</span>
+               -
+              <span class='param_description'>The canvas to draw on</span>
+            </li>
+            <li>
+              <span class='param_name'>text</span>
+               -
+              <span class='param_description'>The text to draw</span>
+            </li>
+            <li>
+              <span class='param_name'>options</span>
+               -
+              <span class='param_description'>These include font, size, color, and yPosition</span>
+            </li>
+          </ul>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>centerText: function(canvas, text, options) {&#x000A;      var color, font, size, yPosition;&#x000A;      if (options == null) options = {};&#x000A;      font = options.font || I.font;&#x000A;      size = options.size || I.fontSize;&#x000A;      color = options.color || I.fontColor;&#x000A;      yPosition = options.y || I.yPosition;&#x000A;      canvas.font("" + size + "px " + font);&#x000A;      return canvas.centerText({&#x000A;        y: yPosition,&#x000A;        text: text,&#x000A;        color: color&#x000A;      });&#x000A;    }&#x000A;  });&#x000A;};&#x000A;;&#x000A;&#x000A;(function() {&#x000A;  var Map, Tilemap, loadByName;&#x000A;  Map = function(data, entityCallback) {&#x000A;    var entity, loadEntities, spriteLookup, tileHeight, tileWidth, uuid, _ref;&#x000A;    tileHeight = data.tileHeight;&#x000A;    tileWidth = data.tileWidth;&#x000A;    spriteLookup = {};&#x000A;    _ref = App.entities;&#x000A;    for (uuid in _ref) {&#x000A;      entity = _ref[uuid];&#x000A;      spriteLookup[uuid] = Sprite.fromURL(entity.tileSrc);&#x000A;    }&#x000A;    loadEntities = function() {&#x000A;      if (!entityCallback) return;&#x000A;      return data.layers.each(function(layer, layerIndex) {&#x000A;        var instance, instanceData, instances, x, y, _i, _len, _results;&#x000A;        if (instances = layer.instances) {&#x000A;          _results = [];&#x000A;          for (_i = 0, _len = instances.length; _i < _len; _i++) {&#x000A;            instance = instances[_i];&#x000A;            x = instance.x, y = instance.y, uuid = instance.uuid;&#x000A;            instanceData = Object.extend({&#x000A;              layer: layerIndex,&#x000A;              sprite: spriteLookup[uuid],&#x000A;              x: x + tileWidth / 2,&#x000A;              y: y + tileHeight / 2&#x000A;            }, App.entities[uuid], instance.properties);&#x000A;            _results.push(entityCallback(instanceData));&#x000A;          }&#x000A;          return _results;&#x000A;        }&#x000A;      });&#x000A;    };&#x000A;    loadEntities();&#x000A;    return data;&#x000A;  };&#x000A;  Tilemap = function(name, callback, entityCallback) {&#x000A;    return fromPixieId(App.Tilemaps[name], callback, entityCallback);&#x000A;  };&#x000A;  loadByName = function(name, callback, entityCallback) {&#x000A;    var proxy, url;&#x000A;    url = ResourceLoader.urlFor("tilemaps", name);&#x000A;    proxy = {};&#x000A;    $.getJSON(url, function(data) {&#x000A;      Object.extend(proxy, Map(data, entityCallback));&#x000A;      return typeof callback === "function" ? callback(proxy) : void 0;&#x000A;    });&#x000A;    return proxy;&#x000A;  };&#x000A;  Tilemap.load = function(options) {&#x000A;    if (options.pixieId) {&#x000A;      return fromPixieId(options.pixieId, options.complete, options.entity);&#x000A;    } else if (options.name) {&#x000A;      return loadByName(options.name, options.complete, options.entity);&#x000A;    }&#x000A;  };&#x000A;  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Tilemap"] = Tilemap;&#x000A;})();&#x000A;;</code></pre>
+        </section>
+      </div>
+      <hr />
+    </div>
+  </body>
+</html>

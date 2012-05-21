@@ -1,0 +1,303 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+    <title>Metered</title>
+    <link href='/assets/spacedocs/docs.css' media='screen, projection' rel='stylesheet' type='text/css' />
+  </head>
+  <body>
+    <pre></pre>
+    <nav>
+      <a href='Ageable.html'>Ageable</a>
+      <a href='Array.html'>Array</a>
+      <a href='Bindable.html'>Bindable</a>
+      <a href='Boolean.html'>Boolean</a>
+      <a href='Bounded.html'>Bounded</a>
+      <a href='Camera.html'>Camera</a>
+      <a href='Clampable.html'>Clampable</a>
+      <a href='Collidable.html'>Collidable</a>
+      <a href='Collision.html'>Collision</a>
+      <a href='Color.html'>Color</a>
+      <a href='Controllable.html'>Controllable</a>
+      <a href='Cooldown.html'>Cooldown</a>
+      <a href='Core.html'>Core</a>
+      <a href='Date.html'>Date</a>
+      <a href='Debuggable.html'>Debuggable</a>
+      <a href='Drawable.html'>Drawable</a>
+      <a href='Engine.html'>Engine</a>
+      <a href='Engine.Joysticks.html'>Engine.Joysticks</a>
+      <a href='Expirable.html'>Expirable</a>
+      <a href='Fadeable.html'>Fadeable</a>
+      <a href='Flickerable.html'>Flickerable</a>
+      <a href='Follow.html'>Follow</a>
+      <a href='Framerate.html'>Framerate</a>
+      <a href='Function.html'>Function</a>
+      <a href='GameObject.html'>GameObject</a>
+      <a href='GameOver.html'>GameOver</a>
+      <a href='GameState.html'>GameState</a>
+      <a href='LevelState.html'>LevelState</a>
+      <a href='Local.html'>Local</a>
+      <a href='Math.html'>Math</a>
+      <a href='Matrix.html'>Matrix</a>
+      <a class='active' href='Metered.html'>Metered</a>
+      <a href='Movable.html'>Movable</a>
+      <a href='Music.html'>Music</a>
+      <a href='Number.html'>Number</a>
+      <a href='Object.html'>Object</a>
+      <a href='Oscillator.html'>Oscillator</a>
+      <a href='PixieCanvas.html'>PixieCanvas</a>
+      <a href='Point.html'>Point</a>
+      <a href='PowerCanvas.html'>PowerCanvas</a>
+      <a href='Random.html'>Random</a>
+      <a href='RegExp.html'>RegExp</a>
+      <a href='ResourceLoader.html'>ResourceLoader</a>
+      <a href='Rotatable.html'>Rotatable</a>
+      <a href='Sound.html'>Sound</a>
+      <a href='Sprite.html'>Sprite</a>
+      <a href='String.html'>String</a>
+      <a href='TextEffect.html'>TextEffect</a>
+      <a href='TextScreen.html'>TextScreen</a>
+      <a href='TimedEvents.html'>TimedEvents</a>
+      <a href='TitleScreen.html'>TitleScreen</a>
+      <a href='Tween.html'>Tween</a>
+      <a href='jQuery.html'>jQuery</a>
+      <a href='justPressed.html'>justPressed</a>
+      <a href='keydown.html'>keydown</a>
+      <a href='mouseDown.html'>mouseDown</a>
+      <a href='mousePressed.html'>mousePressed</a>
+      <a href='requestAnimationFrame.html'>requestAnimationFrame</a>
+      <a href='window.html'>window</a>
+    </nav>
+    <section class='method_list'>
+      <h3>Metered Methods</h3>
+      <div class='methods'>
+        <a href='Metered.html##meter'>#meter</a>
+        <a href='Metered.html##showMeter'>#showMeter</a>
+        <a href='Metered.html##hideMeter'>#hideMeter</a>
+        <a href='Metered.html##toggleMeter'>#toggleMeter</a>
+      </div>
+    </section>
+    <div class='documentation'>
+      <a name='#meter'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Metered#meter(name, options, border:, color, height, position, x, y, show, width)</h1>
+      <div class='description'>
+        <section class='summary'><p>Configures a meter to be drawn each overlay event.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />player = GameObject</p>
+          
+          <p>player.include Metered      </p>
+          
+          <p>player.meter 'health',<br />  border<br />    color: 'brown'<br />    radius: 3<br />  color: 'pink'<br />  height: 20<br />  x: 5<br />  y: 5<br />  show: true<br />  width: 150</p>
+          
+          <h1>=> Sets up a health meter, using all the configuration options</h1>
+          
+          <p></pre></code></p>
+        </section>
+        <section class='parameters'>
+          <h3>Parameters</h3>
+          <ul>
+            <li>
+              <span class='param_name'>name</span>
+               -
+              <span class='param_description'>The name of the property to meter</span>
+            </li>
+            <li>
+              <span class='param_name'>options</span>
+               -
+              <span class='param_description'>The meter configuration options</span>
+            </li>
+            <li>
+              <span class='param_name'>border:</span>
+               -
+              <span class='param_description'>radius Border radius of the meter</span>
+            </li>
+            <li>
+              <span class='param_name'>color</span>
+               -
+              <span class='param_description'>Color of the meter's inner rectangle</span>
+            </li>
+            <li>
+              <span class='param_name'>height</span>
+               -
+              <span class='param_description'>Height of the meter</span>
+            </li>
+            <li>
+              <span class='param_name'>position</span>
+               -
+              <span class='param_description'>An x, y object representing the position of the meter</span>
+            </li>
+            <li>
+              <span class='param_name'>x</span>
+               -
+              <span class='param_description'>x position of the meter</span>
+            </li>
+            <li>
+              <span class='param_name'>y</span>
+               -
+              <span class='param_description'>y position of the meter</span>
+            </li>
+            <li>
+              <span class='param_name'>show</span>
+               -
+              <span class='param_description'>Boolean to toggle whether of not to display the meter</span>
+            </li>
+            <li>
+              <span class='param_name'>width</span>
+               -
+              <span class='param_description'>How wide the meter is</span>
+            </li>
+          </ul>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>meter: function(name, options) {&#x000A;      if (options == null) options = {};&#x000A;      Object.reverseMerge(options, {&#x000A;        backgroundColor: 'black',&#x000A;        border: {&#x000A;          color: 'white',&#x000A;          radius: 2,&#x000A;          width: 1.5&#x000A;        },&#x000A;        color: 'green',&#x000A;        height: 10,&#x000A;        x: 0,&#x000A;        y: 0,&#x000A;        show: true,&#x000A;        width: 100&#x000A;      });&#x000A;      if (I[name] == null) I[name] = 100;&#x000A;      if (!I["max" + (name.capitalize())]) {&#x000A;        if (I[name]) {&#x000A;          I["max" + (name.capitalize())] = I[name];&#x000A;        } else {&#x000A;          I["max" + (name.capitalize())] = 100;&#x000A;        }&#x000A;      }&#x000A;      return I.meters[name] = options;&#x000A;    },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#showMeter'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Metered#showMeter(name)</h1>
+      <div class='description'>
+        <section class='summary'><p>Shows the named meter</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />player = GameObject</p>
+          
+          <p>player.include Metered      </p>
+          
+          <h1>creates a health meter but disables visibility</h1>
+          
+          <p>player.meter 'health'<br />  show: false</p>
+          
+          <h1>enables visibility for the meter named 'health'</h1>
+          
+          <p>player.showMeter 'health'<br /></pre></code></p>
+        </section>
+        <section class='parameters'>
+          <h3>Parameters</h3>
+          <ul>
+            <li>
+              <span class='param_name'>name</span>
+               -
+              <span class='param_description'>The name of the meter to show</span>
+            </li>
+          </ul>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>showMeter: function(name) {&#x000A;      return I.meters[name].show = true;&#x000A;    },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#hideMeter'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Metered#hideMeter(name)</h1>
+      <div class='description'>
+        <section class='summary'><p>Hides the named meter</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />player = GameObject</p>
+          
+          <p>player.include Metered      </p>
+          
+          <h1>creates a health meter</h1>
+          
+          <p>player.meter 'health'</p>
+          
+          <h1>disables visibility for the meter named 'health'</h1>
+          
+          <p>player.hideMeter 'health'<br /></pre></code></p>
+        </section>
+        <section class='parameters'>
+          <h3>Parameters</h3>
+          <ul>
+            <li>
+              <span class='param_name'>name</span>
+               -
+              <span class='param_description'>The name of the meter to hide</span>
+            </li>
+          </ul>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>hideMeter: function(name) {&#x000A;      return I.meters[name].show = false;&#x000A;    },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#toggleMeter'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Metered#toggleMeter(name)</h1>
+      <div class='description'>
+        <section class='summary'><p>Toggles visibility of the named meter</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />player = GameObject</p>
+          
+          <p>player.include Metered      </p>
+          
+          <h1>creates a health meter</h1>
+          
+          <p>player.meter 'health'</p>
+          
+          <h1>toggles visibility for the meter named 'health'</h1>
+          
+          <p>player.toggleMeter 'health'<br /></pre></code></p>
+        </section>
+        <section class='parameters'>
+          <h3>Parameters</h3>
+          <ul>
+            <li>
+              <span class='param_name'>name</span>
+               -
+              <span class='param_description'>The name of the meter to toggle</span>
+            </li>
+          </ul>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>toggleMeter: function(name) {&#x000A;      return I.meters[name].show = !I.meters[name].show;&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
+        </section>
+      </div>
+      <hr />
+    </div>
+  </body>
+</html>

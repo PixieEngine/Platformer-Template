@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+    <title>Tween</title>
+    <link href='/assets/spacedocs/docs.css' media='screen, projection' rel='stylesheet' type='text/css' />
+  </head>
+  <body>
+    <pre></pre>
+    <nav>
+      <a href='Ageable.html'>Ageable</a>
+      <a href='Array.html'>Array</a>
+      <a href='Bindable.html'>Bindable</a>
+      <a href='Boolean.html'>Boolean</a>
+      <a href='Bounded.html'>Bounded</a>
+      <a href='Camera.html'>Camera</a>
+      <a href='Clampable.html'>Clampable</a>
+      <a href='Collidable.html'>Collidable</a>
+      <a href='Collision.html'>Collision</a>
+      <a href='Color.html'>Color</a>
+      <a href='Controllable.html'>Controllable</a>
+      <a href='Cooldown.html'>Cooldown</a>
+      <a href='Core.html'>Core</a>
+      <a href='Date.html'>Date</a>
+      <a href='Debuggable.html'>Debuggable</a>
+      <a href='Drawable.html'>Drawable</a>
+      <a href='Engine.html'>Engine</a>
+      <a href='Engine.Joysticks.html'>Engine.Joysticks</a>
+      <a href='Expirable.html'>Expirable</a>
+      <a href='Fadeable.html'>Fadeable</a>
+      <a href='Flickerable.html'>Flickerable</a>
+      <a href='Follow.html'>Follow</a>
+      <a href='Framerate.html'>Framerate</a>
+      <a href='Function.html'>Function</a>
+      <a href='GameObject.html'>GameObject</a>
+      <a href='GameOver.html'>GameOver</a>
+      <a href='GameState.html'>GameState</a>
+      <a href='LevelState.html'>LevelState</a>
+      <a href='Local.html'>Local</a>
+      <a href='Math.html'>Math</a>
+      <a href='Matrix.html'>Matrix</a>
+      <a href='Metered.html'>Metered</a>
+      <a href='Movable.html'>Movable</a>
+      <a href='Music.html'>Music</a>
+      <a href='Number.html'>Number</a>
+      <a href='Object.html'>Object</a>
+      <a href='Oscillator.html'>Oscillator</a>
+      <a href='PixieCanvas.html'>PixieCanvas</a>
+      <a href='Point.html'>Point</a>
+      <a href='PowerCanvas.html'>PowerCanvas</a>
+      <a href='Random.html'>Random</a>
+      <a href='RegExp.html'>RegExp</a>
+      <a href='ResourceLoader.html'>ResourceLoader</a>
+      <a href='Rotatable.html'>Rotatable</a>
+      <a href='Sound.html'>Sound</a>
+      <a href='Sprite.html'>Sprite</a>
+      <a href='String.html'>String</a>
+      <a href='TextEffect.html'>TextEffect</a>
+      <a href='TextScreen.html'>TextScreen</a>
+      <a href='TimedEvents.html'>TimedEvents</a>
+      <a href='TitleScreen.html'>TitleScreen</a>
+      <a class='active' href='Tween.html'>Tween</a>
+      <a href='jQuery.html'>jQuery</a>
+      <a href='justPressed.html'>justPressed</a>
+      <a href='keydown.html'>keydown</a>
+      <a href='mouseDown.html'>mouseDown</a>
+      <a href='mousePressed.html'>mousePressed</a>
+      <a href='requestAnimationFrame.html'>requestAnimationFrame</a>
+      <a href='window.html'>window</a>
+    </nav>
+    <section class='method_list'>
+      <h3>Tween Methods</h3>
+      <div class='methods'>
+        <a href='Tween.html##tween'>#tween</a>
+      </div>
+    </section>
+    <div class='documentation'>
+      <a name='#tween'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Tween#tween(duration, properties)</h1>
+      <div class='description'>
+        <section class='summary'><p>Modify the object's properties over time.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />player = GameObject()</p>
+          
+          <p>player.tween 30,<br />  x: 50<br />  y: 50<br />  easing: "quadratic"<br /></pre></code></p>
+          
+          <p><code><pre><br />player = GameObject()</p>
+          
+          <p>player.tween 30,<br />  x: 150<br />  y: 150<br />  complete: -><br />    player.dance()<br /></pre></code></p>
+        </section>
+        <section class='parameters'>
+          <h3>Parameters</h3>
+          <ul>
+            <li>
+              <span class='param_name'>duration</span>
+               -
+              <span class='param_description'>How long (in frames) until the object's properties reach their final values.</span>
+            </li>
+            <li>
+              <span class='param_name'>properties</span>
+               -
+              <span class='param_description'>Which properties to tween. Set the `easing` property to specify the easing function.</span>
+            </li>
+          </ul>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>tween: function(duration, properties) {&#x000A;      var complete, easing, property, target, _results;&#x000A;      properties = Object.extend({}, properties);&#x000A;      easing = properties.easing || "linear";&#x000A;      complete = properties.complete;&#x000A;      delete properties.easing;&#x000A;      delete properties.complete;&#x000A;      _results = [];&#x000A;      for (property in properties) {&#x000A;        target = properties[property];&#x000A;        _results.push(I.activeTweens[property] = {&#x000A;          complete: complete,&#x000A;          end: target,&#x000A;          start: I[property],&#x000A;          easing: easing,&#x000A;          duration: duration,&#x000A;          startTime: I.age,&#x000A;          endTime: I.age + duration&#x000A;        });&#x000A;      }&#x000A;      return _results;&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;&#x000A;;&#x000A;;&#x000A;;&#x000A;;&#x000A;&#x000A;document.oncontextmenu = function() {&#x000A;  return false;&#x000A;};&#x000A;&#x000A;$(document).bind("keydown", function(event) {&#x000A;  if (!$(event.target).is("input")) return event.preventDefault();&#x000A;});&#x000A;;</code></pre>
+        </section>
+      </div>
+      <hr />
+    </div>
+  </body>
+</html>
