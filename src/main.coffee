@@ -5,7 +5,6 @@ gameKeys
 window.engine = Engine
   backgroundColor: Color("sky blue").desaturate(.2)
   canvas: $("canvas").pixieCanvas()
-  includedModules: ["Levels", "Tilemap"]
   levels: ['level']
   
 engine.include 'Engine.Levels', 'Engine.Tilemap'
