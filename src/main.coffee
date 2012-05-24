@@ -8,6 +8,8 @@ window.engine = Engine
   includedModules: ["Levels", "Tilemap"]
   levels: ['level']
   
+engine.include 'Engine.Levels', 'Engine.Tilemap'
+  
 engine.nextLevel()
 engine.start()
 
