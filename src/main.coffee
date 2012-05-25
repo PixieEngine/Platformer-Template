@@ -11,8 +11,4 @@ engine.include 'Engine.Levels', 'Engine.Tilemap'
   
 engine.nextLevel()
 engine.start()
-
-engine.bind 'update', ->
-  if keydown.f
-    engine.flash()
     
