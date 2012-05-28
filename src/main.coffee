@@ -22,7 +22,7 @@ engine.on 'update', ->
   bounds = Rectangle
     x: 0
     y: 0
-    width: 3600
+    width: 6400
     height: App.height
   
   target = engine.first("Player")
