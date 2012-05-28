@@ -17,6 +17,23 @@ engine.add 'Player'
   
 engine.start()
     
+engine.on 'update', ->
+  camera = engine.camera()
+  bounds = Rectangle
+    x: 0
+    y: 0
+    width: 3600
+    height: App.height
+  
+  target = engine.first("Player")
+  
+  if target 
+    camera.follow(target, "topdown")
+    camera.I.cameraBounds = bounds
+    camera.I.t90 = 0.5
+    camera.I.x = target.I.x
+    camera.I.y = target.I.y
+  
 $('body').append $ '<iframe />',
  class: "youtube-player"
  css:
