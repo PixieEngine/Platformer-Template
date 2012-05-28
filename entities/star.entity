@@ -1,0 +1,7 @@
+{
+  "class": "Star",
+  "parentClass": "GameObject",
+  "sprite": "star",
+  "__CODE": "",
+  "uuid": "star"
+}
