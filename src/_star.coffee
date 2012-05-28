@@ -6,7 +6,7 @@ Star = (I={}) ->
     "class": "Star",
     "parentClass": "GameObject",
     "sprite": "star",
-    "__CODE": "self.on 'destroy', ->\n  player = engine.first('Player')\n  \n  player.I.stars += 1\n  \n  player.I.speed += 1",
+    "__CODE": "self.on 'destroy', ->\n  player = engine.first('Player')\n  \n  unless I.x > engine.camera().I.cameraBounds.width \n    player.I.stars += 1\n    player.I.speed += 1",
     "uuid": "star"
   }
 
@@ -15,8 +15,8 @@ Star = (I={}) ->
   self.on 'destroy', ->
     player = engine.first('Player')
     
-    player.I.stars += 1
-    
-    player.I.speed += 1
+    unless I.x > engine.camera().I.cameraBounds.width 
+      player.I.stars += 1
+      player.I.speed += 1
 
   return self
