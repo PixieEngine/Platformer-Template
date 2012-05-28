@@ -6,13 +6,13 @@ Star = (I={}) ->
     "class": "Star",
     "parentClass": "GameObject",
     "sprite": "star",
-    "__CODE": "index = 0\n\nself.on 'destroy', ->\n  player = engine.first('Player')\n  \n  unless I.x > engine.camera().I.cameraBounds.width \n    player.I.stars += 1\n    player.I.speed += 1\n    \n    engine.add 'FloatingTextEffect'\n      x: I.x - 40\n      y: I.y - 40\n      text: [\n        \"Nothings\"\n        \"Gonna\"\n        \"Stop\"\n        \"Me\"\n        \"Now\"\n      ].wrap(index)\n      \n      index += 1\n      ",
+    "__CODE": "I.index = 0\n\nself.on 'destroy', ->\n  player = engine.first('Player')\n  \n  unless I.x > engine.camera().I.cameraBounds.width \n    player.I.stars += 1\n    player.I.speed += 1\n    \n    engine.add 'FloatingTextEffect'\n      x: I.x - 40\n      y: I.y - 40\n      text: [\n        \"Nothings\"\n        \"Gonna\"\n        \"Stop\"\n        \"Me\"\n        \"Now\"\n      ].wrap(I.index)\n      \n      I.index += 1\n      ",
     "uuid": "star"
   }
 
   self = GameObject(I)
 
-  index = 0
+  I.index = 0
   
   self.on 'destroy', ->
     player = engine.first('Player')
@@ -30,9 +30,9 @@ Star = (I={}) ->
           "Stop"
           "Me"
           "Now"
-        ].wrap(index)
+        ].wrap(I.index)
         
-        index += 1
+        I.index += 1
         
 
   return self
