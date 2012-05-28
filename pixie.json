@@ -1,6 +1,6 @@
 {
   "author": "condor",
-  "name": "Platformer Template",
+  "name": "Nothing's gonna stop me now",
   "libs": {
     "00_gamelib.js": "https://raw.github.com/PixieEngine/PixieDust/pixie/game.js",
     "browserlib.js": "https://github.com/STRd6/browserlib/raw/pixie/game.js"
