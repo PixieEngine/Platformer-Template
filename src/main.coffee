@@ -20,7 +20,7 @@ window.reloadGame = ->
     
   player.I.stars = 0
   
-load()
+window.reloadGame()
   
 engine.start()
     
