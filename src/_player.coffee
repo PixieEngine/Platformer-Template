@@ -12,7 +12,7 @@ Player = (I={}) ->
     "onWall": false,
     "velocity": "{x: 0, y: 0}",
     "sprite": "balki",
-    "scale": ""
+    "scale": 0.5
   }
 
   self = GameObject(I)
