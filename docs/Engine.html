@@ -5,6 +5,7 @@
     <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
     <title>Engine</title>
     <link href='/assets/spacedocs/docs.css' media='screen, projection' rel='stylesheet' type='text/css' />
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
   </head>
   <body>
     <pre></pre>
@@ -72,42 +73,64 @@
     <section class='method_list'>
       <h3>Engine Methods</h3>
       <div class='methods'>
-        <a href='Engine.html##beforeAdd'>#beforeAdd</a>
+        <a href='Engine.html##add'>#add</a>
         <a href='Engine.html##afterAdd'>#afterAdd</a>
-        <a href='Engine.html##update'>#update</a>
         <a href='Engine.html##afterUpdate'>#afterUpdate</a>
+        <a href='Engine.html##beforeAdd'>#beforeAdd</a>
         <a href='Engine.html##beforeDraw'>#beforeDraw</a>
-        <a href='Engine.html##draw'>#draw</a>
-        <a href='Engine.html##overlay'>#overlay</a>
-        <a href='Engine.html##start'>#start</a>
-        <a href='Engine.html##stop'>#stop</a>
-        <a href='Engine.html##frameAdvance'>#frameAdvance</a>
-        <a href='Engine.html##play'>#play</a>
-        <a href='Engine.html##pause'>#pause</a>
-        <a href='Engine.html##paused'>#paused</a>
-        <a href='Engine.html##setFramerate'>#setFramerate</a>
+        <a href='Engine.html##cameras'>#cameras</a>
         <a href='Engine.html##collides'>#collides</a>
         <a href='Engine.html##collidesWith'>#collidesWith</a>
-        <a href='Engine.html##rayCollides'>#rayCollides</a>
         <a href='Engine.html##delay'>#delay</a>
-        <a href='Engine.html##nextLevel'>#nextLevel</a>
-        <a href='Engine.html##goToLevel'>#goToLevel</a>
-        <a href='Engine.html##reloadLevel'>#reloadLevel</a>
+        <a href='Engine.html##draw'>#draw</a>
         <a href='Engine.html##find'>#find</a>
+        <a href='Engine.html##frameAdvance'>#frameAdvance</a>
+        <a href='Engine.html##goToLevel'>#goToLevel</a>
         <a href='Engine.html##loadMap'>#loadMap</a>
-        <a href='Engine.html##add'>#add</a>
-        <a href='Engine.html##cameras'>#cameras</a>
+        <a href='Engine.html##nextLevel'>#nextLevel</a>
+        <a href='Engine.html##overlay'>#overlay</a>
+        <a href='Engine.html##pause'>#pause</a>
+        <a href='Engine.html##paused'>#paused</a>
+        <a href='Engine.html##play'>#play</a>
+        <a href='Engine.html##rayCollides'>#rayCollides</a>
+        <a href='Engine.html##reloadLevel'>#reloadLevel</a>
+        <a href='Engine.html##setFramerate'>#setFramerate</a>
+        <a href='Engine.html##start'>#start</a>
+        <a href='Engine.html##stop'>#stop</a>
+        <a href='Engine.html##update'>#update</a>
       </div>
     </section>
     <div class='documentation'>
-      <a name='#beforeAdd'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#beforeAdd(entityData)</h1>
+      <h1>Engine Summary</h1>
       <div class='description'>
-        <section class='summary'><p>Observe or modify the <br />entity data before it is added to the engine.</p></section>
+        <section class='summary'></section>
+        <p>The Engine controls the game world and manages game state. Once you <br />set it up and let it run it pretty much takes care of itself.</p>
         <section class='usage'>
           <h3>Usage</h3>
+          <p>You can use the engine to add or remove objects from the game world.</p>
           
+          <p>There are several modules that can include to add additional capabilities <br />to the engine.</p>
+          
+          <p>The engine fires events that you  may bind listeners to. Event listeners <br />may be bound with <code>engine.bind(eventName, callback)</code></p>
+        </section>
+      </div>
+      <hr />
+      <a name='#add'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#add(entityData)</h1>
+      <div class='description'>
+        <section class='summary'><p>The add method creates and adds an object to the game world. Two<br />other events are triggered around this one: beforeAdd and afterAdd.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre></p>
+          
+          <h1>you can add arbitrary entityData and</h1>
+          
+          <h1>the engine will make it into a GameObject</h1>
+          
+          <p>engine.add <br />  x: 50<br />  y: 30<br />  color: "red"</p>
+          
+          <p>player = engine.add<br />  class: "Player"<br /></pre></code></p>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -115,7 +138,7 @@
             <li>
               <span class='param_name'>entityData</span>
                -
-              <span class='param_description'></span>
+              <span class='param_description'>The data used to create the game object.</span>
             </li>
           </ul>
         </section>
@@ -123,14 +146,14 @@
           <h3>Returns</h3>
           <p>
             Type:
-            <a href='.html'></a>
+            <a href='GameObject.html'>GameObject</a>
           </p>
           <p class='return_description'></p>
         </section>
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code></code></pre>
+          <pre><code>add: function(entityData) {&#x000A;      var object;&#x000A;      self.trigger("beforeAdd", entityData);&#x000A;      object = GameObject.construct(entityData);&#x000A;      object.create();&#x000A;      self.trigger("afterAdd", object);&#x000A;      if (I.updating) {&#x000A;        queuedObjects.push(object);&#x000A;      } else {&#x000A;        I.objects.push(object);&#x000A;      }&#x000A;      return object;&#x000A;    },&#x000A;    objects: function() {&#x000A;      return I.objects.copy();&#x000A;    }&#x000A;  });&#x000A;  self.include(Bindable);&#x000A;  self.bind("update", function(elapsedTime) {&#x000A;    var toKeep, toRemove, _ref;&#x000A;    I.updating = true;&#x000A;    I.objects.invoke("trigger", "beforeUpdate", elapsedTime);&#x000A;    _ref = I.objects.partition(function(object) {&#x000A;      return object.update(elapsedTime);&#x000A;    }), toKeep = _ref[0], toRemove = _ref[1];&#x000A;    I.objects.invoke("trigger", "afterUpdate", elapsedTime);&#x000A;    toRemove.invoke("trigger", "remove");&#x000A;    I.objects = toKeep.concat(queuedObjects);&#x000A;    queuedObjects = [];&#x000A;    return I.updating = false;&#x000A;  });&#x000A;  self.include(GameState.Cameras);&#x000A;  self.include(GameState.SaveState);&#x000A;  return self;&#x000A;};&#x000A;;&#x000A;&#x000A;GameState.Cameras = function(I, self) {&#x000A;  var cameras;&#x000A;  cameras = [Camera()];&#x000A;  self.bind('update', function() {&#x000A;    return self.cameras().invoke('trigger', 'update');&#x000A;  });&#x000A;  self.bind('afterUpdate', function() {&#x000A;    return self.cameras().invoke('trigger', 'afterUpdate');&#x000A;  });&#x000A;  self.bind('draw', function(canvas) {&#x000A;    return self.cameras().invoke('trigger', 'draw', canvas, self.objects());&#x000A;  });&#x000A;  self.bind('overlay', function(canvas) {&#x000A;    return self.cameras().invoke('trigger', 'overlay', canvas, self.objects());&#x000A;  });&#x000A;  return {&#x000A;    addCamera: function(data) {&#x000A;      return cameras.push(Camera(data));&#x000A;    },</code></pre>
         </section>
       </div>
       <hr />
@@ -150,40 +173,6 @@
               <span class='param_name'>object</span>
                -
               <span class='param_description'>The object that has just been added to the</span>
-            </li>
-          </ul>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code></code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#update'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#update(elapsedTime)</h1>
-      <div class='description'>
-        <section class='summary'><p>Called when the engine updates all the game objects.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          
-        </section>
-        <section class='parameters'>
-          <h3>Parameters</h3>
-          <ul>
-            <li>
-              <span class='param_name'>elapsedTime</span>
-               -
-              <span class='param_description'>The time in seconds that has elapsed since the last update.</span>
             </li>
           </ul>
         </section>
@@ -226,6 +215,40 @@
         </section>
       </div>
       <hr />
+      <a name='#beforeAdd'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#beforeAdd(entityData)</h1>
+      <div class='description'>
+        <section class='summary'><p>Observe or modify the <br />entity data before it is added to the engine.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          
+        </section>
+        <section class='parameters'>
+          <h3>Parameters</h3>
+          <ul>
+            <li>
+              <span class='param_name'>entityData</span>
+               -
+              <span class='param_description'></span>
+            </li>
+          </ul>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code></code></pre>
+        </section>
+      </div>
+      <hr />
       <a name='#beforeDraw'></a>
       <!-- TODO make sure method_data isn't nil -->
       <h1>Engine#beforeDraw()</h1>
@@ -250,245 +273,27 @@
         </section>
       </div>
       <hr />
-      <a name='#draw'></a>
+      <a name='#cameras'></a>
       <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#draw()</h1>
+      <h1>Engine#cameras()</h1>
       <div class='description'>
-        <section class='summary'><p>Called after the engine draws on the canvas. The current camera transform is applied.</p></section>
+        <section class='summary'><p>Returns the array of camera objects.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.bind "draw", (canvas) -><br />  # print some directions for the player<br />  canvas.drawText<br />    text: "Go this way =>"<br />    x: 200<br />    y: 200 <br /></pre></code></p>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code></code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#overlay'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#overlay()</h1>
-      <div class='description'>
-        <section class='summary'><p>Called after the engine draws.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p>The current camera transform is not applied. This is great for<br />adding overlays.</p>
           
-          <p><code><pre><br />engine.bind "overlay", (canvas) -><br />  # print the player's health. This will be<br />  # positioned absolutely according to the viewport.<br />  canvas.drawText<br />    text: "HEALTH:"<br />    position: Point(20, 20)</p>
-          
-          <p>canvas.drawText<br />    text: player.health()<br />    position: Point(50, 20)<br /></pre></code></p>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
           <p>
             Type:
-            <a href='.html'></a>
+            <a href='Array.html'>Array</a>
           </p>
           <p class='return_description'></p>
         </section>
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>Engine = function(I) {&#x000A;    var animLoop, draw, frameAdvance, lastStepTime, modules, running, self, startTime, step, update;&#x000A;    if (I == null) I = {};&#x000A;    Object.reverseMerge(I, defaults);&#x000A;    frameAdvance = false;&#x000A;    running = false;&#x000A;    startTime = +new Date();&#x000A;    lastStepTime = -Infinity;&#x000A;    animLoop = function(timestamp) {&#x000A;      var delta, msPerFrame, remainder;&#x000A;      timestamp || (timestamp = +new Date());&#x000A;      msPerFrame = 1000 / I.FPS;&#x000A;      delta = timestamp - lastStepTime;&#x000A;      remainder = delta - msPerFrame;&#x000A;      if (remainder > 0) {&#x000A;        lastStepTime = timestamp - Math.min(remainder, msPerFrame);&#x000A;        step();&#x000A;      }&#x000A;      if (running) return window.requestAnimationFrame(animLoop);&#x000A;    };&#x000A;    update = function(elapsedTime) {&#x000A;      self.trigger("beforeUpdate", elapsedTime);&#x000A;      self.trigger("update", elapsedTime);&#x000A;      return self.trigger("afterUpdate", elapsedTime);&#x000A;    };&#x000A;    draw = function() {&#x000A;      var canvas;&#x000A;      if (!(canvas = I.canvas)) return;&#x000A;      self.trigger("beforeDraw", canvas);&#x000A;      self.trigger("draw", canvas);&#x000A;      return self.trigger("overlay", I.canvas);&#x000A;    };&#x000A;    step = function() {&#x000A;      var secondsPerFrame;&#x000A;      if (!I.paused || frameAdvance) {&#x000A;        secondsPerFrame = 1 / I.FPS;&#x000A;        update(secondsPerFrame);&#x000A;        I.age += 1;&#x000A;      }&#x000A;      return draw();&#x000A;    };&#x000A;    self = Core(I).extend({</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#start'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#start()</h1>
-      <div class='description'>
-        <section class='summary'><p>Start the game simulation.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />engine.start()<br /></pre></code></p>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>start: function() {&#x000A;        if (!running) {&#x000A;          running = true;&#x000A;          return window.requestAnimationFrame(animLoop);&#x000A;        }&#x000A;      },</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#stop'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#stop()</h1>
-      <div class='description'>
-        <section class='summary'><p>Stop the simulation.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />engine.stop()<br /></pre></code></p>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>stop: function() {&#x000A;        return running = false;&#x000A;      },</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#frameAdvance'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#frameAdvance()</h1>
-      <div class='description'>
-        <section class='summary'><p>Pause the game and step through 1 update of the engine.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />engine.frameAdvance()<br /></pre></code></p>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>frameAdvance: function() {&#x000A;        I.paused = true;&#x000A;        frameAdvance = true;&#x000A;        step();&#x000A;        return frameAdvance = false;&#x000A;      },</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#play'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#play()</h1>
-      <div class='description'>
-        <section class='summary'><p>Resume the game.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />engine.play()<br /></pre></code></p>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>play: function() {&#x000A;        return I.paused = false;&#x000A;      },</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#pause'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#pause(setTo)</h1>
-      <div class='description'>
-        <section class='summary'><p>Toggle the paused state of the simulation.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />engine.pause()<br /></pre></code></p>
-        </section>
-        <section class='parameters'>
-          <h3>Parameters</h3>
-          <ul>
-            <li>
-              <span class='param_name'>setTo</span>
-               -
-              <span class='param_description'>Force to pause by passing true or unpause by passing false.</span>
-            </li>
-          </ul>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>pause: function(setTo) {&#x000A;        if (setTo != null) {&#x000A;          return I.paused = setTo;&#x000A;        } else {&#x000A;          return I.paused = !I.paused;&#x000A;        }&#x000A;      },</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#paused'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#paused()</h1>
-      <div class='description'>
-        <section class='summary'><p>Query the engine to see if it is paused.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />engine.pause()</p>
-          
-          <p>engine.paused()</p>
-          
-          <h1>true</h1>
-          
-          <p>engine.play()</p>
-          
-          <p>engine.paused()</p>
-          
-          <h1>false</h1>
-          
-          <p></pre></code></p>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>paused: function() {&#x000A;        return I.paused;&#x000A;      },</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#setFramerate'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#setFramerate()</h1>
-      <div class='description'>
-        <section class='summary'><p>Change the framerate of the game. The default framerate is 30 fps.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />engine.setFramerate(60)<br /></pre></code></p>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>setFramerate: function(newFPS) {&#x000A;        I.FPS = newFPS;&#x000A;        self.stop();&#x000A;        return self.start();&#x000A;      },&#x000A;      update: update,&#x000A;      draw: draw&#x000A;    });&#x000A;    self.include(Bindable);&#x000A;    modules = Engine.defaultModules.concat(I.includedModules);&#x000A;    modules = modules.without([].concat(I.excludedModules));&#x000A;    modules.each(function(moduleName) {&#x000A;      if (!Engine[moduleName]) {&#x000A;        throw "#Engine." + moduleName + " is not a valid engine module";&#x000A;      }&#x000A;      return self.include(Engine[moduleName]);&#x000A;    });&#x000A;    self.trigger("init");&#x000A;    return self;&#x000A;  };&#x000A;  Engine.defaultModules = ["Data", "Keyboard", "Mouse", "Background", "Delay", "GameState", "Selector", "Collision", "Tilemap", "Levels"];&#x000A;  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Engine"] = Engine;&#x000A;})();&#x000A;;</code></pre>
+          <pre><code>cameras: function(newCameras) {&#x000A;      if (newCameras) {&#x000A;        cameras = newCameras;&#x000A;        return self;&#x000A;      } else {&#x000A;        return cameras;&#x000A;      }&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
         </section>
       </div>
       <hr />
@@ -570,50 +375,6 @@
         </section>
       </div>
       <hr />
-      <a name='#rayCollides'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#rayCollides(The, A, An)</h1>
-      <div class='description'>
-        <section class='summary'><p>Detects collisions between a ray and the game objects.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          
-        </section>
-        <section class='parameters'>
-          <h3>Parameters</h3>
-          <ul>
-            <li>
-              <span class='param_name'>The</span>
-               -
-              <span class='param_description'>origin point</span>
-            </li>
-            <li>
-              <span class='param_name'>A</span>
-               -
-              <span class='param_description'>point representing the direction of the ray</span>
-            </li>
-            <li>
-              <span class='param_name'>An</span>
-               -
-              <span class='param_description'>object to exclude from the results.</span>
-            </li>
-          </ul>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>rayCollides: function(source, direction, sourceObject) {&#x000A;      var hits, nearestDistance, nearestHit;&#x000A;      hits = self.objects().map(function(object) {&#x000A;        var hit;&#x000A;        hit = object.solid() && (object !== sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds());&#x000A;        if (hit) hit.object = object;&#x000A;        return hit;&#x000A;      });&#x000A;      nearestDistance = Infinity;&#x000A;      nearestHit = null;&#x000A;      hits.each(function(hit) {&#x000A;        var d;&#x000A;        if (hit && (d = hit.distance(source)) < nearestDistance) {&#x000A;          nearestDistance = d;&#x000A;          return nearestHit = hit;&#x000A;        }&#x000A;      });&#x000A;      return nearestHit;&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
-        </section>
-      </div>
-      <hr />
       <a name='#delay'></a>
       <!-- TODO make sure method_data isn't nil -->
       <h1>Engine#delay(steps, callback)</h1>
@@ -653,14 +414,14 @@
         </section>
       </div>
       <hr />
-      <a name='#nextLevel'></a>
+      <a name='#draw'></a>
       <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#nextLevel()</h1>
+      <h1>Engine#draw()</h1>
       <div class='description'>
-        <section class='summary'><p>Load map for the next level.</p></section>
+        <section class='summary'><p>Called after the engine draws on the canvas. The current camera transform is applied.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.nextLevel()<br /></pre></code></p>
+          <p><code><pre><br />engine.bind "draw", (canvas) -><br />  # print some directions for the player<br />  canvas.drawText<br />    text: "Go this way =>"<br />    x: 200<br />    y: 200 <br /></pre></code></p>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -673,55 +434,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>nextLevel: function() {&#x000A;      var level;&#x000A;      if (!I.transitioning) {&#x000A;        I.currentLevel += 1;&#x000A;        if (level = I.levels[I.currentLevel]) {&#x000A;          return loadLevel(level);&#x000A;        } else {&#x000A;          return engine.setState(GameOver());&#x000A;        }&#x000A;      }&#x000A;    },</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#goToLevel'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#goToLevel()</h1>
-      <div class='description'>
-        <section class='summary'><p>Load map named <code>level</code></p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />engine.goToLevel 'bossFight'<br /></pre></code></p>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>goToLevel: function(level) {&#x000A;      return loadLevel(level);&#x000A;    },</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#reloadLevel'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#reloadLevel()</h1>
-      <div class='description'>
-        <section class='summary'><p>Reload the current level. Useful for retrying after a player dies.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />engine.reloadLevel()<br /></pre></code></p>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>reloadLevel: function() {&#x000A;      return loadLevel(I.currentLevelName);&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
+          <pre><code></code></pre>
         </section>
       </div>
       <hr />
@@ -791,6 +504,54 @@
         </section>
       </div>
       <hr />
+      <a name='#frameAdvance'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#frameAdvance()</h1>
+      <div class='description'>
+        <section class='summary'><p>Pause the game and step through 1 update of the engine.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />engine.frameAdvance()<br /></pre></code></p>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>frameAdvance: function() {&#x000A;        I.paused = true;&#x000A;        frameAdvance = true;&#x000A;        step();&#x000A;        return frameAdvance = false;&#x000A;      },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#goToLevel'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#goToLevel()</h1>
+      <div class='description'>
+        <section class='summary'><p>Load map named <code>level</code></p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />engine.goToLevel 'bossFight'<br /></pre></code></p>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>goToLevel: function(level) {&#x000A;      return loadLevel(level);&#x000A;    },</code></pre>
+        </section>
+      </div>
+      <hr />
       <a name='#loadMap'></a>
       <!-- TODO make sure method_data isn't nil -->
       <h1>Engine#loadMap()</h1>
@@ -815,30 +576,74 @@
         </section>
       </div>
       <hr />
-      <a name='#add'></a>
+      <a name='#nextLevel'></a>
       <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#add(entityData)</h1>
+      <h1>Engine#nextLevel()</h1>
       <div class='description'>
-        <section class='summary'><p>The add method creates and adds an object to the game world. Two<br />other events are triggered around this one: beforeAdd and afterAdd.</p></section>
+        <section class='summary'><p>Load map for the next level.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre></p>
+          <p><code><pre><br />engine.nextLevel()<br /></pre></code></p>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>nextLevel: function() {&#x000A;      var level;&#x000A;      if (!I.transitioning) {&#x000A;        I.currentLevel += 1;&#x000A;        if (level = I.levels[I.currentLevel]) {&#x000A;          return loadLevel(level);&#x000A;        } else {&#x000A;          return engine.setState(GameOver());&#x000A;        }&#x000A;      }&#x000A;    },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#overlay'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#overlay()</h1>
+      <div class='description'>
+        <section class='summary'><p>Called after the engine draws.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p>The current camera transform is not applied. This is great for<br />adding overlays.</p>
           
-          <h1>you can add arbitrary entityData and</h1>
+          <p><code><pre><br />engine.bind "overlay", (canvas) -><br />  # print the player's health. This will be<br />  # positioned absolutely according to the viewport.<br />  canvas.drawText<br />    text: "HEALTH:"<br />    position: Point(20, 20)</p>
           
-          <h1>the engine will make it into a GameObject</h1>
-          
-          <p>engine.add <br />  x: 50<br />  y: 30<br />  color: "red"</p>
-          
-          <p>player = engine.add<br />  class: "Player"<br /></pre></code></p>
+          <p>canvas.drawText<br />    text: player.health()<br />    position: Point(50, 20)<br /></pre></code></p>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>Engine = function(I) {&#x000A;    var animLoop, draw, frameAdvance, lastStepTime, modules, running, self, startTime, step, update;&#x000A;    if (I == null) I = {};&#x000A;    Object.reverseMerge(I, defaults);&#x000A;    frameAdvance = false;&#x000A;    running = false;&#x000A;    startTime = +new Date();&#x000A;    lastStepTime = -Infinity;&#x000A;    animLoop = function(timestamp) {&#x000A;      var delta, msPerFrame, remainder;&#x000A;      timestamp || (timestamp = +new Date());&#x000A;      msPerFrame = 1000 / I.FPS;&#x000A;      delta = timestamp - lastStepTime;&#x000A;      remainder = delta - msPerFrame;&#x000A;      if (remainder > 0) {&#x000A;        lastStepTime = timestamp - Math.min(remainder, msPerFrame);&#x000A;        step();&#x000A;      }&#x000A;      if (running) return window.requestAnimationFrame(animLoop);&#x000A;    };&#x000A;    update = function(elapsedTime) {&#x000A;      self.trigger("beforeUpdate", elapsedTime);&#x000A;      self.trigger("update", elapsedTime);&#x000A;      return self.trigger("afterUpdate", elapsedTime);&#x000A;    };&#x000A;    draw = function() {&#x000A;      var canvas;&#x000A;      if (!(canvas = I.canvas)) return;&#x000A;      self.trigger("beforeDraw", canvas);&#x000A;      self.trigger("draw", canvas);&#x000A;      return self.trigger("overlay", I.canvas);&#x000A;    };&#x000A;    step = function() {&#x000A;      var secondsPerFrame;&#x000A;      if (!I.paused || frameAdvance) {&#x000A;        secondsPerFrame = 1 / I.FPS;&#x000A;        update(secondsPerFrame);&#x000A;        I.age += 1;&#x000A;      }&#x000A;      return draw();&#x000A;    };&#x000A;    self = Core(I).extend({</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#pause'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#pause(setTo)</h1>
+      <div class='description'>
+        <section class='summary'><p>Toggle the paused state of the simulation.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />engine.pause()<br /></pre></code></p>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
           <ul>
             <li>
-              <span class='param_name'>entityData</span>
+              <span class='param_name'>setTo</span>
                -
-              <span class='param_description'>The data used to create the game object.</span>
+              <span class='param_description'>Force to pause by passing true or unpause by passing false.</span>
             </li>
           </ul>
         </section>
@@ -846,41 +651,272 @@
           <h3>Returns</h3>
           <p>
             Type:
-            <a href='GameObject.html'>GameObject</a>
+            <a href='.html'></a>
           </p>
           <p class='return_description'></p>
         </section>
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>add: function(entityData) {&#x000A;      var object;&#x000A;      self.trigger("beforeAdd", entityData);&#x000A;      object = GameObject.construct(entityData);&#x000A;      object.create();&#x000A;      self.trigger("afterAdd", object);&#x000A;      if (I.updating) {&#x000A;        queuedObjects.push(object);&#x000A;      } else {&#x000A;        I.objects.push(object);&#x000A;      }&#x000A;      return object;&#x000A;    },&#x000A;    objects: function() {&#x000A;      return I.objects.copy();&#x000A;    }&#x000A;  });&#x000A;  self.include(Bindable);&#x000A;  self.bind("update", function(elapsedTime) {&#x000A;    var toKeep, toRemove, _ref;&#x000A;    I.updating = true;&#x000A;    I.objects.invoke("trigger", "beforeUpdate", elapsedTime);&#x000A;    _ref = I.objects.partition(function(object) {&#x000A;      return object.update(elapsedTime);&#x000A;    }), toKeep = _ref[0], toRemove = _ref[1];&#x000A;    I.objects.invoke("trigger", "afterUpdate", elapsedTime);&#x000A;    toRemove.invoke("trigger", "remove");&#x000A;    I.objects = toKeep.concat(queuedObjects);&#x000A;    queuedObjects = [];&#x000A;    return I.updating = false;&#x000A;  });&#x000A;  self.include(GameState.Cameras);&#x000A;  self.include(GameState.SaveState);&#x000A;  return self;&#x000A;};&#x000A;;&#x000A;&#x000A;GameState.Cameras = function(I, self) {&#x000A;  var cameras;&#x000A;  cameras = [Camera()];&#x000A;  self.bind('update', function() {&#x000A;    return self.cameras().invoke('trigger', 'update');&#x000A;  });&#x000A;  self.bind('afterUpdate', function() {&#x000A;    return self.cameras().invoke('trigger', 'afterUpdate');&#x000A;  });&#x000A;  self.bind('draw', function(canvas) {&#x000A;    return self.cameras().invoke('trigger', 'draw', canvas, self.objects());&#x000A;  });&#x000A;  self.bind('overlay', function(canvas) {&#x000A;    return self.cameras().invoke('trigger', 'overlay', canvas, self.objects());&#x000A;  });&#x000A;  return {&#x000A;    addCamera: function(data) {&#x000A;      return cameras.push(Camera(data));&#x000A;    },</code></pre>
+          <pre><code>pause: function(setTo) {&#x000A;        if (setTo != null) {&#x000A;          return I.paused = setTo;&#x000A;        } else {&#x000A;          return I.paused = !I.paused;&#x000A;        }&#x000A;      },</code></pre>
         </section>
       </div>
       <hr />
-      <a name='#cameras'></a>
+      <a name='#paused'></a>
       <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#cameras()</h1>
+      <h1>Engine#paused()</h1>
       <div class='description'>
-        <section class='summary'><p>Returns the array of camera objects.</p></section>
+        <section class='summary'><p>Query the engine to see if it is paused.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
+          <p><code><pre><br />engine.pause()</p>
           
+          <p>engine.paused()</p>
+          
+          <h1>true</h1>
+          
+          <p>engine.play()</p>
+          
+          <p>engine.paused()</p>
+          
+          <h1>false</h1>
+          
+          <p></pre></code></p>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
           <p>
             Type:
-            <a href='Array.html'>Array</a>
+            <a href='.html'></a>
           </p>
           <p class='return_description'></p>
         </section>
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>cameras: function(newCameras) {&#x000A;      if (newCameras) {&#x000A;        cameras = newCameras;&#x000A;        return self;&#x000A;      } else {&#x000A;        return cameras;&#x000A;      }&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
+          <pre><code>paused: function() {&#x000A;        return I.paused;&#x000A;      },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#play'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#play()</h1>
+      <div class='description'>
+        <section class='summary'><p>Resume the game.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />engine.play()<br /></pre></code></p>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>play: function() {&#x000A;        return I.paused = false;&#x000A;      },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#rayCollides'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#rayCollides(The, A, An)</h1>
+      <div class='description'>
+        <section class='summary'><p>Detects collisions between a ray and the game objects.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          
+        </section>
+        <section class='parameters'>
+          <h3>Parameters</h3>
+          <ul>
+            <li>
+              <span class='param_name'>The</span>
+               -
+              <span class='param_description'>origin point</span>
+            </li>
+            <li>
+              <span class='param_name'>A</span>
+               -
+              <span class='param_description'>point representing the direction of the ray</span>
+            </li>
+            <li>
+              <span class='param_name'>An</span>
+               -
+              <span class='param_description'>object to exclude from the results.</span>
+            </li>
+          </ul>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>rayCollides: function(source, direction, sourceObject) {&#x000A;      var hits, nearestDistance, nearestHit;&#x000A;      hits = self.objects().map(function(object) {&#x000A;        var hit;&#x000A;        hit = object.solid() && (object !== sourceObject) && Collision.rayRectangle(source, direction, object.centeredBounds());&#x000A;        if (hit) hit.object = object;&#x000A;        return hit;&#x000A;      });&#x000A;      nearestDistance = Infinity;&#x000A;      nearestHit = null;&#x000A;      hits.each(function(hit) {&#x000A;        var d;&#x000A;        if (hit && (d = hit.distance(source)) < nearestDistance) {&#x000A;          nearestDistance = d;&#x000A;          return nearestHit = hit;&#x000A;        }&#x000A;      });&#x000A;      return nearestHit;&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#reloadLevel'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#reloadLevel()</h1>
+      <div class='description'>
+        <section class='summary'><p>Reload the current level. Useful for retrying after a player dies.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />engine.reloadLevel()<br /></pre></code></p>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>reloadLevel: function() {&#x000A;      return loadLevel(I.currentLevelName);&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#setFramerate'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#setFramerate()</h1>
+      <div class='description'>
+        <section class='summary'><p>Change the framerate of the game. The default framerate is 30 fps.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />engine.setFramerate(60)<br /></pre></code></p>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>setFramerate: function(newFPS) {&#x000A;        I.FPS = newFPS;&#x000A;        self.stop();&#x000A;        return self.start();&#x000A;      },&#x000A;      update: update,&#x000A;      draw: draw&#x000A;    });&#x000A;    self.include(Bindable);&#x000A;    modules = Engine.defaultModules.concat(I.includedModules);&#x000A;    modules = modules.without([].concat(I.excludedModules));&#x000A;    modules.each(function(moduleName) {&#x000A;      if (!Engine[moduleName]) {&#x000A;        throw "#Engine." + moduleName + " is not a valid engine module";&#x000A;      }&#x000A;      return self.include(Engine[moduleName]);&#x000A;    });&#x000A;    self.trigger("init");&#x000A;    return self;&#x000A;  };&#x000A;  Engine.defaultModules = ["Data", "Keyboard", "Mouse", "Background", "Delay", "GameState", "Selector", "Collision", "Tilemap", "Levels"];&#x000A;  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Engine"] = Engine;&#x000A;})();&#x000A;;</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#start'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#start()</h1>
+      <div class='description'>
+        <section class='summary'><p>Start the game simulation.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />engine.start()<br /></pre></code></p>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>start: function() {&#x000A;        if (!running) {&#x000A;          running = true;&#x000A;          return window.requestAnimationFrame(animLoop);&#x000A;        }&#x000A;      },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#stop'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#stop()</h1>
+      <div class='description'>
+        <section class='summary'><p>Stop the simulation.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />engine.stop()<br /></pre></code></p>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>stop: function() {&#x000A;        return running = false;&#x000A;      },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#update'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Engine#update(elapsedTime)</h1>
+      <div class='description'>
+        <section class='summary'><p>Called when the engine updates all the game objects.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          
+        </section>
+        <section class='parameters'>
+          <h3>Parameters</h3>
+          <ul>
+            <li>
+              <span class='param_name'>elapsedTime</span>
+               -
+              <span class='param_description'>The time in seconds that has elapsed since the last update.</span>
+            </li>
+          </ul>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code></code></pre>
         </section>
       </div>
       <hr />
     </div>
   </body>
 </html>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      $(".documentation").on("click", ".toggle_source", function(e) {
+        e.preventDefault();
+        return $(this).next().toggle();
+      });
+      return $("code.run").each(function() {
+        var canvas, codeElement, compiledJs, source;
+        codeElement = $(this);
+        source = codeElement.text();
+        compiledJs = CoffeeScript.compile(source, {
+          bare: true
+        });
+        canvas = $("<canvas width=200 height=150/>").pixieCanvas();
+        codeElement.after(canvas);
+        return eval(compiledJs);
+      });
+    });
+  //]]>
+</script>

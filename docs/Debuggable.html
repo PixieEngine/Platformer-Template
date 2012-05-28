@@ -5,6 +5,7 @@
     <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
     <title>Debuggable</title>
     <link href='/assets/spacedocs/docs.css' media='screen, projection' rel='stylesheet' type='text/css' />
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
   </head>
   <body>
     <pre></pre>
@@ -77,6 +78,26 @@
       </div>
     </section>
     <div class='documentation'>
+      <h1>Debuggable Summary</h1>
+      <div class='description'>
+        <section class='summary'></section>
+        <p>The Debuggable Module provides a simple API to easily display<br />an object's properties onscreen. This mixin comes with predefined<br />attribute filters so that you can exclude irrelevant data.</p>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />player = GameObject<br />  x: 40<br />  y: 14<br />  spriteName: null<br />  numericErrorProperty: NaN</p>
+          
+          <p>player.include Debuggable</p>
+          
+          <h1>sets up debug output for all player's properties</h1>
+          
+          <h1>at the starting position (0, 0)</h1>
+          
+          <p>player.debug<br />  filter: 'all'<br /></pre></code></p>
+          
+          <p>Debuggable module</p>
+        </section>
+      </div>
+      <hr />
       <a name='#debug'></a>
       <!-- TODO make sure method_data isn't nil -->
       <h1>Debuggable#debug(Options, bounds, color, filter, x, y, velocity)</h1>
@@ -226,3 +247,24 @@
     </div>
   </body>
 </html>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      $(".documentation").on("click", ".toggle_source", function(e) {
+        e.preventDefault();
+        return $(this).next().toggle();
+      });
+      return $("code.run").each(function() {
+        var canvas, codeElement, compiledJs, source;
+        codeElement = $(this);
+        source = codeElement.text();
+        compiledJs = CoffeeScript.compile(source, {
+          bare: true
+        });
+        canvas = $("<canvas width=200 height=150/>").pixieCanvas();
+        codeElement.after(canvas);
+        return eval(compiledJs);
+      });
+    });
+  //]]>
+</script>

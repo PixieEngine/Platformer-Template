@@ -5,6 +5,7 @@
     <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
     <title>Bounded</title>
     <link href='/assets/spacedocs/docs.css' media='screen, projection' rel='stylesheet' type='text/css' />
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
   </head>
   <body>
     <pre></pre>
@@ -72,18 +73,189 @@
     <section class='method_list'>
       <h3>Bounded Methods</h3>
       <div class='methods'>
+        <a href='Bounded.html##bounds'>#bounds</a>
+        <a href='Bounded.html##center'>#center</a>
+        <a href='Bounded.html##centeredBounds'>#centeredBounds</a>
+        <a href='Bounded.html##circle'>#circle</a>
         <a href='Bounded.html##closest'>#closest</a>
-        <a href='Bounded.html##distance'>#distance</a>
-        <a href='Bounded.html##position'>#position</a>
         <a href='Bounded.html##collides'>#collides</a>
         <a href='Bounded.html##collisionBounds'>#collisionBounds</a>
-        <a href='Bounded.html##bounds'>#bounds</a>
-        <a href='Bounded.html##centeredBounds'>#centeredBounds</a>
-        <a href='Bounded.html##center'>#center</a>
-        <a href='Bounded.html##circle'>#circle</a>
+        <a href='Bounded.html##distance'>#distance</a>
+        <a href='Bounded.html##position'>#position</a>
       </div>
     </section>
     <div class='documentation'>
+      <h1>Bounded Summary</h1>
+      <div class='description'>
+        <section class='summary'></section>
+        <p>The Bounded module is used to provide basic data about the<br />location and dimensions of the including object. This module is included<br />by default in <code>GameObject</code>.</p>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />player = Core<br />  x: 10<br />  y: 50<br />  width: 20<br />  height: 20<br />  other: "stuff"<br />  more: "properties"</p>
+          
+          <p>player.position()</p>
+          
+          <h1>=> Uncaught TypeError: Object has no method 'position'</h1>
+          
+          <p>player.include(Bounded)</p>
+          
+          <h1>now player has all the methods provided by this module</h1>
+          
+          <p>player.position()</p>
+          
+          <h1>=> {x: 10, y: 50}</h1>
+          
+          <p></pre></code></p>
+        </section>
+      </div>
+      <hr />
+      <a name='#bounds'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Bounded#bounds(xOffset, yOffset)</h1>
+      <div class='description'>
+        <section class='summary'><p>Returns infomation about the location of the object and its dimensions with optional offsets.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />player = Core<br />  x: 3<br />  y: 6<br />  width: 2<br />  height: 2</p>
+          
+          <p>player.include(Bounded)</p>
+          
+          <p>player.bounds()</p>
+          
+          <h1>=> {x: 3, y: 6, width: 2, height: 2}</h1>
+          
+          <p>player.bounds(7, 4)</p>
+          
+          <h1>=> {x: 10, y: 10, width: 2, height: 2}</h1>
+          
+          <p></pre></code></p>
+        </section>
+        <section class='parameters'>
+          <h3>Parameters</h3>
+          <ul>
+            <li>
+              <span class='param_name'>xOffset</span>
+               -
+              <span class='param_description'>the amount to shift the x position</span>
+            </li>
+            <li>
+              <span class='param_name'>yOffset</span>
+               -
+              <span class='param_description'>the amount to shift the y position</span>
+            </li>
+          </ul>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>bounds: function(xOffset, yOffset) {&#x000A;      var center;&#x000A;      center = self.center();&#x000A;      return {&#x000A;        x: center.x - I.width / 2 + (xOffset || 0),&#x000A;        y: center.y - I.height / 2 + (yOffset || 0),&#x000A;        width: I.width,&#x000A;        height: I.height&#x000A;      };&#x000A;    },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#center'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Bounded#center()</h1>
+      <div class='description'>
+        <section class='summary'><p>The center method returns the {@link Point} that is<br />the center of the object.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />player = Core<br />  x: 50<br />  y: 40<br />  width: 10<br />  height: 30</p>
+          
+          <p>player.include(Bounded)  </p>
+          
+          <p>player.center()</p>
+          
+          <h1>=> {x: 30, y: 35}</h1>
+          
+          <p></pre></code></p>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='Point.html'>Point</a>
+          </p>
+          <p class='return_description'>The middle of the calling object</p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>center: function(newCenter) {&#x000A;      return self.position(newCenter);&#x000A;    },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#centeredBounds'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Bounded#centeredBounds()</h1>
+      <div class='description'>
+        <section class='summary'><p>The centeredBounds method returns infomation about the center<br />of the object along with the midpoint of the width and height.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />player = Core<br />  x: 3<br />  y: 6<br />  width: 2<br />  height: 2</p>
+          
+          <p>player.include(Bounded)</p>
+          
+          <p>player.centeredBounds()</p>
+          
+          <h1>=> {x: 4, y: 7, xw: 1, yw: 1}</h1>
+          
+          <p></pre></code></p>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>centeredBounds: function() {&#x000A;      var center;&#x000A;      center = self.center();&#x000A;      return {&#x000A;        x: center.x,&#x000A;        y: center.y,&#x000A;        xw: I.width / 2,&#x000A;        yw: I.height / 2&#x000A;      };&#x000A;    },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#circle'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Bounded#circle()</h1>
+      <div class='description'>
+        <section class='summary'><p>Return the circular bounds of the object. The circle is<br />centered at the midpoint of the object.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <p><code><pre><br />player = Core<br />  radius: 5<br />  x: 50<br />  y: 50<br />  other: "stuff"</p>
+          
+          <p>player.include(Bounded)</p>
+          
+          <p>player.circle()</p>
+          
+          <h1>=> {radius: 5, x: 50, y: 50}</h1>
+          
+          <p></pre></code></p>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='Object.html'>Object</a>
+          </p>
+          <p class='return_description'>An object with a position and a radius</p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>circle: function() {&#x000A;      var circle;&#x000A;      circle = self.center();&#x000A;      circle.radius = I.radius || I.width / 2 || I.height / 2;&#x000A;      return circle;&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;&#x000A;var Camera;&#x000A;&#x000A;Camera = function(I) {&#x000A;  var currentObject, currentType, focusOn, followTypes, objectFilters, self, transformFilters;&#x000A;  if (I == null) I = {};&#x000A;  Object.reverseMerge(I, {&#x000A;    cameraBounds: Rectangle({&#x000A;      x: 0,&#x000A;      y: 0,&#x000A;      width: App.width,&#x000A;      height: App.height&#x000A;    }),&#x000A;    screen: Rectangle({&#x000A;      x: 0,&#x000A;      y: 0,&#x000A;      width: App.width,&#x000A;      height: App.height&#x000A;    }),&#x000A;    deadzone: Point(0, 0),&#x000A;    zoom: 1,&#x000A;    transform: Matrix(),&#x000A;    x: App.width / 2,&#x000A;    y: App.height / 2,&#x000A;    velocity: Point.ZERO,&#x000A;    maxSpeed: 25,&#x000A;    t90: 2&#x000A;  });&#x000A;  currentType = "centered";&#x000A;  currentObject = null;&#x000A;  objectFilters = [];&#x000A;  transformFilters = [];&#x000A;  focusOn = function(object) {&#x000A;    var c, dampingFactor, delta, dt, force, objectCenter, objectVelocity, target;&#x000A;    dt = 1 / 30;&#x000A;    dampingFactor = 2;&#x000A;    c = dt * 3.75 / I.t90;&#x000A;    if (c >= 1) {&#x000A;      self.position(target);&#x000A;      return I.velocity = Point.ZERO;&#x000A;    } else {&#x000A;      objectCenter = object.center();&#x000A;      objectVelocity = object.I.velocity;&#x000A;      if (objectVelocity) {&#x000A;        target = objectCenter.add(objectVelocity.scale(5));&#x000A;      } else {&#x000A;        target = objectCenter;&#x000A;      }&#x000A;      delta = target.subtract(self.position());&#x000A;      force = delta.subtract(I.velocity.scale(dampingFactor));&#x000A;      self.changePosition(I.velocity.scale(c).clamp(I.maxSpeed));&#x000A;      return I.velocity = I.velocity.add(force.scale(c));&#x000A;    }&#x000A;  };&#x000A;  followTypes = {&#x000A;    centered: function(object) {&#x000A;      I.deadzone = Point(0, 0);&#x000A;      return focusOn(object);&#x000A;    },&#x000A;    topdown: function(object) {&#x000A;      var helper;&#x000A;      helper = Math.max(I.screen.width, I.screen.height) / 4;&#x000A;      I.deadzone = Point(helper, helper);&#x000A;      return focusOn(object);&#x000A;    },&#x000A;    platformer: function(object) {&#x000A;      var height, width;&#x000A;      width = I.screen.width / 8;&#x000A;      height = I.screen.height / 3;&#x000A;      I.deadzone = Point(width, height);&#x000A;      return focusOn(object);&#x000A;    }&#x000A;  };&#x000A;  self = Core(I).extend({&#x000A;    follow: function(object, type) {&#x000A;      if (type == null) type = "centered";&#x000A;      currentObject = object;&#x000A;      return currentType = type;&#x000A;    },&#x000A;    objectFilterChain: function(fn) {&#x000A;      return objectFilters.push(fn);&#x000A;    },&#x000A;    transformFilterChain: function(fn) {&#x000A;      return transformFilters.push(fn);&#x000A;    }&#x000A;  });&#x000A;  self.include(Bindable);&#x000A;  self.attrAccessor("transform");&#x000A;  self.bind("afterUpdate", function() {&#x000A;    if (currentObject) followTypes[currentType](currentObject);&#x000A;    I.x = I.x.clamp(I.cameraBounds.left + I.screen.width / 2, I.cameraBounds.right - I.screen.width / 2);&#x000A;    I.y = I.y.clamp(I.cameraBounds.top + I.screen.height / 2, I.cameraBounds.bottom - I.screen.height / 2);&#x000A;    return I.transform = Matrix.translate(-I.x, -I.y);&#x000A;  });&#x000A;  self.bind("draw", function(canvas, objects) {&#x000A;    return canvas.withTransform(Matrix.translate(I.screen.x, I.screen.y), function(canvas) {&#x000A;      var transform;&#x000A;      canvas.clip(0, 0, I.screen.width, I.screen.height);&#x000A;      objects = objectFilters.pipeline(objects);&#x000A;      transform = transformFilters.pipeline(self.transform().copy());&#x000A;      canvas.withTransform(Matrix.translation(I.screen.width / 2, I.screen.height / 2), function(canvas) {&#x000A;        return canvas.withTransform(transform, function(canvas) {&#x000A;          self.trigger("beforeDraw", canvas);&#x000A;          return objects.invoke("draw", canvas);&#x000A;        });&#x000A;      });&#x000A;      return self.trigger('flash', canvas);&#x000A;    });&#x000A;  });&#x000A;  self.bind("overlay", function(canvas, objects) {&#x000A;    return canvas.withTransform(Matrix.translate(I.screen.x, I.screen.y), function(canvas) {&#x000A;      canvas.clip(0, 0, I.screen.width, I.screen.height);&#x000A;      objects = objectFilters.pipeline(objects);&#x000A;      return objects.invoke("trigger", "overlay", canvas);&#x000A;    });&#x000A;  });&#x000A;  self.include(Bounded);&#x000A;  self.include(Camera.ZSort);&#x000A;  self.include(Camera.Zoom);&#x000A;  self.include(Camera.Rotate);&#x000A;  self.include(Camera.Shake);&#x000A;  self.include(Camera.Flash);&#x000A;  self.include(Camera.Fade);&#x000A;  return self;&#x000A;};&#x000A;;</code></pre>
+        </section>
+      </div>
+      <hr />
       <a name='#closest'></a>
       <!-- TODO make sure method_data isn't nil -->
       <h1>Bounded#closest(selector)</h1>
@@ -115,72 +287,6 @@
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
           <pre><code>closest: function(selector) {&#x000A;      var position;&#x000A;      if (Object.isString(selector)) {&#x000A;        selector = engine.find(selector);&#x000A;      } else {&#x000A;        selector = [].concat(selector);&#x000A;      }&#x000A;      position = self.position();&#x000A;      return selector.sort(function(a, b) {&#x000A;        return Point.distanceSquared(position, a.position()) - Point.distanceSquared(position, b.position());&#x000A;      }).first();&#x000A;    },</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#distance'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Bounded#distance()</h1>
-      <div class='description'>
-        <section class='summary'><p>Distance between two objects. Proxies to Point.distance.<br />In order for this to work, <code>otherObj</code> must have a <br />position method.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />player = GameObject<br />  x: 50<br />  y: 50<br />  width: 10<br />  height: 10</p>
-          
-          <p>player.include Bounded</p>
-          
-          <p>enemy = GameObject<br />  x: 110<br />  y: 120<br />  width: 7<br />  height: 20</p>
-          
-          <p>player.distance(enemy)</p>
-          
-          <h1>=> 92.19544457292888</h1>
-          
-          <p></pre></code></p>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='Number.html'>Number</a>
-          </p>
-          <p class='return_description'>Distance between the two objects</p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>distance: function(otherObj) {&#x000A;      return Point.distance(self.position(), otherObj.position());&#x000A;    },</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#position'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Bounded#position()</h1>
-      <div class='description'>
-        <section class='summary'><p>The position of this game object. By default it is the top left point.<br />Redefining the center method will change the relative position.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />player = Core<br />  x: 50<br />  y: 40</p>
-          
-          <p>player.include(Bounded)      </p>
-          
-          <p>player.position()</p>
-          
-          <h1>=> {x: 50, y: 40}</h1>
-          
-          <p></pre></code></p>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='Point.html'>Point</a>
-          </p>
-          <p class='return_description'>The position of this object</p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>position: function(newPosition) {&#x000A;      if (newPosition != null) {&#x000A;        I.x = newPosition.x;&#x000A;        return I.y = newPosition.y;&#x000A;      } else {&#x000A;        return Point(I.x, I.y);&#x000A;      }&#x000A;    },&#x000A;    changePosition: function(delta) {&#x000A;      I.x += delta.x;&#x000A;      I.y += delta.y;&#x000A;      return self;&#x000A;    },</code></pre>
         </section>
       </div>
       <hr />
@@ -267,71 +373,22 @@
         </section>
       </div>
       <hr />
-      <a name='#bounds'></a>
+      <a name='#distance'></a>
       <!-- TODO make sure method_data isn't nil -->
-      <h1>Bounded#bounds(xOffset, yOffset)</h1>
+      <h1>Bounded#distance()</h1>
       <div class='description'>
-        <section class='summary'><p>Returns infomation about the location of the object and its dimensions with optional offsets.</p></section>
+        <section class='summary'><p>Distance between two objects. Proxies to Point.distance.<br />In order for this to work, <code>otherObj</code> must have a <br />position method.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = Core<br />  x: 3<br />  y: 6<br />  width: 2<br />  height: 2</p>
+          <p><code><pre><br />player = GameObject<br />  x: 50<br />  y: 50<br />  width: 10<br />  height: 10</p>
           
-          <p>player.include(Bounded)</p>
+          <p>player.include Bounded</p>
           
-          <p>player.bounds()</p>
+          <p>enemy = GameObject<br />  x: 110<br />  y: 120<br />  width: 7<br />  height: 20</p>
           
-          <h1>=> {x: 3, y: 6, width: 2, height: 2}</h1>
+          <p>player.distance(enemy)</p>
           
-          <p>player.bounds(7, 4)</p>
-          
-          <h1>=> {x: 10, y: 10, width: 2, height: 2}</h1>
-          
-          <p></pre></code></p>
-        </section>
-        <section class='parameters'>
-          <h3>Parameters</h3>
-          <ul>
-            <li>
-              <span class='param_name'>xOffset</span>
-               -
-              <span class='param_description'>the amount to shift the x position</span>
-            </li>
-            <li>
-              <span class='param_name'>yOffset</span>
-               -
-              <span class='param_description'>the amount to shift the y position</span>
-            </li>
-          </ul>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>bounds: function(xOffset, yOffset) {&#x000A;      var center;&#x000A;      center = self.center();&#x000A;      return {&#x000A;        x: center.x - I.width / 2 + (xOffset || 0),&#x000A;        y: center.y - I.height / 2 + (yOffset || 0),&#x000A;        width: I.width,&#x000A;        height: I.height&#x000A;      };&#x000A;    },</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#centeredBounds'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Bounded#centeredBounds()</h1>
-      <div class='description'>
-        <section class='summary'><p>The centeredBounds method returns infomation about the center<br />of the object along with the midpoint of the width and height.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />player = Core<br />  x: 3<br />  y: 6<br />  width: 2<br />  height: 2</p>
-          
-          <p>player.include(Bounded)</p>
-          
-          <p>player.centeredBounds()</p>
-          
-          <h1>=> {x: 4, y: 7, xw: 1, yw: 1}</h1>
+          <h1>=> 92.19544457292888</h1>
           
           <p></pre></code></p>
         </section>
@@ -339,31 +396,31 @@
           <h3>Returns</h3>
           <p>
             Type:
-            <a href='.html'></a>
+            <a href='Number.html'>Number</a>
           </p>
-          <p class='return_description'></p>
+          <p class='return_description'>Distance between the two objects</p>
         </section>
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>centeredBounds: function() {&#x000A;      var center;&#x000A;      center = self.center();&#x000A;      return {&#x000A;        x: center.x,&#x000A;        y: center.y,&#x000A;        xw: I.width / 2,&#x000A;        yw: I.height / 2&#x000A;      };&#x000A;    },</code></pre>
+          <pre><code>distance: function(otherObj) {&#x000A;      return Point.distance(self.position(), otherObj.position());&#x000A;    },</code></pre>
         </section>
       </div>
       <hr />
-      <a name='#center'></a>
+      <a name='#position'></a>
       <!-- TODO make sure method_data isn't nil -->
-      <h1>Bounded#center()</h1>
+      <h1>Bounded#position()</h1>
       <div class='description'>
-        <section class='summary'><p>The center method returns the {@link Point} that is<br />the center of the object.</p></section>
+        <section class='summary'><p>The position of this game object. By default it is the top left point.<br />Redefining the center method will change the relative position.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = Core<br />  x: 50<br />  y: 40<br />  width: 10<br />  height: 30</p>
+          <p><code><pre><br />player = Core<br />  x: 50<br />  y: 40</p>
           
-          <p>player.include(Bounded)  </p>
+          <p>player.include(Bounded)      </p>
           
-          <p>player.center()</p>
+          <p>player.position()</p>
           
-          <h1>=> {x: 30, y: 35}</h1>
+          <h1>=> {x: 50, y: 40}</h1>
           
           <p></pre></code></p>
         </section>
@@ -373,47 +430,36 @@
             Type:
             <a href='Point.html'>Point</a>
           </p>
-          <p class='return_description'>The middle of the calling object</p>
+          <p class='return_description'>The position of this object</p>
         </section>
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>center: function(newCenter) {&#x000A;      return self.position(newCenter);&#x000A;    },</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#circle'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Bounded#circle()</h1>
-      <div class='description'>
-        <section class='summary'><p>Return the circular bounds of the object. The circle is<br />centered at the midpoint of the object.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <p><code><pre><br />player = Core<br />  radius: 5<br />  x: 50<br />  y: 50<br />  other: "stuff"</p>
-          
-          <p>player.include(Bounded)</p>
-          
-          <p>player.circle()</p>
-          
-          <h1>=> {radius: 5, x: 50, y: 50}</h1>
-          
-          <p></pre></code></p>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='Object.html'>Object</a>
-          </p>
-          <p class='return_description'>An object with a position and a radius</p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>circle: function() {&#x000A;      var circle;&#x000A;      circle = self.center();&#x000A;      circle.radius = I.radius || I.width / 2 || I.height / 2;&#x000A;      return circle;&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;&#x000A;var Camera;&#x000A;&#x000A;Camera = function(I) {&#x000A;  var currentObject, currentType, focusOn, followTypes, objectFilters, self, transformFilters;&#x000A;  if (I == null) I = {};&#x000A;  Object.reverseMerge(I, {&#x000A;    cameraBounds: Rectangle({&#x000A;      x: 0,&#x000A;      y: 0,&#x000A;      width: App.width,&#x000A;      height: App.height&#x000A;    }),&#x000A;    screen: Rectangle({&#x000A;      x: 0,&#x000A;      y: 0,&#x000A;      width: App.width,&#x000A;      height: App.height&#x000A;    }),&#x000A;    deadzone: Point(0, 0),&#x000A;    zoom: 1,&#x000A;    transform: Matrix(),&#x000A;    x: App.width / 2,&#x000A;    y: App.height / 2,&#x000A;    velocity: Point.ZERO,&#x000A;    maxSpeed: 25,&#x000A;    t90: 2&#x000A;  });&#x000A;  currentType = "centered";&#x000A;  currentObject = null;&#x000A;  objectFilters = [];&#x000A;  transformFilters = [];&#x000A;  focusOn = function(object) {&#x000A;    var c, dampingFactor, delta, dt, force, objectCenter, objectVelocity, target;&#x000A;    dt = 1 / 30;&#x000A;    dampingFactor = 2;&#x000A;    c = dt * 3.75 / I.t90;&#x000A;    if (c >= 1) {&#x000A;      self.position(target);&#x000A;      return I.velocity = Point.ZERO;&#x000A;    } else {&#x000A;      objectCenter = object.center();&#x000A;      objectVelocity = object.I.velocity;&#x000A;      if (objectVelocity) {&#x000A;        target = objectCenter.add(objectVelocity.scale(5));&#x000A;      } else {&#x000A;        target = objectCenter;&#x000A;      }&#x000A;      delta = target.subtract(self.position());&#x000A;      force = delta.subtract(I.velocity.scale(dampingFactor));&#x000A;      self.changePosition(I.velocity.scale(c).clamp(I.maxSpeed));&#x000A;      return I.velocity = I.velocity.add(force.scale(c));&#x000A;    }&#x000A;  };&#x000A;  followTypes = {&#x000A;    centered: function(object) {&#x000A;      I.deadzone = Point(0, 0);&#x000A;      return focusOn(object);&#x000A;    },&#x000A;    topdown: function(object) {&#x000A;      var helper;&#x000A;      helper = Math.max(I.screen.width, I.screen.height) / 4;&#x000A;      I.deadzone = Point(helper, helper);&#x000A;      return focusOn(object);&#x000A;    },&#x000A;    platformer: function(object) {&#x000A;      var height, width;&#x000A;      width = I.screen.width / 8;&#x000A;      height = I.screen.height / 3;&#x000A;      I.deadzone = Point(width, height);&#x000A;      return focusOn(object);&#x000A;    }&#x000A;  };&#x000A;  self = Core(I).extend({&#x000A;    follow: function(object, type) {&#x000A;      if (type == null) type = "centered";&#x000A;      currentObject = object;&#x000A;      return currentType = type;&#x000A;    },&#x000A;    objectFilterChain: function(fn) {&#x000A;      return objectFilters.push(fn);&#x000A;    },&#x000A;    transformFilterChain: function(fn) {&#x000A;      return transformFilters.push(fn);&#x000A;    }&#x000A;  });&#x000A;  self.include(Bindable);&#x000A;  self.attrAccessor("transform");&#x000A;  self.bind("afterUpdate", function() {&#x000A;    if (currentObject) followTypes[currentType](currentObject);&#x000A;    I.x = I.x.clamp(I.cameraBounds.left + I.screen.width / 2, I.cameraBounds.right - I.screen.width / 2);&#x000A;    I.y = I.y.clamp(I.cameraBounds.top + I.screen.height / 2, I.cameraBounds.bottom - I.screen.height / 2);&#x000A;    return I.transform = Matrix.translate(-I.x, -I.y);&#x000A;  });&#x000A;  self.bind("draw", function(canvas, objects) {&#x000A;    return canvas.withTransform(Matrix.translate(I.screen.x, I.screen.y), function(canvas) {&#x000A;      var transform;&#x000A;      canvas.clip(0, 0, I.screen.width, I.screen.height);&#x000A;      objects = objectFilters.pipeline(objects);&#x000A;      transform = transformFilters.pipeline(self.transform().copy());&#x000A;      canvas.withTransform(Matrix.translation(I.screen.width / 2, I.screen.height / 2), function(canvas) {&#x000A;        return canvas.withTransform(transform, function(canvas) {&#x000A;          self.trigger("beforeDraw", canvas);&#x000A;          return objects.invoke("draw", canvas);&#x000A;        });&#x000A;      });&#x000A;      return self.trigger('flash', canvas);&#x000A;    });&#x000A;  });&#x000A;  self.bind("overlay", function(canvas, objects) {&#x000A;    return canvas.withTransform(Matrix.translate(I.screen.x, I.screen.y), function(canvas) {&#x000A;      canvas.clip(0, 0, I.screen.width, I.screen.height);&#x000A;      objects = objectFilters.pipeline(objects);&#x000A;      return objects.invoke("trigger", "overlay", canvas);&#x000A;    });&#x000A;  });&#x000A;  self.include(Bounded);&#x000A;  self.include(Camera.ZSort);&#x000A;  self.include(Camera.Zoom);&#x000A;  self.include(Camera.Rotate);&#x000A;  self.include(Camera.Shake);&#x000A;  self.include(Camera.Flash);&#x000A;  self.include(Camera.Fade);&#x000A;  return self;&#x000A;};&#x000A;;</code></pre>
+          <pre><code>position: function(newPosition) {&#x000A;      if (newPosition != null) {&#x000A;        I.x = newPosition.x;&#x000A;        return I.y = newPosition.y;&#x000A;      } else {&#x000A;        return Point(I.x, I.y);&#x000A;      }&#x000A;    },&#x000A;    changePosition: function(delta) {&#x000A;      I.x += delta.x;&#x000A;      I.y += delta.y;&#x000A;      return self;&#x000A;    },</code></pre>
         </section>
       </div>
       <hr />
     </div>
   </body>
 </html>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      $(".documentation").on("click", ".toggle_source", function(e) {
+        e.preventDefault();
+        return $(this).next().toggle();
+      });
+      return $("code.run").each(function() {
+        var canvas, codeElement, compiledJs, source;
+        codeElement = $(this);
+        source = codeElement.text();
+        compiledJs = CoffeeScript.compile(source, {
+          bare: true
+        });
+        canvas = $("<canvas width=200 height=150/>").pixieCanvas();
+        codeElement.after(canvas);
+        return eval(compiledJs);
+      });
+    });
+  //]]>
+</script>

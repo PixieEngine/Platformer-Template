@@ -5,6 +5,7 @@
     <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
     <title>Fadeable</title>
     <link href='/assets/spacedocs/docs.css' media='screen, projection' rel='stylesheet' type='text/css' />
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
   </head>
   <body>
     <pre></pre>
@@ -76,6 +77,16 @@
       </div>
     </section>
     <div class='documentation'>
+      <h1>Fadeable Summary</h1>
+      <div class='description'>
+        <section class='summary'></section>
+        <p>The <code>Fadeable</code> module provides a method to fade a sprite to transparent. <br />You may also provide a callback function that is executed when the sprite has finished fading out.</p>
+        <section class='usage'>
+          <h3>Usage</h3>
+          
+        </section>
+      </div>
+      <hr />
       <a name='#fadeOut'></a>
       <!-- TODO make sure method_data isn't nil -->
       <h1>Fadeable#fadeOut(duration=30, callback=null)</h1>
@@ -136,3 +147,24 @@
     </div>
   </body>
 </html>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      $(".documentation").on("click", ".toggle_source", function(e) {
+        e.preventDefault();
+        return $(this).next().toggle();
+      });
+      return $("code.run").each(function() {
+        var canvas, codeElement, compiledJs, source;
+        codeElement = $(this);
+        source = codeElement.text();
+        compiledJs = CoffeeScript.compile(source, {
+          bare: true
+        });
+        canvas = $("<canvas width=200 height=150/>").pixieCanvas();
+        codeElement.after(canvas);
+        return eval(compiledJs);
+      });
+    });
+  //]]>
+</script>

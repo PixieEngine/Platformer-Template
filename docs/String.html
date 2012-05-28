@@ -5,6 +5,7 @@
     <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
     <title>String</title>
     <link href='/assets/spacedocs/docs.css' media='screen, projection' rel='stylesheet' type='text/css' />
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
   </head>
   <body>
     <pre></pre>
@@ -75,34 +76,34 @@
         <a href='String.html##blank'>#blank</a>
         <a href='String.html##camelize'>#camelize</a>
         <a href='String.html##capitalize'>#capitalize</a>
-        <a href='String.html##constantize'>#constantize</a>
-        <a href='String.html##humanize'>#humanize</a>
-        <a href='String.html##isString'>#isString</a>
-        <a href='String.html##parse'>#parse</a>
-        <a href='String.html##startsWith'>#startsWith</a>
-        <a href='String.html##titleize'>#titleize</a>
-        <a href='String.html##underscore'>#underscore</a>
-        <a href='String.html##withoutExtension'>#withoutExtension</a>
         <a href='String.html##charAt'>#charAt</a>
         <a href='String.html##charCodeAt'>#charCodeAt</a>
         <a href='String.html##concat'>#concat</a>
+        <a href='String.html##constantize'>#constantize</a>
+        <a href='String.html##humanize'>#humanize</a>
         <a href='String.html##indexOf'>#indexOf</a>
+        <a href='String.html##isString'>#isString</a>
         <a href='String.html##lastIndexOf'>#lastIndexOf</a>
         <a href='String.html##localeCompare'>#localeCompare</a>
         <a href='String.html##match'>#match</a>
+        <a href='String.html##parse'>#parse</a>
         <a href='String.html##replace'>#replace</a>
         <a href='String.html##search'>#search</a>
         <a href='String.html##slice'>#slice</a>
         <a href='String.html##split'>#split</a>
+        <a href='String.html##startsWith'>#startsWith</a>
         <a href='String.html##substr'>#substr</a>
         <a href='String.html##substring'>#substring</a>
+        <a href='String.html##titleize'>#titleize</a>
         <a href='String.html##toLocaleLowerCase'>#toLocaleLowerCase</a>
         <a href='String.html##toLocaleUpperCase'>#toLocaleUpperCase</a>
         <a href='String.html##toLowerCase'>#toLowerCase</a>
         <a href='String.html##toString'>#toString</a>
         <a href='String.html##toUpperCase'>#toUpperCase</a>
         <a href='String.html##trim'>#trim</a>
+        <a href='String.html##underscore'>#underscore</a>
         <a href='String.html##valueOf'>#valueOf</a>
+        <a href='String.html##withoutExtension'>#withoutExtension</a>
       </div>
     </section>
     <div class='documentation'>
@@ -194,238 +195,6 @@
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
           <pre><code>String.prototype.capitalize = function() {&#x000A;  return this.charAt(0).toUpperCase() + this.substring(1).toLowerCase();&#x000A;};</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#constantize'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>String#constantize()</h1>
-      <div class='description'>
-        <section class='summary'><p>Return the class or constant named in this string.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <pre><code>"Constant".constantize()
-          # =&gt; Constant
-          # notice this isn't a string. Useful for calling methods on class with the same name as `this`.
-          </code></pre>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='Object.html'>Object</a>
-          </p>
-          <p class='return_description'>The class or constant named in this string.</p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>String.prototype.constantize = function() {&#x000A;  var item, target, _i, _len, _ref;&#x000A;  target = typeof exports !== "undefined" && exports !== null ? exports : window;&#x000A;  _ref = this.split('.');&#x000A;  for (_i = 0, _len = _ref.length; _i < _len; _i++) {&#x000A;    item = _ref[_i];&#x000A;    target = target[item];&#x000A;  }&#x000A;  return target;&#x000A;};</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#humanize'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>String#humanize()</h1>
-      <div class='description'>
-        <section class='summary'><p>Returns a new string that is a more human readable version.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <pre><code>"player_id".humanize()
-          # =&gt; "Player"
-          
-          "player_ammo".humanize()
-          # =&gt; "Player ammo"
-          </code></pre>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='String.html'>String</a>
-          </p>
-          <p class='return_description'>A new string. Replaces _id and _ with "" and capitalizes the word.</p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>String.prototype.humanize = function() {&#x000A;  return this.replace(/_id$/, "").replace(/_/g, " ").capitalize();&#x000A;};</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#isString'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>String#isString()</h1>
-      <div class='description'>
-        <section class='summary'><p>Returns true.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='Boolean.html'>Boolean</a>
-          </p>
-          <p class='return_description'>true</p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>String.prototype.isString = function() {&#x000A;  return true;&#x000A;};</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#parse'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>String#parse()</h1>
-      <div class='description'>
-        <section class='summary'><p>Parse this string as though it is JSON and return the object it represents. If it<br />is not valid JSON returns the string itself.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <pre><code># this is valid json, so an object is returned
-          '{"a": 3}'.parse()
-          # =&gt; {a: 3}
-          
-          # double quoting instead isn't valid JSON so a string is returned
-          "{'a': 3}".parse()
-          # =&gt; "{'a': 3}"
-          </code></pre>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='Object.html'>Object</a>
-          </p>
-          <p class='return_description'>Returns an object from the JSON this string contains. If it is not valid JSON returns the string itself.</p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>String.prototype.parse = function() {&#x000A;  try {&#x000A;    return JSON.parse(this.toString());&#x000A;  } catch (e) {&#x000A;    return this.toString();&#x000A;  }&#x000A;};</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#startsWith'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>String#startsWith(str)</h1>
-      <div class='description'>
-        <section class='summary'><p>Returns true if this string starts with the given string.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          
-        </section>
-        <section class='parameters'>
-          <h3>Parameters</h3>
-          <ul>
-            <li>
-              <span class='param_name'>str</span>
-               -
-              <span class='param_description'>The string to check.</span>
-            </li>
-          </ul>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='Boolean.html'>Boolean</a>
-          </p>
-          <p class='return_description'>True if this string starts with the given string, false otherwise.</p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>String.prototype.startsWith = function(str) {&#x000A;  return this.lastIndexOf(str, 0) === 0;&#x000A;};</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#titleize'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>String#titleize()</h1>
-      <div class='description'>
-        <section class='summary'><p>Returns a new string in Title Case.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <pre><code>"title-case".titleize()
-          # =&gt; "Title Case"
-          
-          "title case".titleize()
-          # =&gt; "Title Case"
-          </code></pre>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='String.html'>String</a>
-          </p>
-          <p class='return_description'>A new string. Title Cased.</p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>String.prototype.titleize = function() {&#x000A;  return this.split(/[- ]/).map(function(word) {&#x000A;    return word.capitalize();&#x000A;  }).join(' ');&#x000A;};</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#underscore'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>String#underscore()</h1>
-      <div class='description'>
-        <section class='summary'><p>Underscore a word, changing camelCased with under_scored.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <pre><code>"UNDERScore".underscore()
-          # =&gt; "under_score"
-          
-          "UNDER-SCORE".underscore()
-          # =&gt; "under_score"
-          
-          "UnDEr-SCorE".underscore()
-          # =&gt; "un_d_er_s_cor_e"
-          </code></pre>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='String.html'>String</a>
-          </p>
-          <p class='return_description'>A new string. Separated by _.</p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>String.prototype.underscore = function() {&#x000A;  return this.replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2').replace(/([a-z\d])([A-Z])/g, '$1_$2').replace(/-/g, '_').toLowerCase();&#x000A;};</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#withoutExtension'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>String#withoutExtension()</h1>
-      <div class='description'>
-        <section class='summary'><p>Assumes the string is something like a file name and returns the <br />contents of the string without the extension.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <pre><code>"neat.png".witouthExtension() 
-          # =&gt; "neat"
-          </code></pre>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='String.html'>String</a>
-          </p>
-          <p class='return_description'>A new string without the extension name.</p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>String.prototype.withoutExtension = function() {&#x000A;  return this.replace(/\.[^\.]*$/, '');&#x000A;};&#x000A;&#x000A;String.prototype.parseHex = function() {&#x000A;  var alpha, hexString, i, rgb;&#x000A;  hexString = this.replace(/#/, '');&#x000A;  switch (hexString.length) {&#x000A;    case 3:&#x000A;    case 4:&#x000A;      if (hexString.length === 4) {&#x000A;        alpha = (parseInt(hexString.substr(3, 1), 16) * 0x11) / 255;&#x000A;      } else {&#x000A;        alpha = 1;&#x000A;      }&#x000A;      rgb = (function() {&#x000A;        var _results;&#x000A;        _results = [];&#x000A;        for (i = 0; i <= 2; i++) {&#x000A;          _results.push(parseInt(hexString.substr(i, 1), 16) * 0x11);&#x000A;        }&#x000A;        return _results;&#x000A;      })();&#x000A;      rgb.push(alpha);&#x000A;      return rgb;&#x000A;    case 6:&#x000A;    case 8:&#x000A;      if (hexString.length === 8) {&#x000A;        alpha = parseInt(hexString.substr(6, 2), 16) / 255;&#x000A;      } else {&#x000A;        alpha = 1;&#x000A;      }&#x000A;      rgb = (function() {&#x000A;        var _results;&#x000A;        _results = [];&#x000A;        for (i = 0; i <= 2; i++) {&#x000A;          _results.push(parseInt(hexString.substr(2 * i, 2), 16));&#x000A;        }&#x000A;        return _results;&#x000A;      })();&#x000A;      rgb.push(alpha);&#x000A;      return rgb;&#x000A;  }&#x000A;};&#x000A;;</code></pre>
         </section>
       </div>
       <hr />
@@ -531,6 +300,62 @@
         </section>
       </div>
       <hr />
+      <a name='#constantize'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>String#constantize()</h1>
+      <div class='description'>
+        <section class='summary'><p>Return the class or constant named in this string.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <pre><code>"Constant".constantize()
+          # =&gt; Constant
+          # notice this isn't a string. Useful for calling methods on class with the same name as `this`.
+          </code></pre>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='Object.html'>Object</a>
+          </p>
+          <p class='return_description'>The class or constant named in this string.</p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>String.prototype.constantize = function() {&#x000A;  var item, target, _i, _len, _ref;&#x000A;  target = typeof exports !== "undefined" && exports !== null ? exports : window;&#x000A;  _ref = this.split('.');&#x000A;  for (_i = 0, _len = _ref.length; _i < _len; _i++) {&#x000A;    item = _ref[_i];&#x000A;    target = target[item];&#x000A;  }&#x000A;  return target;&#x000A;};</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#humanize'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>String#humanize()</h1>
+      <div class='description'>
+        <section class='summary'><p>Returns a new string that is a more human readable version.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <pre><code>"player_id".humanize()
+          # =&gt; "Player"
+          
+          "player_ammo".humanize()
+          # =&gt; "Player ammo"
+          </code></pre>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='String.html'>String</a>
+          </p>
+          <p class='return_description'>A new string. Replaces _id and _ with "" and capitalizes the word.</p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>String.prototype.humanize = function() {&#x000A;  return this.replace(/_id$/, "").replace(/_/g, " ").capitalize();&#x000A;};</code></pre>
+        </section>
+      </div>
+      <hr />
       <a name='#indexOf'></a>
       <!-- TODO make sure method_data isn't nil -->
       <h1>String#indexOf(A, The)</h1>
@@ -567,6 +392,30 @@
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
           <pre><code></code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#isString'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>String#isString()</h1>
+      <div class='description'>
+        <section class='summary'><p>Returns true.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='Boolean.html'>Boolean</a>
+          </p>
+          <p class='return_description'>true</p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>String.prototype.isString = function() {&#x000A;  return true;&#x000A;};</code></pre>
         </section>
       </div>
       <hr />
@@ -664,6 +513,37 @@
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
           <pre><code></code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#parse'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>String#parse()</h1>
+      <div class='description'>
+        <section class='summary'><p>Parse this string as though it is JSON and return the object it represents. If it<br />is not valid JSON returns the string itself.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <pre><code># this is valid json, so an object is returned
+          '{"a": 3}'.parse()
+          # =&gt; {a: 3}
+          
+          # double quoting instead isn't valid JSON so a string is returned
+          "{'a': 3}".parse()
+          # =&gt; "{'a': 3}"
+          </code></pre>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='Object.html'>Object</a>
+          </p>
+          <p class='return_description'>Returns an object from the JSON this string contains. If it is not valid JSON returns the string itself.</p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>String.prototype.parse = function() {&#x000A;  try {&#x000A;    return JSON.parse(this.toString());&#x000A;  } catch (e) {&#x000A;    return this.toString();&#x000A;  }&#x000A;};</code></pre>
         </section>
       </div>
       <hr />
@@ -818,6 +698,40 @@
         </section>
       </div>
       <hr />
+      <a name='#startsWith'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>String#startsWith(str)</h1>
+      <div class='description'>
+        <section class='summary'><p>Returns true if this string starts with the given string.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          
+        </section>
+        <section class='parameters'>
+          <h3>Parameters</h3>
+          <ul>
+            <li>
+              <span class='param_name'>str</span>
+               -
+              <span class='param_description'>The string to check.</span>
+            </li>
+          </ul>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='Boolean.html'>Boolean</a>
+          </p>
+          <p class='return_description'>True if this string starts with the given string, false otherwise.</p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>String.prototype.startsWith = function(str) {&#x000A;  return this.lastIndexOf(str, 0) === 0;&#x000A;};</code></pre>
+        </section>
+      </div>
+      <hr />
       <a name='#substr'></a>
       <!-- TODO make sure method_data isn't nil -->
       <h1>String#substr(Location, The)</h1>
@@ -893,6 +807,35 @@
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
           <pre><code></code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#titleize'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>String#titleize()</h1>
+      <div class='description'>
+        <section class='summary'><p>Returns a new string in Title Case.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <pre><code>"title-case".titleize()
+          # =&gt; "Title Case"
+          
+          "title case".titleize()
+          # =&gt; "Title Case"
+          </code></pre>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='String.html'>String</a>
+          </p>
+          <p class='return_description'>A new string. Title Cased.</p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>String.prototype.titleize = function() {&#x000A;  return this.split(/[- ]/).map(function(word) {&#x000A;    return word.capitalize();&#x000A;  }).join(' ');&#x000A;};</code></pre>
         </section>
       </div>
       <hr />
@@ -1040,6 +983,38 @@
         </section>
       </div>
       <hr />
+      <a name='#underscore'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>String#underscore()</h1>
+      <div class='description'>
+        <section class='summary'><p>Underscore a word, changing camelCased with under_scored.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <pre><code>"UNDERScore".underscore()
+          # =&gt; "under_score"
+          
+          "UNDER-SCORE".underscore()
+          # =&gt; "under_score"
+          
+          "UnDEr-SCorE".underscore()
+          # =&gt; "un_d_er_s_cor_e"
+          </code></pre>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='String.html'>String</a>
+          </p>
+          <p class='return_description'>A new string. Separated by _.</p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>String.prototype.underscore = function() {&#x000A;  return this.replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2').replace(/([a-z\d])([A-Z])/g, '$1_$2').replace(/-/g, '_').toLowerCase();&#x000A;};</code></pre>
+        </section>
+      </div>
+      <hr />
       <a name='#valueOf'></a>
       <!-- TODO make sure method_data isn't nil -->
       <h1>String#valueOf()</h1>
@@ -1064,6 +1039,53 @@
         </section>
       </div>
       <hr />
+      <a name='#withoutExtension'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>String#withoutExtension()</h1>
+      <div class='description'>
+        <section class='summary'><p>Assumes the string is something like a file name and returns the <br />contents of the string without the extension.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <pre><code>"neat.png".witouthExtension() 
+          # =&gt; "neat"
+          </code></pre>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='String.html'>String</a>
+          </p>
+          <p class='return_description'>A new string without the extension name.</p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>String.prototype.withoutExtension = function() {&#x000A;  return this.replace(/\.[^\.]*$/, '');&#x000A;};&#x000A;&#x000A;String.prototype.parseHex = function() {&#x000A;  var alpha, hexString, i, rgb;&#x000A;  hexString = this.replace(/#/, '');&#x000A;  switch (hexString.length) {&#x000A;    case 3:&#x000A;    case 4:&#x000A;      if (hexString.length === 4) {&#x000A;        alpha = (parseInt(hexString.substr(3, 1), 16) * 0x11) / 255;&#x000A;      } else {&#x000A;        alpha = 1;&#x000A;      }&#x000A;      rgb = (function() {&#x000A;        var _results;&#x000A;        _results = [];&#x000A;        for (i = 0; i <= 2; i++) {&#x000A;          _results.push(parseInt(hexString.substr(i, 1), 16) * 0x11);&#x000A;        }&#x000A;        return _results;&#x000A;      })();&#x000A;      rgb.push(alpha);&#x000A;      return rgb;&#x000A;    case 6:&#x000A;    case 8:&#x000A;      if (hexString.length === 8) {&#x000A;        alpha = parseInt(hexString.substr(6, 2), 16) / 255;&#x000A;      } else {&#x000A;        alpha = 1;&#x000A;      }&#x000A;      rgb = (function() {&#x000A;        var _results;&#x000A;        _results = [];&#x000A;        for (i = 0; i <= 2; i++) {&#x000A;          _results.push(parseInt(hexString.substr(2 * i, 2), 16));&#x000A;        }&#x000A;        return _results;&#x000A;      })();&#x000A;      rgb.push(alpha);&#x000A;      return rgb;&#x000A;  }&#x000A;};&#x000A;;</code></pre>
+        </section>
+      </div>
+      <hr />
     </div>
   </body>
 </html>
+<script type='text/javascript'>
+  //<![CDATA[
+    $(function() {
+      $(".documentation").on("click", ".toggle_source", function(e) {
+        e.preventDefault();
+        return $(this).next().toggle();
+      });
+      return $("code.run").each(function() {
+        var canvas, codeElement, compiledJs, source;
+        codeElement = $(this);
+        source = codeElement.text();
+        compiledJs = CoffeeScript.compile(source, {
+          bare: true
+        });
+        canvas = $("<canvas width=200 height=150/>").pixieCanvas();
+        codeElement.after(canvas);
+        return eval(compiledJs);
+      });
+    });
+  //]]>
+</script>
