@@ -12,7 +12,8 @@ Player = (I={}) ->
     "onWall": false,
     "velocity": "{x: 0, y: 0}",
     "sprite": "balki",
-    "totalStars": 50
+    "totalStars": 50,
+    "stars": 0
   }
 
   self = GameObject(I)
