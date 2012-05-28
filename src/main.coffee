@@ -18,6 +18,8 @@ load = ->
     
   player.I.stars = 0
   
+load()
+  
 engine.start()
     
 engine.on 'update', ->
