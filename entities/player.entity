@@ -8,7 +8,7 @@
   "onWall": false,
   "velocity": "{x: 0, y: 0}",
   "sprite": "balki",
-  "totalStars": 27,
+  "totalStars": 30,
   "stars": 0,
   "speed": 5,
   "freakout": false
