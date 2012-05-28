@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -94,13 +94,21 @@
         <section class='summary'><p>Modify the object's properties over time.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = GameObject()</p>
+          <pre><code>player = GameObject()
           
-          <p>player.tween 30,<br />  x: 50<br />  y: 50<br />  easing: "quadratic"<br /></pre></code></p>
+          player.tween 30,
+            x: 50
+            y: 50
+            easing: "quadratic"
           
-          <p><code><pre><br />player = GameObject()</p>
+          player = GameObject()
           
-          <p>player.tween 30,<br />  x: 150<br />  y: 150<br />  complete: -><br />    player.dance()<br /></pre></code></p>
+          player.tween 30,
+            x: 150
+            y: 150
+            complete: -&gt;
+              player.dance()
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -128,7 +136,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>tween: function(duration, properties) {&#x000A;      var complete, easing, property, target, _results;&#x000A;      properties = Object.extend({}, properties);&#x000A;      easing = properties.easing || "linear";&#x000A;      complete = properties.complete;&#x000A;      delete properties.easing;&#x000A;      delete properties.complete;&#x000A;      _results = [];&#x000A;      for (property in properties) {&#x000A;        target = properties[property];&#x000A;        _results.push(I.activeTweens[property] = {&#x000A;          complete: complete,&#x000A;          end: target,&#x000A;          start: I[property],&#x000A;          easing: easing,&#x000A;          duration: duration,&#x000A;          startTime: I.age,&#x000A;          endTime: I.age + duration&#x000A;        });&#x000A;      }&#x000A;      return _results;&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;&#x000A;;&#x000A;;&#x000A;;&#x000A;;&#x000A;&#x000A;document.oncontextmenu = function() {&#x000A;  return false;&#x000A;};&#x000A;&#x000A;$(document).bind("keydown", function(event) {&#x000A;  if (!$(event.target).is("input")) return event.preventDefault();&#x000A;});&#x000A;;</code></pre>
+          <pre><code>tween: function(duration, properties) {&#x000A;      var complete, easing, property, target, _results;&#x000A;      properties = Object.extend({}, properties);&#x000A;      easing = properties.easing || "linear";&#x000A;      complete = properties.complete;&#x000A;      delete properties.easing;&#x000A;      delete properties.complete;&#x000A;      _results = [];&#x000A;      for (property in properties) {&#x000A;        target = properties[property];&#x000A;        _results.push(I.activeTweens[property] = {&#x000A;          complete: complete,&#x000A;          end: target,&#x000A;          start: I[property],&#x000A;          easing: easing,&#x000A;          duration: duration,&#x000A;          startTime: I.age,&#x000A;          endTime: I.age + duration&#x000A;        });&#x000A;      }&#x000A;      return _results;&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;&#x000A;;&#x000A;;&#x000A;;</code></pre>
         </section>
       </div>
       <hr />

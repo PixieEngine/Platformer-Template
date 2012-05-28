@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -84,7 +84,11 @@
         <p>The Text Effect class provides a method to display moving text onscreen, fading out the text over the effect duration.</p>
         <section class='usage'>
           <h3>Usage</h3>
-          <p>By default, images are loaded asynchronously. A proxy object is <br />returned immediately. Even though it has a draw method it will not<br />draw anything to the screen until the image has been loaded.</p>
+          <pre><code># adds a TextEffect to the engine at (60, 100)
+          engine.add 'TextEffect'
+            x: 60
+            y: 100
+          </code></pre>
         </section>
       </div>
       <hr />
@@ -92,7 +96,7 @@
       <!-- TODO make sure method_data isn't nil -->
       <h1>TextEffect#draw(canvas)</h1>
       <div class='description'>
-        <section class='summary'><p>Draws the <code>textShadow</code> text and the <code>text</code> text.</p></section>
+        <section class='summary'><p>Draws text from <code>I.textShadow</code> <code>I.text</code>.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
           
@@ -118,7 +122,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>var TextEffect;&#x000A;&#x000A;TextEffect = function(I) {&#x000A;  var self;&#x000A;  if (I == null) I = {};&#x000A;  Object.reverseMerge(I, {&#x000A;    color: Color('green'),&#x000A;    duration: 40,&#x000A;    font: '20px Helvetica',&#x000A;    text: '100',&#x000A;    textShadow: Color('black'),&#x000A;    alpha: 1,&#x000A;    rotation: 0,&#x000A;    rotationalVelocity: 0,&#x000A;    velocity: Point(0, 0)&#x000A;  });&#x000A;  self = GameObject(I);&#x000A;  self.bind("update", function() {&#x000A;    return I.alpha = 1 - (I.age / I.duration);&#x000A;  });&#x000A;  self.unbind("draw");&#x000A;  self.bind("draw", function(canvas) {&#x000A;    if (!I.color.channels) I.color = Color(I.color);&#x000A;    if (!I.textShadow.channels) I.textShadow = Color(I.textShadow);&#x000A;    I.color.a = I.alpha;&#x000A;    I.textShadow.a = I.alpha;&#x000A;    canvas.font(I.font);&#x000A;    canvas.drawText({&#x000A;      color: I.textShadow,&#x000A;      x: 1,&#x000A;      y: 1,&#x000A;      text: I.text&#x000A;    });&#x000A;    return canvas.drawText({&#x000A;      color: I.color,&#x000A;      x: 0,&#x000A;      y: 0,&#x000A;      text: I.text&#x000A;    });&#x000A;  });&#x000A;  return self;&#x000A;};&#x000A;;</code></pre>
+          <pre><code>var TextEffect;&#x000A;&#x000A;TextEffect = function(I) {&#x000A;  var self;&#x000A;  if (I == null) I = {};&#x000A;  Object.reverseMerge(I, {&#x000A;    color: Color('green'),&#x000A;    duration: -1,&#x000A;    font: '20px Helvetica',&#x000A;    text: '100',&#x000A;    textShadow: Color('black'),&#x000A;    alpha: 1,&#x000A;    rotation: 0,&#x000A;    velocity: Point(0, 0)&#x000A;  });&#x000A;  self = GameObject(I);&#x000A;  self.bind("update", function() {&#x000A;    return I.alpha = (1 - (I.age / I.duration)).clamp(0, 1);&#x000A;  });&#x000A;  self.unbind("draw");&#x000A;  self.bind("draw", function(canvas) {&#x000A;    var width;&#x000A;    if (!I.color.channels) I.color = Color(I.color);&#x000A;    if (!I.textShadow.channels) I.textShadow = Color(I.textShadow);&#x000A;    I.color.a = I.alpha;&#x000A;    I.textShadow.a = I.alpha;&#x000A;    width = canvas.measureText();&#x000A;    canvas.font(I.font);&#x000A;    canvas.drawText({&#x000A;      color: I.textShadow,&#x000A;      x: 1 - width / 2,&#x000A;      y: 1,&#x000A;      text: I.text&#x000A;    });&#x000A;    return canvas.drawText({&#x000A;      color: I.color,&#x000A;      x: 0 - width / 2,&#x000A;      y: 0,&#x000A;      text: I.text&#x000A;    });&#x000A;  });&#x000A;  return self;&#x000A;};&#x000A;;</code></pre>
         </section>
       </div>
       <hr />
@@ -126,7 +130,7 @@
       <!-- TODO make sure method_data isn't nil -->
       <h1>TextEffect#update()</h1>
       <div class='description'>
-        <section class='summary'><p>Updates the position of the text based on the effect velocity. Updates the <br />alpha based on the elapsed time since the effect creation. If <code>rotationalVelocity</code><br />is provided then the text rotation is updated as well.</p></section>
+        <section class='summary'><p>Updates the position of the text based on the effect velocity. Updates the <br />alpha based on the elapsed time since the effect creation.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
           

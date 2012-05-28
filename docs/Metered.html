@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -86,35 +86,32 @@
         <p>The Metered module provides a simple drop-in<br />meter ui to track arbitrary numeric attributes.</p>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = GameObject<br />  health: 100<br />  maxHealth: 100</p>
+          <pre><code>player = GameObject
+            health: 100
+            maxHealth: 100
           
-          <p>player.include Metered</p>
+          player.include Metered
           
-          <p>enemy = GameObject<br />  health: 500</p>
+          enemy = GameObject
+            health: 500
           
-          <p>enemy.include Metered</p>
+          enemy.include Metered
           
-          <p>someOtherObject = GameObject</p>
+          someOtherObject = GameObject
           
-          <p>someOtherObject.include Metered</p>
+          someOtherObject.include Metered
           
-          <p>player.meter 'health'</p>
+          player.meter 'health'
+          # =&gt; Sets up a health meter that will be drawn during the player overlay event
           
-          <h1>=> Sets up a health meter that will be drawn during the player overlay event</h1>
+          enemy.meter 'health'
+          # =&gt; Sets up a health meter that will be drawn during the enemy overlay event. 
+          # Since maxHealth wasn't provided, it is set to the value of I.health (500)
           
-          <p>enemy.meter 'health'</p>
-          
-          <h1>=> Sets up a health meter that will be drawn during the enemy overlay event.</h1>
-          
-          <h1>Since maxHealth wasn't provided, it is set to the value of I.health (500)</h1>
-          
-          <p>someOtherObject.meter 'turbo'</p>
-          
-          <h1>=> Sets up a turbo meter that will be drawn during the someOtherObject overlay event.</h1>
-          
-          <h1>Since neither turbo maxTurbo were provided, they are both set to 100.</h1>
-          
-          <p></pre></code></p>
+          someOtherObject.meter 'turbo'
+          # =&gt; Sets up a turbo meter that will be drawn during the someOtherObject overlay event. 
+          # Since neither turbo maxTurbo were provided, they are both set to 100.
+          </code></pre>
           
           <p>Metered module</p>
         </section>
@@ -127,17 +124,16 @@
         <section class='summary'><p>Hides the named meter</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = GameObject</p>
+          <pre><code>player = GameObject
           
-          <p>player.include Metered      </p>
+          player.include Metered      
           
-          <h1>creates a health meter</h1>
+          # creates a health meter
+          player.meter 'health'
           
-          <p>player.meter 'health'</p>
-          
-          <h1>disables visibility for the meter named 'health'</h1>
-          
-          <p>player.hideMeter 'health'<br /></pre></code></p>
+          # disables visibility for the meter named 'health'
+          player.hideMeter 'health'
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -171,15 +167,23 @@
         <section class='summary'><p>Configures a meter to be drawn each overlay event.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = GameObject</p>
+          <pre><code>player = GameObject
           
-          <p>player.include Metered      </p>
+          player.include Metered      
           
-          <p>player.meter 'health',<br />  border<br />    color: 'brown'<br />    radius: 3<br />  color: 'pink'<br />  height: 20<br />  x: 5<br />  y: 5<br />  show: true<br />  width: 150</p>
+          player.meter 'health',
+            border
+              color: 'brown'
+              radius: 3
+            color: 'pink'
+            height: 20
+            x: 5
+            y: 5
+            show: true
+            width: 150
           
-          <h1>=> Sets up a health meter, using all the configuration options</h1>
-          
-          <p></pre></code></p>
+          # =&gt; Sets up a health meter, using all the configuration options
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -258,17 +262,17 @@
         <section class='summary'><p>Shows the named meter</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = GameObject</p>
+          <pre><code>player = GameObject
           
-          <p>player.include Metered      </p>
+          player.include Metered      
           
-          <h1>creates a health meter but disables visibility</h1>
+          # creates a health meter but disables visibility
+          player.meter 'health'
+            show: false
           
-          <p>player.meter 'health'<br />  show: false</p>
-          
-          <h1>enables visibility for the meter named 'health'</h1>
-          
-          <p>player.showMeter 'health'<br /></pre></code></p>
+          # enables visibility for the meter named 'health'
+          player.showMeter 'health'
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -302,17 +306,16 @@
         <section class='summary'><p>Toggles visibility of the named meter</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = GameObject</p>
+          <pre><code>player = GameObject
           
-          <p>player.include Metered      </p>
+          player.include Metered      
           
-          <h1>creates a health meter</h1>
+          # creates a health meter
+          player.meter 'health'
           
-          <p>player.meter 'health'</p>
-          
-          <h1>toggles visibility for the meter named 'health'</h1>
-          
-          <p>player.toggleMeter 'health'<br /></pre></code></p>
+          # toggles visibility for the meter named 'health'
+          player.toggleMeter 'health'
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>

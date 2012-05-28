@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -86,9 +86,16 @@
         <section class='summary'><p>Loads the game state passed in, or the last saved state, if any.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.bind 'update', -><br />  if justPressed.l<br />    # loads the last saved state<br />    engine.loadState()</p>
+          <pre><code>engine.bind 'update', -&gt;
+            if justPressed.l
+              # loads the last saved state
+              engine.loadState()
           
-          <p>if justPressed.o<br />    # removes all game objects, then reinstantiates <br />    # them with the entityData passed in<br />    engine.loadState([{x: 40, y: 50, class: "Player"}, {x: 0, y: 0, class: "Enemy"}, {x: 500, y: 400, class: "Boss"}])<br /></pre></code></p>
+            if justPressed.o
+              # removes all game objects, then reinstantiates 
+              # them with the entityData passed in
+              engine.loadState([{x: 40, y: 50, class: "Player"}, {x: 0, y: 0, class: "Enemy"}, {x: 500, y: 400, class: "Boss"}])
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -122,13 +129,15 @@
         <section class='summary'><p>Reloads the current game state, useful for hotswapping code.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.I.objects.each (object) -><br />  # bring all objects to (0, 0) for some reason<br />  object.I.x = 0<br />  object.I.y = 0</p>
+          <pre><code>engine.I.objects.each (object) -&gt;
+            # bring all objects to (0, 0) for some reason
+            object.I.x = 0
+            object.I.y = 0
           
-          <h1>reload all objects to make sure</h1>
-          
-          <h1>they are at (0, 0)</h1>
-          
-          <p>engine.reload()<br /></pre></code></p>
+          # reload all objects to make sure
+          # they are at (0, 0)  
+          engine.reload()
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -152,7 +161,10 @@
         <section class='summary'><p>Save the current game state and returns a JSON object representing that state.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.bind 'update', -><br />  if justPressed.s<br />    engine.saveState()<br /></pre></code></p>
+          <pre><code>engine.bind 'update', -&gt;
+            if justPressed.s
+              engine.saveState()
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>

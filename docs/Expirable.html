@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a class='active' href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -79,21 +79,22 @@
           <h3>Usage</h3>
           <p>This module is included by default in <code>GameObjects</code></p>
           
-          <p><code><pre><br />enemy = GameObject<br />  x: 50<br />  y: 30<br />  duration: 5</p>
+          <pre><code>enemy = GameObject
+            x: 50
+            y: 30
+            duration: 5
           
-          <p>enemy.include Expirable</p>
+          enemy.include Expirable
           
-          <p>enemy.I.active</p>
+          enemy.I.active
+          # =&gt; true
           
-          <h1>=> true</h1>
+          5.times -&gt;
+            enemy.update(1)
           
-          <p>5.times -><br />  enemy.update(1)</p>
-          
-          <p>enemy.I.active</p>
-          
-          <h1>=> false</h1>
-          
-          <p></pre></code></p>
+          enemy.I.active
+          # =&gt; false
+          </code></pre>
         </section>
       </div>
       <hr />

@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a class='active' href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -81,10 +81,15 @@
       <h1>Clampable Summary</h1>
       <div class='description'>
         <section class='summary'></section>
-        <p>The <code>Clampable</code> module provides helper methods to clamp object properties. </p>
+        <p>The <code>Clampable</code> module provides helper methods to clamp object properties. This module is included by default in <code>GameObject</code></p>
         <section class='usage'>
           <h3>Usage</h3>
+          <pre><code>player = GameObject
+            x: 40
+            y: 30
           
+          player.include Clampable
+          </code></pre>
         </section>
       </div>
       <hr />
@@ -95,15 +100,17 @@
         <section class='summary'><p>Keep an objects attributes within a given range.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre></p>
+          <pre><code># Player's health will be within [0, 100] at the end of every update
+          player.clamp
+            health:
+              min: 0
+              max: 100
           
-          <h1>Player's health will be within [0, 100] at the end of every update</h1>
-          
-          <p>player.clamp<br />  health:<br />    min: 0<br />    max: 100</p>
-          
-          <h1>Score can only be positive</h1>
-          
-          <p>player.clamp<br />  score:<br />    min: 0<br /></pre></code></p>
+          # Score can only be positive
+          player.clamp
+            score:
+              min: 0
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -160,7 +167,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>clampToBounds: function(bounds) {&#x000A;      bounds || (bounds = Rectangle({&#x000A;        x: 0,&#x000A;        y: 0,&#x000A;        width: App.width,&#x000A;        height: App.height&#x000A;      }));&#x000A;      return self.clamp({&#x000A;        x: {&#x000A;          min: bounds.x + I.width / 2,&#x000A;          max: bounds.width - I.width / 2&#x000A;        },&#x000A;        y: {&#x000A;          min: bounds.y + I.height / 2,&#x000A;          max: bounds.height - I.height / 2&#x000A;        }&#x000A;      });&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;&#x000A;&#x000A;(function() {</code></pre>
+          <pre><code>clampToBounds: function(bounds) {&#x000A;      bounds || (bounds = Rectangle({&#x000A;        x: 0,&#x000A;        y: 0,&#x000A;        width: App.width,&#x000A;        height: App.height&#x000A;      }));&#x000A;      return self.clamp({&#x000A;        x: {&#x000A;          min: bounds.x + I.width / 2,&#x000A;          max: bounds.width - I.width / 2&#x000A;        },&#x000A;        y: {&#x000A;          min: bounds.y + I.height / 2,&#x000A;          max: bounds.height - I.height / 2&#x000A;        }&#x000A;      });&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;&#x000A;&#x000A;(function() {&#x000A;  var ANY, CEILING, Collidable, DOWN, FLOOR, LEFT, NONE, RIGHT, UP, WALL, _ref, _ref2;&#x000A;  Collidable = function(I, self) {&#x000A;    Object.reverseMerge(I, {&#x000A;      allowCollisions: ANY,&#x000A;      immovable: false,&#x000A;      touching: NONE,&#x000A;      velocity: Point(0, 0),&#x000A;      mass: 1,&#x000A;      elasticity: 0&#x000A;    });&#x000A;    self.attrAccessor("immovable", "velocity", "mass", "elasticity");&#x000A;    return {&#x000A;      solid: function(newSolid) {&#x000A;        if (newSolid != null) {&#x000A;          if (newSolid) {&#x000A;            return I.allowCollisions = ANY;&#x000A;          } else {&#x000A;            return I.allowCollisions = NONE;&#x000A;          }&#x000A;        } else {&#x000A;          return I.allowCollisions;&#x000A;        }&#x000A;      }&#x000A;    };&#x000A;  };&#x000A;  (typeof exports !== "undefined" && exports !== null ? exports : this)["Collidable"] = Collidable;&#x000A;  _ref = Object.extend(Collidable, {&#x000A;    NONE: 0x0000,&#x000A;    LEFT: 0x0001,&#x000A;    RIGHT: 0x0010,&#x000A;    UP: 0x0100,&#x000A;    DOWN: 0x1000&#x000A;  }), NONE = _ref.NONE, LEFT = _ref.LEFT, RIGHT = _ref.RIGHT, UP = _ref.UP, DOWN = _ref.DOWN;&#x000A;  _ref2 = Object.extend(Collidable, {&#x000A;    FLOOR: DOWN,&#x000A;    WALL: LEFT | RIGHT,&#x000A;    CEILING: UP,&#x000A;    ANY: LEFT | RIGHT | UP | DOWN&#x000A;  }), ANY = _ref2.ANY, FLOOR = _ref2.FLOOR, WALL = _ref2.WALL, CEILING = _ref2.CEILING;&#x000A;  return Object.extend(Collidable, {&#x000A;    separate: function(a, b) {&#x000A;      var aBounds, aMass, aVelocity, average, bBounds, bMass, bVelocity, deltaVelocity, normal, overlap, pushA, pushB, relativeVelocity, totalMass;&#x000A;      if (a.immovable() && b.immovable()) return;&#x000A;      aBounds = a.bounds();&#x000A;      bBounds = b.bounds();&#x000A;      aVelocity = a.velocity();&#x000A;      bVelocity = b.velocity();&#x000A;      deltaVelocity = aVelocity.subtract(bVelocity);&#x000A;      overlap = Point(0, 0);&#x000A;      if (Collision.rectangular(aBounds, bBounds)) {&#x000A;        if (deltaVelocity.x > 0) {&#x000A;          overlap.x = aBounds.x + aBounds.width - bBounds.x;&#x000A;          if (!(a.I.allowCollisions & RIGHT) || !(b.I.allowCollisions & LEFT)) {&#x000A;            overlap.x = 0;&#x000A;          } else {&#x000A;            a.I.touching |= RIGHT;&#x000A;            b.I.touching |= LEFT;&#x000A;          }&#x000A;        } else if (deltaVelocity.x < 0) {&#x000A;          overlap.x = aBounds.x - bBounds.width - bBounds.x;&#x000A;          if (!(a.I.allowCollisions & LEFT) || !(b.I.allowCollisions & RIGHT)) {&#x000A;            overlap.x = 0;&#x000A;          } else {&#x000A;            a.I.touching |= LEFT;&#x000A;            b.I.touching |= RIGHT;&#x000A;          }&#x000A;        }&#x000A;        if (deltaVelocity.y > 0) {&#x000A;          overlap.y = aBounds.y + aBounds.height - bBounds.y;&#x000A;          if (!(a.I.allowCollisions & DOWN) || !(b.I.allowCollisions & UP)) {&#x000A;            overlap.y = 0;&#x000A;          } else {&#x000A;            a.I.touching |= DOWN;&#x000A;            b.I.touching |= UP;&#x000A;          }&#x000A;        } else if (deltaVelocity.y < 0) {&#x000A;          overlap.y = aBounds.y - bBounds.height - bBounds.y;&#x000A;          if (!(a.I.allowCollisions & UP) || !(b.I.allowCollisions & DOWN)) {&#x000A;            overlap.y = 0;&#x000A;          } else {&#x000A;            a.I.touching |= UP;&#x000A;            b.I.touching |= DOWN;&#x000A;          }&#x000A;        }&#x000A;      }&#x000A;      if (!overlap.equal(Point.ZERO)) {&#x000A;        if (!a.immovable() && !b.immovable()) {&#x000A;          a.changePosition(overlap.scale(-0.5));&#x000A;          b.changePosition(overlap.scale(+0.5));&#x000A;          relativeVelocity = aVelocity.subtract(bVelocity);&#x000A;          aMass = a.mass();&#x000A;          bMass = b.mass();&#x000A;          totalMass = bMass + aMass;&#x000A;          normal = overlap.norm();&#x000A;          pushA = normal.scale(-2 * (relativeVelocity.dot(normal) * (bMass / totalMass)));&#x000A;          pushB = normal.scale(+2 * (relativeVelocity.dot(normal) * (aMass / totalMass)));&#x000A;          average = pushA.add(pushB).scale(0.5);&#x000A;          pushA.subtract$(average).scale(a.elasticity());&#x000A;          pushB.subtract$(average).scale(b.elasticity());&#x000A;          a.I.velocity = average.add(pushA);&#x000A;          b.I.velocity = average.add(pushB);&#x000A;        } else if (!a.immovable()) {&#x000A;          a.changePosition(overlap.scale(-1));&#x000A;          a.I.velocity = bVelocity.subtract(aVelocity.scale(a.elasticity()));&#x000A;        } else if (!b.immovable()) {&#x000A;          b.changePosition(overlap);&#x000A;          b.I.velocity = aVelocity.subtract(bVelocity.scale(b.elasticity()));&#x000A;        }&#x000A;        return true;&#x000A;      }&#x000A;    }&#x000A;  });&#x000A;})();&#x000A;;&#x000A;&#x000A;(function() {&#x000A;  var Collision, collides;&#x000A;  collides = function(a, b) {&#x000A;    return Collision.rectangular(a.bounds(), b.bounds());&#x000A;  };</code></pre>
         </section>
       </div>
       <hr />

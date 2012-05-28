@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -115,7 +115,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>(function() {&#x000A;  // Private array of chars to use&#x000A;  var CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(''); &#x000A;&#x000A;  Math.uuid = function (len, radix) {&#x000A;    var chars = CHARS, uuid = [];&#x000A;    radix = radix || chars.length;&#x000A;&#x000A;    if (len) {&#x000A;      // Compact form&#x000A;      for (var i = 0; i < len; i++) uuid[i] = chars[0 | Math.random()*radix];&#x000A;    } else {&#x000A;      // rfc4122, version 4 form&#x000A;      var r;&#x000A;&#x000A;      // rfc4122 requires these characters&#x000A;      uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';&#x000A;      uuid[14] = '4';&#x000A;&#x000A;      // Fill in random data.  At i==19 set the high bits of clock sequence as&#x000A;      // per rfc4122, sec. 4.1.5&#x000A;      for (var i = 0; i < 36; i++) {&#x000A;        if (!uuid[i]) {&#x000A;          r = 0 | Math.random()*16;&#x000A;          uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];&#x000A;        }&#x000A;      }&#x000A;    }&#x000A;&#x000A;    return uuid.join('');&#x000A;  };&#x000A;&#x000A;  // A more performant, but slightly bulkier, RFC4122v4 solution.  We boost performance&#x000A;  // by minimizing calls to random()&#x000A;  Math.uuidFast = function() {&#x000A;    var chars = CHARS, uuid = new Array(36), rnd=0, r;&#x000A;    for (var i = 0; i < 36; i++) {&#x000A;      if (i==8 || i==13 ||  i==18 || i==23) {&#x000A;        uuid[i] = '-';&#x000A;      } else if (i==14) {&#x000A;        uuid[i] = '4';&#x000A;      } else {&#x000A;        if (rnd <= 0x02) rnd = 0x2000000 + (Math.random()*0x1000000)|0;&#x000A;        r = rnd & 0xf;&#x000A;        rnd = rnd >> 4;&#x000A;        uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];&#x000A;      }&#x000A;    }&#x000A;    return uuid.join('');&#x000A;  };&#x000A;&#x000A;  // A more compact, but less performant, RFC4122v4 solution:&#x000A;  Math.uuidCompact = function() {&#x000A;    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {&#x000A;      var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);&#x000A;      return v.toString(16);&#x000A;    }).toUpperCase();&#x000A;  };&#x000A;})();;&#x000A;;&#x000A;;&#x000A;var ActiveBounds;&#x000A;&#x000A;ActiveBounds = function(I, self) {&#x000A;  if (I == null) I = {};&#x000A;  Object.reverseMerge(I, {&#x000A;    activeBounds: Rectangle({&#x000A;      x: 0,&#x000A;      y: 0,&#x000A;      width: App.width,&#x000A;      height: App.height&#x000A;    })&#x000A;  });&#x000A;  return self.bind('update', function() {&#x000A;    var _ref, _ref2;&#x000A;    if (!((I.activeBounds.left <= (_ref = I.x) && _ref <= I.activeBounds.right))) {&#x000A;      self.destroy();&#x000A;    }&#x000A;    if (!((I.activeBounds.top <= (_ref2 = I.y) && _ref2 <= I.activeBounds.bottom))) {&#x000A;      return self.destroy();&#x000A;    }&#x000A;  });&#x000A;};&#x000A;;</code></pre>
+          <pre><code>(function() {&#x000A;  // Private array of chars to use&#x000A;  var CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(''); &#x000A;&#x000A;  Math.uuid = function (len, radix) {&#x000A;    var chars = CHARS, uuid = [];&#x000A;    radix = radix || chars.length;&#x000A;&#x000A;    if (len) {&#x000A;      // Compact form&#x000A;      for (var i = 0; i < len; i++) uuid[i] = chars[0 | Math.random()*radix];&#x000A;    } else {&#x000A;      // rfc4122, version 4 form&#x000A;      var r;&#x000A;&#x000A;      // rfc4122 requires these characters&#x000A;      uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';&#x000A;      uuid[14] = '4';&#x000A;&#x000A;      // Fill in random data.  At i==19 set the high bits of clock sequence as&#x000A;      // per rfc4122, sec. 4.1.5&#x000A;      for (var i = 0; i < 36; i++) {&#x000A;        if (!uuid[i]) {&#x000A;          r = 0 | Math.random()*16;&#x000A;          uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];&#x000A;        }&#x000A;      }&#x000A;    }&#x000A;&#x000A;    return uuid.join('');&#x000A;  };&#x000A;&#x000A;  // A more performant, but slightly bulkier, RFC4122v4 solution.  We boost performance&#x000A;  // by minimizing calls to random()&#x000A;  Math.uuidFast = function() {&#x000A;    var chars = CHARS, uuid = new Array(36), rnd=0, r;&#x000A;    for (var i = 0; i < 36; i++) {&#x000A;      if (i==8 || i==13 ||  i==18 || i==23) {&#x000A;        uuid[i] = '-';&#x000A;      } else if (i==14) {&#x000A;        uuid[i] = '4';&#x000A;      } else {&#x000A;        if (rnd <= 0x02) rnd = 0x2000000 + (Math.random()*0x1000000)|0;&#x000A;        r = rnd & 0xf;&#x000A;        rnd = rnd >> 4;&#x000A;        uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];&#x000A;      }&#x000A;    }&#x000A;    return uuid.join('');&#x000A;  };&#x000A;&#x000A;  // A more compact, but less performant, RFC4122v4 solution:&#x000A;  Math.uuidCompact = function() {&#x000A;    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {&#x000A;      var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);&#x000A;      return v.toString(16);&#x000A;    }).toUpperCase();&#x000A;  };&#x000A;})();;&#x000A;;&#x000A;;</code></pre>
         </section>
       </div>
       <hr />

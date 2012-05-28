@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a class='active' href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -94,25 +94,23 @@
         <section class='summary'><p>A convenient way to set the fade instance variables on a sprite. You can modify the<br />instance variables by hand but the suggested way to do it is through this method.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = GameObject()</p>
+          <pre><code>player = GameObject()
           
-          <p>player.include(Fadeable)</p>
+          player.include(Fadeable)
           
-          <p>fadedOut = false</p>
+          fadedOut = false
           
-          <h1>this will fade the player object out over the next 30 frames.</h1>
+          # this will fade the player object out over the next 30 frames. 
+          # once the player is faded out the fadedOut variable will be set to true.
+          player.fadeOut 30, (player) -&gt;
+            fadedOut = true
           
-          <h1>once the player is faded out the fadedOut variable will be set to true.</h1>
+          30.times -&gt;
+            player.update()
           
-          <p>player.fadeOut 30, (player) -><br />  fadedOut = true</p>
-          
-          <p>30.times -><br />  player.update()</p>
-          
-          <p>fadedOut</p>
-          
-          <h1>=> true</h1>
-          
-          <p></pre></code></p>
+          fadedOut
+          # =&gt; true
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>

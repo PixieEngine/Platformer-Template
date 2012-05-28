@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -135,7 +135,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>destroy: function() {&#x000A;      if (!I.destroyed) self.trigger('destroy');&#x000A;      I.destroyed = true;&#x000A;      return I.active = false;&#x000A;    }&#x000A;  });&#x000A;  defaultModules = [Bindable, Ageable, Bounded, Clampable, Cooldown, Drawable, Expirable, Follow, Metered, Movable, Rotatable, TimedEvents, Tween];&#x000A;  modules = defaultModules.concat(I.includedModules.invoke('constantize'));&#x000A;  modules = modules.without(I.excludedModules.invoke('constantize'));&#x000A;  modules.each(function(Module) {&#x000A;    return self.include(Module);&#x000A;  });&#x000A;  self.attrAccessor("solid");&#x000A;  autobindEvents = ['create', 'destroy', 'step'];&#x000A;  autobindEvents.each(function(eventName) {&#x000A;    var event;&#x000A;    if (event = I[eventName]) {&#x000A;      if (typeof event === "function") {&#x000A;        return self.bind(eventName, event);&#x000A;      } else {&#x000A;        return self.bind(eventName, eval("(function() {" + event + "})"));&#x000A;      }&#x000A;    }&#x000A;  });&#x000A;  return self;&#x000A;};</code></pre>
+          <pre><code>destroy: function() {&#x000A;      if (!I.destroyed) self.trigger('destroy');&#x000A;      I.destroyed = true;&#x000A;      return I.active = false;&#x000A;    }&#x000A;  });&#x000A;  GameObject.defaultModules.each(function(moduleName) {&#x000A;    return self.include(moduleName);&#x000A;  });&#x000A;  return self;&#x000A;};&#x000A;&#x000A;GameObject.defaultModules = ["Ageable", "Bounded", "Clampable", "Cooldown", "Drawable", "Expirable", "Follow", "Metered", "Movable", "Rotatable", "TimedEvents", "Tween"];</code></pre>
         </section>
       </div>
       <hr />
@@ -146,9 +146,11 @@
         <section class='summary'><p>Triggered when the object is removed from<br />the engine. Use the remove event to handle any clean up.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />boss = GameObject()</p>
+          <pre><code>boss = GameObject()
           
-          <p>boss.bind 'remove', -><br />  unlockDoorToLevel2()<br /></pre></code></p>
+          boss.bind 'remove', -&gt;
+            unlockDoorToLevel2()
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -161,7 +163,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>var GameObject;&#x000A;&#x000A;GameObject = function(I) {&#x000A;  var autobindEvents, defaultModules, modules, self;&#x000A;  I || (I = {});</code></pre>
+          <pre><code>var GameObject;&#x000A;&#x000A;GameObject = function(I) {&#x000A;  var self;&#x000A;  I || (I = {});</code></pre>
         </section>
       </div>
       <hr />
@@ -172,9 +174,18 @@
         <section class='summary'><p>Triggered during every update step.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = GameObject()</p>
+          <pre><code>player = GameObject()
           
-          <p>player.bind 'step', -><br />  # check to see if keys are being pressed and <br />  # change the player's velocity<br />  if keydown.left<br />    player.velocity(Point(-1, 0))<br />  else if keydown.right<br />    player.velocity(Point(1, 0))<br />  else<br />    player.velocity(Point(0, 0))<br /></pre></code></p>
+          player.bind 'step', -&gt;
+            # check to see if keys are being pressed and 
+            # change the player's velocity
+            if keydown.left
+              player.velocity(Point(-1, 0))
+            else if keydown.right
+              player.velocity(Point(1, 0))
+            else
+              player.velocity(Point(0, 0))
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>

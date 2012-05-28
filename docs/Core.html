@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -94,15 +94,18 @@
       <!-- TODO make sure method_data isn't nil -->
       <h1>Core#attrAccessor()</h1>
       <div class='description'>
-        <section class='summary'><p>Generates a public jQuery style getter / setter method for each <br />String argument.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
+        <section class='summary'>
+          <p>Generates a public jQuery style getter / setter method for each <br />String argument.</p>
+          
           <pre><code>myObject = Core
             r: 255
             g: 0
             b: 100
-          
-          myObject.attrAccessor "r", "g", "b"
+          </code></pre>
+        </section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <pre><code>myObject.attrAccessor "r", "g", "b"
           
           myObject.r(254)
           myObject.r()
@@ -121,7 +124,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>attrAccessor: function() {&#x000A;      var attrNames;&#x000A;      attrNames = 1 <= arguments.length ? __slice.call(arguments, 0) : [];&#x000A;      return attrNames.each(function(attrName) {&#x000A;        return self[attrName] = function(newValue) {&#x000A;          if (newValue != null) {&#x000A;            I[attrName] = newValue;&#x000A;            return self;&#x000A;          } else {&#x000A;            return I[attrName];&#x000A;          }&#x000A;        };&#x000A;      });&#x000A;    },</code></pre>
+          <pre><code>attrAccessor: function() {&#x000A;        var attrNames;&#x000A;        attrNames = 1 <= arguments.length ? __slice.call(arguments, 0) : [];&#x000A;        return attrNames.each(function(attrName) {&#x000A;          return self[attrName] = function(newValue) {&#x000A;            if (newValue != null) {&#x000A;              I[attrName] = newValue;&#x000A;              return self;&#x000A;            } else {&#x000A;              return I[attrName];&#x000A;            }&#x000A;          };&#x000A;        });&#x000A;      },</code></pre>
         </section>
       </div>
       <hr />
@@ -129,15 +132,18 @@
       <!-- TODO make sure method_data isn't nil -->
       <h1>Core#attrReader()</h1>
       <div class='description'>
-        <section class='summary'><p>Generates a public jQuery style getter method for each String argument.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
+        <section class='summary'>
+          <p>Generates a public jQuery style getter method for each String argument.</p>
+          
           <pre><code>myObject = Core
             r: 255
             g: 0
             b: 100
-          
-          myObject.attrReader "r", "g", "b"
+          </code></pre>
+        </section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <pre><code>myObject.attrReader "r", "g", "b"
           
           myObject.r()
           =&gt; 255
@@ -160,7 +166,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>attrReader: function() {&#x000A;      var attrNames;&#x000A;      attrNames = 1 <= arguments.length ? __slice.call(arguments, 0) : [];&#x000A;      return attrNames.each(function(attrName) {&#x000A;        return self[attrName] = function() {&#x000A;          return I[attrName];&#x000A;        };&#x000A;      });&#x000A;    },</code></pre>
+          <pre><code>attrReader: function() {&#x000A;        var attrNames;&#x000A;        attrNames = 1 <= arguments.length ? __slice.call(arguments, 0) : [];&#x000A;        return attrNames.each(function(attrName) {&#x000A;          return self[attrName] = function() {&#x000A;            return I[attrName];&#x000A;          };&#x000A;        });&#x000A;      },</code></pre>
         </section>
       </div>
       <hr />
@@ -168,15 +174,18 @@
       <!-- TODO make sure method_data isn't nil -->
       <h1>Core#extend()</h1>
       <div class='description'>
-        <section class='summary'><p>Extends this object with methods from the passed in object. A shortcut for Object.extend(self, methods)</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
+        <section class='summary'>
+          <p>Extends this object with methods from the passed in object. A shortcut for Object.extend(self, methods)</p>
+          
           <pre><code>I =
             x: 30
             y: 40
             maxSpeed: 5
-          
-          # we are using extend to give player
+          </code></pre>
+        </section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <pre><code># we are using extend to give player
           # additional methods that Core doesn't have
           player = Core(I).extend
             increaseSpeed: -&gt;
@@ -202,7 +211,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>extend: function(options) {&#x000A;      Object.extend(self, options);&#x000A;      return self;&#x000A;    },</code></pre>
+          <pre><code>extend: function(options) {&#x000A;        Object.extend(self, options);&#x000A;        return self;&#x000A;      },</code></pre>
         </section>
       </div>
       <hr />
@@ -210,13 +219,16 @@
       <!-- TODO make sure method_data isn't nil -->
       <h1>Core#include(Module)</h1>
       <div class='description'>
-        <section class='summary'><p>Includes a module in this object.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
+        <section class='summary'>
+          <p>Includes a module in this object.</p>
+          
           <pre><code>myObject = Core()
           myObject.include(Bindable)
-          
-          # now you can bind handlers to functions
+          </code></pre>
+        </section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <pre><code># now you can bind handlers to functions
           myObject.bind "someEvent", -&gt;
             alert("wow. that was easy.")
           </code></pre>
@@ -242,7 +254,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>include: function() {&#x000A;      var Module, modules, _i, _len;&#x000A;      modules = 1 <= arguments.length ? __slice.call(arguments, 0) : [];&#x000A;      for (_i = 0, _len = modules.length; _i < _len; _i++) {&#x000A;        Module = modules[_i];&#x000A;        if (typeof Module.isString === "function" ? Module.isString() : void 0) {&#x000A;          Module = Module.constantize();&#x000A;        }&#x000A;        self.extend(Module(I, self));&#x000A;      }&#x000A;      return self;&#x000A;    },&#x000A;    send: function() {&#x000A;      var args, name;&#x000A;      name = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];&#x000A;      return self[name].apply(self, args);&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;&#x000A;var __slice = Array.prototype.slice;&#x000A;&#x000A;Function.prototype.once = function() {&#x000A;  var func, memo, ran;&#x000A;  func = this;&#x000A;  ran = false;&#x000A;  memo = void 0;&#x000A;  return function() {&#x000A;    if (ran) return memo;&#x000A;    ran = true;&#x000A;    return memo = func.apply(this, arguments);&#x000A;  };&#x000A;};&#x000A;&#x000A;Function.prototype.withBefore = function(interception) {&#x000A;  var method;&#x000A;  method = this;&#x000A;  return function() {&#x000A;    interception.apply(this, arguments);&#x000A;    return method.apply(this, arguments);&#x000A;  };&#x000A;};&#x000A;&#x000A;Function.prototype.withAfter = function(interception) {&#x000A;  var method;&#x000A;  method = this;&#x000A;  return function() {&#x000A;    var result;&#x000A;    result = method.apply(this, arguments);&#x000A;    interception.apply(this, arguments);&#x000A;    return result;&#x000A;  };&#x000A;};</code></pre>
+          <pre><code>include: function() {&#x000A;        var Module, key, moduleName, modules, value, _i, _len;&#x000A;        modules = 1 <= arguments.length ? __slice.call(arguments, 0) : [];&#x000A;        for (_i = 0, _len = modules.length; _i < _len; _i++) {&#x000A;          Module = modules[_i];&#x000A;          if (typeof Module.isString === "function" ? Module.isString() : void 0) {&#x000A;            moduleName = Module;&#x000A;            Module = Module.constantize();&#x000A;          } else if (moduleName = Module._name) {} else {&#x000A;            for (key in root) {&#x000A;              value = root[key];&#x000A;              if (value === Module) Module._name = moduleName = key;&#x000A;            }&#x000A;          }&#x000A;          if (moduleName) {&#x000A;            if (!I.includedModules.include(moduleName)) {&#x000A;              I.includedModules.push(moduleName);&#x000A;              self.extend(Module(I, self));&#x000A;            }&#x000A;          } else {&#x000A;            warn("Unable to discover name for module: ", Module, "\nSerialization issues may occur.");&#x000A;            self.extend(Module(I, self));&#x000A;          }&#x000A;        }&#x000A;        return self;&#x000A;      },&#x000A;      send: function() {&#x000A;        var args, name;&#x000A;        name = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];&#x000A;        return self[name].apply(self, args);&#x000A;      }&#x000A;    };&#x000A;    self.include("Bindable");&#x000A;    _ref = I.includedModules;&#x000A;    for (_i = 0, _len = _ref.length; _i < _len; _i++) {&#x000A;      moduleName = _ref[_i];&#x000A;      Module = moduleName.constantize();&#x000A;      self.extend(Module(I, self));&#x000A;    }&#x000A;    return self;&#x000A;  };&#x000A;})();&#x000A;;&#x000A;var __slice = Array.prototype.slice;&#x000A;&#x000A;Function.prototype.once = function() {&#x000A;  var func, memo, ran;&#x000A;  func = this;&#x000A;  ran = false;&#x000A;  memo = void 0;&#x000A;  return function() {&#x000A;    if (ran) return memo;&#x000A;    ran = true;&#x000A;    return memo = func.apply(this, arguments);&#x000A;  };&#x000A;};</code></pre>
         </section>
       </div>
       <hr />

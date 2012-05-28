@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -122,15 +122,16 @@
         <section class='summary'><p>The add method creates and adds an object to the game world. Two<br />other events are triggered around this one: beforeAdd and afterAdd.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre></p>
+          <pre><code># you can add arbitrary entityData and
+          # the engine will make it into a GameObject
+          engine.add 
+            x: 50
+            y: 30
+            color: "red"
           
-          <h1>you can add arbitrary entityData and</h1>
-          
-          <h1>the engine will make it into a GameObject</h1>
-          
-          <p>engine.add <br />  x: 50<br />  y: 30<br />  color: "red"</p>
-          
-          <p>player = engine.add<br />  class: "Player"<br /></pre></code></p>
+          player = engine.add
+            class: "Player"
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -153,7 +154,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>add: function(entityData) {&#x000A;      var object;&#x000A;      self.trigger("beforeAdd", entityData);&#x000A;      object = GameObject.construct(entityData);&#x000A;      object.create();&#x000A;      self.trigger("afterAdd", object);&#x000A;      if (I.updating) {&#x000A;        queuedObjects.push(object);&#x000A;      } else {&#x000A;        I.objects.push(object);&#x000A;      }&#x000A;      return object;&#x000A;    },&#x000A;    objects: function() {&#x000A;      return I.objects.copy();&#x000A;    }&#x000A;  });&#x000A;  self.include(Bindable);&#x000A;  self.bind("update", function(elapsedTime) {&#x000A;    var toKeep, toRemove, _ref;&#x000A;    I.updating = true;&#x000A;    I.objects.invoke("trigger", "beforeUpdate", elapsedTime);&#x000A;    _ref = I.objects.partition(function(object) {&#x000A;      return object.update(elapsedTime);&#x000A;    }), toKeep = _ref[0], toRemove = _ref[1];&#x000A;    I.objects.invoke("trigger", "afterUpdate", elapsedTime);&#x000A;    toRemove.invoke("trigger", "remove");&#x000A;    I.objects = toKeep.concat(queuedObjects);&#x000A;    queuedObjects = [];&#x000A;    return I.updating = false;&#x000A;  });&#x000A;  self.include(GameState.Cameras);&#x000A;  self.include(GameState.SaveState);&#x000A;  return self;&#x000A;};&#x000A;;&#x000A;&#x000A;GameState.Cameras = function(I, self) {&#x000A;  var cameras;&#x000A;  cameras = [Camera()];&#x000A;  self.bind('update', function() {&#x000A;    return self.cameras().invoke('trigger', 'update');&#x000A;  });&#x000A;  self.bind('afterUpdate', function() {&#x000A;    return self.cameras().invoke('trigger', 'afterUpdate');&#x000A;  });&#x000A;  self.bind('draw', function(canvas) {&#x000A;    return self.cameras().invoke('trigger', 'draw', canvas, self.objects());&#x000A;  });&#x000A;  self.bind('overlay', function(canvas) {&#x000A;    return self.cameras().invoke('trigger', 'overlay', canvas, self.objects());&#x000A;  });&#x000A;  return {&#x000A;    addCamera: function(data) {&#x000A;      return cameras.push(Camera(data));&#x000A;    },</code></pre>
+          <pre><code>add: function(entityData) {&#x000A;      var object;&#x000A;      self.trigger("beforeAdd", entityData);&#x000A;      object = GameObject.construct(entityData);&#x000A;      object.create();&#x000A;      self.trigger("afterAdd", object);&#x000A;      if (I.updating) {&#x000A;        queuedObjects.push(object);&#x000A;      } else {&#x000A;        I.objects.push(object);&#x000A;      }&#x000A;      return object;&#x000A;    },&#x000A;    objects: function() {&#x000A;      return I.objects.copy();&#x000A;    }&#x000A;  });&#x000A;  self.bind("update", function(elapsedTime) {&#x000A;    var toKeep, toRemove, _ref;&#x000A;    I.updating = true;&#x000A;    I.objects.invoke("trigger", "beforeUpdate", elapsedTime);&#x000A;    _ref = I.objects.partition(function(object) {&#x000A;      return object.update(elapsedTime);&#x000A;    }), toKeep = _ref[0], toRemove = _ref[1];&#x000A;    I.objects.invoke("trigger", "afterUpdate", elapsedTime);&#x000A;    toRemove.invoke("trigger", "remove");&#x000A;    I.objects = toKeep.concat(queuedObjects);&#x000A;    queuedObjects = [];&#x000A;    return I.updating = false;&#x000A;  });&#x000A;  self.include("GameState.Cameras");&#x000A;  self.include("GameState.SaveState");&#x000A;  return self;&#x000A;};&#x000A;;&#x000A;&#x000A;GameState.Cameras = function(I, self) {&#x000A;  var cameras;&#x000A;  cameras = [Camera()];&#x000A;  self.bind('update', function() {&#x000A;    return self.cameras().invoke('trigger', 'update');&#x000A;  });&#x000A;  self.bind('afterUpdate', function() {&#x000A;    return self.cameras().invoke('trigger', 'afterUpdate');&#x000A;  });&#x000A;  self.bind('draw', function(canvas) {&#x000A;    return self.cameras().invoke('trigger', 'draw', canvas, self.objects());&#x000A;  });&#x000A;  self.bind('overlay', function(canvas) {&#x000A;    return self.cameras().invoke('trigger', 'overlay', canvas, self.objects());&#x000A;  });&#x000A;  return {&#x000A;    addCamera: function(data) {&#x000A;      return cameras.push(Camera(data));&#x000A;    },</code></pre>
         </section>
       </div>
       <hr />
@@ -377,18 +378,21 @@
       <hr />
       <a name='#delay'></a>
       <!-- TODO make sure method_data isn't nil -->
-      <h1>Engine#delay(steps, callback)</h1>
+      <h1>Engine#delay(seconds, callback)</h1>
       <div class='description'>
-        <section class='summary'><p>Execute a callback after a number of steps have passed.</p></section>
+        <section class='summary'><p>Execute a callback after a number of seconds have passed.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.delay 5, -><br />  engine.add<br />    class: "Ghost"<br /></pre></code></p>
+          <pre><code>engine.delay 5, -&gt;
+            engine.add
+              class: "Ghost"
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
           <ul>
             <li>
-              <span class='param_name'>steps</span>
+              <span class='param_name'>seconds</span>
                -
               <span class='param_description'>The number of steps to wait before executing the callback</span>
             </li>
@@ -410,7 +414,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>delay: function(steps, callback) {&#x000A;      delayedEvents.push({&#x000A;        delay: steps,&#x000A;        callback: callback&#x000A;      });&#x000A;      return self;&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
+          <pre><code>delay: function(seconds, callback) {&#x000A;      delayedEvents.push({&#x000A;        delay: seconds,&#x000A;        callback: callback&#x000A;      });&#x000A;      return self;&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
         </section>
       </div>
       <hr />
@@ -421,7 +425,13 @@
         <section class='summary'><p>Called after the engine draws on the canvas. The current camera transform is applied.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.bind "draw", (canvas) -><br />  # print some directions for the player<br />  canvas.drawText<br />    text: "Go this way =>"<br />    x: 200<br />    y: 200 <br /></pre></code></p>
+          <pre><code>engine.bind "draw", (canvas) -&gt;
+            # print some directions for the player
+            canvas.drawText
+              text: "Go this way =&gt;"
+              x: 200
+              y: 200 
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -445,39 +455,39 @@
         <section class='summary'><p>Get a selection of GameObjects that match the specified selector criteria. The selector language<br />can select objects by id, class, or attributes. Note that this method always returns an Array,<br />so if you are trying to find only one object you will need something like <code>engine.find("Enemy").first()</code>.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = engine.add<br />  class: "Player"</p>
+          <pre><code>player = engine.add
+            class: "Player"
           
-          <p>enemy = engine.add<br />  class: "Enemy"<br />  speed: 5<br />  x: 0</p>
+          enemy = engine.add
+            class: "Enemy"
+            speed: 5
+            x: 0
           
-          <p>distantEnemy = engine.add<br />  class "Enemy"<br />  x: 500</p>
+          distantEnemy = engine.add
+            class "Enemy"
+            x: 500
           
-          <p>boss = engine.add<br />  class: "Enemy"<br />  id: "Boss"<br />  x: 0</p>
+          boss = engine.add
+            class: "Enemy"
+            id: "Boss"
+            x: 0
           
-          <h1>to select an object by id use "#anId"</h1>
+          # to select an object by id use "#anId"
+          engine.find "#Boss"
+          # =&gt; [boss]
           
-          <p>engine.find "#Boss"</p>
+          # to select an object by class use "MyClass"
+          engine.find "Enemy"
+          # =&gt; [enemy, distantEnemy, boss]
           
-          <h1>=> [boss]</h1>
+          # to select an object by properties use ".someProperty" or ".someProperty=someValue"
+          engine.find ".speed=5"
+          # =&gt; [enemy]
           
-          <h1>to select an object by class use "MyClass"</h1>
-          
-          <p>engine.find "Enemy"</p>
-          
-          <h1>=> [enemy, distantEnemy, boss]</h1>
-          
-          <h1>to select an object by properties use ".someProperty" or ".someProperty=someValue"</h1>
-          
-          <p>engine.find ".speed=5"</p>
-          
-          <h1>=> [enemy]</h1>
-          
-          <h1>You may mix and match selectors.</h1>
-          
-          <p>engine.find "Enemy.x=0"</p>
-          
-          <h1>=> [enemy, boss] # doesn't return distantEnemy</h1>
-          
-          <p></pre></code></p>
+          # You may mix and match selectors.
+          engine.find "Enemy.x=0"
+          # =&gt; [enemy, boss] # doesn't return distantEnemy
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -511,7 +521,8 @@
         <section class='summary'><p>Pause the game and step through 1 update of the engine.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.frameAdvance()<br /></pre></code></p>
+          <pre><code>engine.frameAdvance()
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -535,7 +546,8 @@
         <section class='summary'><p>Load map named <code>level</code></p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.goToLevel 'bossFight'<br /></pre></code></p>
+          <pre><code>engine.goToLevel 'bossFight'
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -583,7 +595,8 @@
         <section class='summary'><p>Load map for the next level.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.nextLevel()<br /></pre></code></p>
+          <pre><code>engine.nextLevel()
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -609,9 +622,17 @@
           <h3>Usage</h3>
           <p>The current camera transform is not applied. This is great for<br />adding overlays.</p>
           
-          <p><code><pre><br />engine.bind "overlay", (canvas) -><br />  # print the player's health. This will be<br />  # positioned absolutely according to the viewport.<br />  canvas.drawText<br />    text: "HEALTH:"<br />    position: Point(20, 20)</p>
+          <pre><code>engine.bind "overlay", (canvas) -&gt;
+            # print the player's health. This will be
+            # positioned absolutely according to the viewport.
+            canvas.drawText
+              text: "HEALTH:"
+              position: Point(20, 20)
           
-          <p>canvas.drawText<br />    text: player.health()<br />    position: Point(50, 20)<br /></pre></code></p>
+            canvas.drawText
+              text: player.health()
+              position: Point(50, 20)
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -624,7 +645,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>Engine = function(I) {&#x000A;    var animLoop, draw, frameAdvance, lastStepTime, modules, running, self, startTime, step, update;&#x000A;    if (I == null) I = {};&#x000A;    Object.reverseMerge(I, defaults);&#x000A;    frameAdvance = false;&#x000A;    running = false;&#x000A;    startTime = +new Date();&#x000A;    lastStepTime = -Infinity;&#x000A;    animLoop = function(timestamp) {&#x000A;      var delta, msPerFrame, remainder;&#x000A;      timestamp || (timestamp = +new Date());&#x000A;      msPerFrame = 1000 / I.FPS;&#x000A;      delta = timestamp - lastStepTime;&#x000A;      remainder = delta - msPerFrame;&#x000A;      if (remainder > 0) {&#x000A;        lastStepTime = timestamp - Math.min(remainder, msPerFrame);&#x000A;        step();&#x000A;      }&#x000A;      if (running) return window.requestAnimationFrame(animLoop);&#x000A;    };&#x000A;    update = function(elapsedTime) {&#x000A;      self.trigger("beforeUpdate", elapsedTime);&#x000A;      self.trigger("update", elapsedTime);&#x000A;      return self.trigger("afterUpdate", elapsedTime);&#x000A;    };&#x000A;    draw = function() {&#x000A;      var canvas;&#x000A;      if (!(canvas = I.canvas)) return;&#x000A;      self.trigger("beforeDraw", canvas);&#x000A;      self.trigger("draw", canvas);&#x000A;      return self.trigger("overlay", I.canvas);&#x000A;    };&#x000A;    step = function() {&#x000A;      var secondsPerFrame;&#x000A;      if (!I.paused || frameAdvance) {&#x000A;        secondsPerFrame = 1 / I.FPS;&#x000A;        update(secondsPerFrame);&#x000A;        I.age += 1;&#x000A;      }&#x000A;      return draw();&#x000A;    };&#x000A;    self = Core(I).extend({</code></pre>
+          <pre><code>Engine = function(I) {&#x000A;    var animLoop, draw, frameAdvance, lastStepTime, running, self, startTime, step, update;&#x000A;    if (I == null) I = {};&#x000A;    Object.reverseMerge(I, defaults);&#x000A;    frameAdvance = false;&#x000A;    running = false;&#x000A;    startTime = +new Date();&#x000A;    lastStepTime = -Infinity;&#x000A;    animLoop = function(timestamp) {&#x000A;      var delta, msPerFrame, remainder;&#x000A;      timestamp || (timestamp = +new Date());&#x000A;      msPerFrame = 1000 / I.FPS;&#x000A;      delta = timestamp - lastStepTime;&#x000A;      remainder = delta - msPerFrame;&#x000A;      if (remainder > 0) {&#x000A;        lastStepTime = timestamp - Math.min(remainder, msPerFrame);&#x000A;        step();&#x000A;      }&#x000A;      if (running) return window.requestAnimationFrame(animLoop);&#x000A;    };&#x000A;    update = function(elapsedTime) {&#x000A;      self.trigger("beforeUpdate", elapsedTime);&#x000A;      self.trigger("update", elapsedTime);&#x000A;      return self.trigger("afterUpdate", elapsedTime);&#x000A;    };&#x000A;    draw = function() {&#x000A;      var canvas;&#x000A;      if (!(canvas = I.canvas)) return;&#x000A;      self.trigger("beforeDraw", canvas);&#x000A;      self.trigger("draw", canvas);&#x000A;      return self.trigger("overlay", I.canvas);&#x000A;    };&#x000A;    step = function() {&#x000A;      var secondsPerFrame;&#x000A;      if (!I.paused || frameAdvance) {&#x000A;        secondsPerFrame = 1 / I.FPS;&#x000A;        update(secondsPerFrame);&#x000A;        I.age += 1;&#x000A;      }&#x000A;      return draw();&#x000A;    };&#x000A;    self = Core(I).extend({</code></pre>
         </section>
       </div>
       <hr />
@@ -635,7 +656,8 @@
         <section class='summary'><p>Toggle the paused state of the simulation.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.pause()<br /></pre></code></p>
+          <pre><code>engine.pause()
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -669,19 +691,16 @@
         <section class='summary'><p>Query the engine to see if it is paused.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.pause()</p>
+          <pre><code>engine.pause()
           
-          <p>engine.paused()</p>
+          engine.paused()
+          # true
           
-          <h1>true</h1>
+          engine.play()
           
-          <p>engine.play()</p>
-          
-          <p>engine.paused()</p>
-          
-          <h1>false</h1>
-          
-          <p></pre></code></p>
+          engine.paused()
+          # false
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -705,7 +724,8 @@
         <section class='summary'><p>Resume the game.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.play()<br /></pre></code></p>
+          <pre><code>engine.play()
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -773,7 +793,8 @@
         <section class='summary'><p>Reload the current level. Useful for retrying after a player dies.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.reloadLevel()<br /></pre></code></p>
+          <pre><code>engine.reloadLevel()
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -786,7 +807,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>reloadLevel: function() {&#x000A;      return loadLevel(I.currentLevelName);&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
+          <pre><code>restartLevel: function() {&#x000A;      return loadLevel(I.currentLevelName);&#x000A;    },&#x000A;    reloadLevel: function() {&#x000A;      return self.restartLevel();&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
         </section>
       </div>
       <hr />
@@ -797,7 +818,8 @@
         <section class='summary'><p>Change the framerate of the game. The default framerate is 30 fps.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.setFramerate(60)<br /></pre></code></p>
+          <pre><code>engine.setFramerate(60)
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -810,7 +832,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>setFramerate: function(newFPS) {&#x000A;        I.FPS = newFPS;&#x000A;        self.stop();&#x000A;        return self.start();&#x000A;      },&#x000A;      update: update,&#x000A;      draw: draw&#x000A;    });&#x000A;    self.include(Bindable);&#x000A;    modules = Engine.defaultModules.concat(I.includedModules);&#x000A;    modules = modules.without([].concat(I.excludedModules));&#x000A;    modules.each(function(moduleName) {&#x000A;      if (!Engine[moduleName]) {&#x000A;        throw "#Engine." + moduleName + " is not a valid engine module";&#x000A;      }&#x000A;      return self.include(Engine[moduleName]);&#x000A;    });&#x000A;    self.trigger("init");&#x000A;    return self;&#x000A;  };&#x000A;  Engine.defaultModules = ["Data", "Keyboard", "Mouse", "Background", "Delay", "GameState", "Selector", "Collision", "Tilemap", "Levels"];&#x000A;  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Engine"] = Engine;&#x000A;})();&#x000A;;</code></pre>
+          <pre><code>setFramerate: function(newFPS) {&#x000A;        I.FPS = newFPS;&#x000A;        self.stop();&#x000A;        return self.start();&#x000A;      },&#x000A;      update: update,&#x000A;      draw: draw&#x000A;    });&#x000A;    Engine.defaultModules.each(function(moduleName) {&#x000A;      var fullModuleName;&#x000A;      fullModuleName = "Engine." + moduleName;&#x000A;      if (!Engine[moduleName]) {&#x000A;        throw "#" + fullModuleName + " is not a valid engine module";&#x000A;      }&#x000A;      return self.include(fullModuleName);&#x000A;    });&#x000A;    self.trigger("init");&#x000A;    return self;&#x000A;  };&#x000A;  Engine.defaultModules = ["Data", "Keyboard", "Mouse", "Background", "Delay", "GameState", "Selector", "Collision", "Tilemap", "Levels"];&#x000A;  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Engine"] = Engine;&#x000A;})();&#x000A;;</code></pre>
         </section>
       </div>
       <hr />
@@ -821,7 +843,8 @@
         <section class='summary'><p>Start the game simulation.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.start()<br /></pre></code></p>
+          <pre><code>engine.start()
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>
@@ -845,7 +868,8 @@
         <section class='summary'><p>Stop the simulation.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />engine.stop()<br /></pre></code></p>
+          <pre><code>engine.stop()
+          </code></pre>
         </section>
         <section class='returns'>
           <h3>Returns</h3>

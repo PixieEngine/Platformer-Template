@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a class='active' href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -98,21 +98,27 @@
         <section class='summary'><p>Takes two circle objects and returns true if they collide (overlap), false otherwise.<br />Circle objects have x, y, and radius.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = GameObject<br />  x: 5<br />  y: 5<br />  radius: 10</p>
+          <pre><code>player = GameObject
+            x: 5
+            y: 5
+            radius: 10
           
-          <p>enemy = GameObject<br />  x: 10<br />  y: 10<br />  radius: 10</p>
+          enemy = GameObject
+            x: 10
+            y: 10
+            radius: 10
           
-          <p>farEnemy = GameObject<br />  x: 500<br />  y: 500<br />  radius: 30</p>
+          farEnemy = GameObject
+            x: 500
+            y: 500
+            radius: 30
           
-          <p>Collision.circular(player, enemy)</p>
+          Collision.circular(player, enemy)
+          # =&gt; true
           
-          <h1>=> true</h1>
-          
-          <p>Collision.circular(player, farEnemy)</p>
-          
-          <h1>=> false</h1>
-          
-          <p></pre></code></p>
+          Collision.circular(player, farEnemy)
+          # =&gt; false
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -151,25 +157,36 @@
         <section class='summary'><p>Collision holds many useful class methods for checking geometric overlap of various objects.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = engine.add<br />  class: "Player"<br />  x: 0<br />  y: 0<br />  width: 10<br />  height: 10</p>
+          <pre><code>player = engine.add
+            class: "Player"
+            x: 0
+            y: 0
+            width: 10
+            height: 10
           
-          <p>enemy = engine.add<br />  class: "Enemy"<br />  x: 5<br />  y: 5<br />  width: 10<br />  height: 10</p>
+          enemy = engine.add
+            class: "Enemy"
+            x: 5
+            y: 5
+            width: 10
+            height: 10
           
-          <p>enemy2 = engine.add<br />  class: "Enemy"<br />  x: -5<br />  y: -5<br />  width: 10<br />  height: 10</p>
+          enemy2 = engine.add
+            class: "Enemy"
+            x: -5
+            y: -5
+            width: 10
+            height: 10
           
-          <p>Collision.collide(player, enemy, (p, e) -> ...)</p>
+          Collision.collide(player, enemy, (p, e) -&gt; ...)
+          # =&gt; callback is called once
           
-          <h1>=> callback is called once</h1>
+          Collision.collide(player, [enemy, enemy2], (p, e) -&gt; ...)
+          # =&gt; callback is called twice
           
-          <p>Collision.collide(player, [enemy, enemy2], (p, e) -> ...)</p>
-          
-          <h1>=> callback is called twice</h1>
-          
-          <p>Collision.collide("Player", "Enemy", (p, e) -> ...)</p>
-          
-          <h1>=> callback is also called twice</h1>
-          
-          <p></pre></code></p>
+          Collision.collide("Player", "Enemy", (p, e) -&gt; ...)
+          # =&gt; callback is also called twice
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -218,13 +235,15 @@
         <section class='summary'><p>Detects whether a line intersects a circle.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />circle = engine.add<br />  class: "circle"<br />  x: 50<br />  y: 50<br />  radius: 10</p>
+          <pre><code>circle = engine.add
+            class: "circle"
+            x: 50
+            y: 50
+            radius: 10
           
-          <p>Collision.rayCircle(Point(0, 0), Point(1, 0), circle)</p>
-          
-          <h1>=> true</h1>
-          
-          <p></pre></code></p>
+          Collision.rayCircle(Point(0, 0), Point(1, 0), circle)
+          # =&gt; true
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -268,13 +287,16 @@
         <section class='summary'><p>Detects whether a line intersects a rectangle.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />rect = engine.add<br />  class: "circle"<br />  x: 50<br />  y: 50<br />  width: 20<br />  height: 20</p>
+          <pre><code>rect = engine.add
+            class: "circle"
+            x: 50
+            y: 50
+            width: 20
+            height: 20
           
-          <p>Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)</p>
-          
-          <h1>=> true</h1>
-          
-          <p></pre></code></p>
+          Collision.rayRectangle(Point(0, 0), Point(1, 0), rect)
+          # =&gt; true
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>
@@ -307,7 +329,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>rayRectangle: function(source, direction, target) {&#x000A;      var areaPQ0, areaPQ1, hit, p0, p1, t, tX, tY, xval, xw, yval, yw, _ref, _ref2;&#x000A;      if (!((target.xw != null) && (target.yw != null))) {&#x000A;        if ((target.width != null) && (target.height != null)) {&#x000A;          xw = target.width / 2;&#x000A;          yw = target.height / 2;&#x000A;          return Collision.rayRectangle(source, direction, {&#x000A;            x: target.x + xw,&#x000A;            y: target.y + yw,&#x000A;            xw: xw,&#x000A;            yw: yw&#x000A;          });&#x000A;        } else {&#x000A;          error("Bounds object isn't a rectangle");&#x000A;          return;&#x000A;        }&#x000A;      }&#x000A;      xw = target.xw;&#x000A;      yw = target.yw;&#x000A;      if (source.x < target.x) {&#x000A;        xval = target.x - xw;&#x000A;      } else {&#x000A;        xval = target.x + xw;&#x000A;      }&#x000A;      if (source.y < target.y) {&#x000A;        yval = target.y - yw;&#x000A;      } else {&#x000A;        yval = target.y + yw;&#x000A;      }&#x000A;      if (direction.x === 0) {&#x000A;        p0 = Point(target.x - xw, yval);&#x000A;        p1 = Point(target.x + xw, yval);&#x000A;        t = (yval - source.y) / direction.y;&#x000A;      } else if (direction.y === 0) {&#x000A;        p0 = Point(xval, target.y - yw);&#x000A;        p1 = Point(xval, target.y + yw);&#x000A;        t = (xval - source.x) / direction.x;&#x000A;      } else {&#x000A;        tX = (xval - source.x) / direction.x;&#x000A;        tY = (yval - source.y) / direction.y;&#x000A;        if ((tX < tY || ((-xw < (_ref = source.x - target.x) && _ref < xw))) && !((-yw < (_ref2 = source.y - target.y) && _ref2 < yw))) {&#x000A;          p0 = Point(target.x - xw, yval);&#x000A;          p1 = Point(target.x + xw, yval);&#x000A;          t = tY;&#x000A;        } else {&#x000A;          p0 = Point(xval, target.y - yw);&#x000A;          p1 = Point(xval, target.y + yw);&#x000A;          t = tX;&#x000A;        }&#x000A;      }&#x000A;      if (t > 0) {&#x000A;        areaPQ0 = direction.cross(p0.subtract(source));&#x000A;        areaPQ1 = direction.cross(p1.subtract(source));&#x000A;        if (areaPQ0 * areaPQ1 < 0) return hit = direction.scale(t).add(source);&#x000A;      }&#x000A;    }&#x000A;  };&#x000A;  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Collision"] = Collision;&#x000A;})();&#x000A;;&#x000A;var CollisionResponse;&#x000A;&#x000A;CollisionResponse = function(I, self) {&#x000A;  if (I == null) I = {};&#x000A;  self.bind('update', function(elapsedTime) {&#x000A;    var t, unit;&#x000A;    t = (elapsedTime * I.velocity.x).abs();&#x000A;    unit = I.velocity.x.sign();&#x000A;    t.times(function() {&#x000A;      if (self.collide(unit, 0, ".solid")) {&#x000A;        return I.velocity.x = 0;&#x000A;      } else {&#x000A;        return I.x += unit;&#x000A;      }&#x000A;    });&#x000A;    t = (elapsedTime * I.velocity.y).abs();&#x000A;    unit = I.velocity.y.sign();&#x000A;    return t.times(function() {&#x000A;      if (self.collide(0, unit, ".solid")) {&#x000A;        return I.velocity.y = 0;&#x000A;      } else {&#x000A;        return I.y += unit;&#x000A;      }&#x000A;    });&#x000A;  });&#x000A;  return self.extend({&#x000A;    collide: function(xOffset, yOffset, className) {&#x000A;      return engine.find(className).inject(false, function(hit, block) {&#x000A;        return hit || Collision.rectangular(self.bounds(xOffset, yOffset), block.bounds());&#x000A;      });&#x000A;    }&#x000A;  });&#x000A;};&#x000A;;&#x000A;var __slice = Array.prototype.slice;&#x000A;&#x000A;(function() {&#x000A;  var Color, channelize, hslParser, hslToRgb, hsvToRgb, parseHSL, parseRGB, rgbParser;&#x000A;  rgbParser = /^rgba?\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),?\s*(\d?\.?\d*)?\)$/;&#x000A;  hslParser = /^hsla?\((\d{1,3}),\s*(\d?\.?\d*),\s*(\d?\.?\d*),?\s*(\d?\.?\d*)?\)$/;&#x000A;  parseRGB = function(colorString) {&#x000A;    var channel, channels, parsedColor;&#x000A;    if (!(channels = rgbParser.exec(colorString))) return;&#x000A;    parsedColor = (function() {&#x000A;      var _i, _len, _ref, _results;&#x000A;      _ref = channels.slice(1, 5);&#x000A;      _results = [];&#x000A;      for (_i = 0, _len = _ref.length; _i < _len; _i++) {&#x000A;        channel = _ref[_i];&#x000A;        _results.push(parseFloat(channel));&#x000A;      }&#x000A;      return _results;&#x000A;    })();&#x000A;    if (isNaN(parsedColor[3])) parsedColor[3] = 1;&#x000A;    return parsedColor;&#x000A;  };&#x000A;  parseHSL = function(colorString) {&#x000A;    var channel, channels, parsedColor;&#x000A;    if (!(channels = hslParser.exec(colorString))) return;&#x000A;    parsedColor = (function() {&#x000A;      var _i, _len, _ref, _results;&#x000A;      _ref = channels.slice(1, 5);&#x000A;      _results = [];&#x000A;      for (_i = 0, _len = _ref.length; _i < _len; _i++) {&#x000A;        channel = _ref[_i];&#x000A;        _results.push(parseFloat(channel));&#x000A;      }&#x000A;      return _results;&#x000A;    })();&#x000A;    if (isNaN(parsedColor[3])) parsedColor[3] = 1;&#x000A;    return hslToRgb(parsedColor);&#x000A;  };&#x000A;  hsvToRgb = function(hsv) {&#x000A;    var a, b, f, g, h, i, p, q, r, rgb, s, t, v;&#x000A;    r = g = b = null;&#x000A;    h = hsv[0], s = hsv[1], v = hsv[2], a = hsv[3];&#x000A;    if (a == null) a = 1;&#x000A;    i = (h / 60).floor();&#x000A;    f = h / 60 - i;&#x000A;    p = v * (1 - s);&#x000A;    q = v * (1 - f * s);&#x000A;    t = v * (1 - (1 - f) * s);&#x000A;    switch (i % 6) {&#x000A;      case 0:&#x000A;        r = v;&#x000A;        g = t;&#x000A;        b = p;&#x000A;        break;&#x000A;      case 1:&#x000A;        r = q;&#x000A;        g = v;&#x000A;        b = p;&#x000A;        break;&#x000A;      case 2:&#x000A;        r = p;&#x000A;        g = v;&#x000A;        b = t;&#x000A;        break;&#x000A;      case 3:&#x000A;        r = p;&#x000A;        g = q;&#x000A;        b = v;&#x000A;        break;&#x000A;      case 4:&#x000A;        r = t;&#x000A;        g = p;&#x000A;        b = v;&#x000A;        break;&#x000A;      case 5:&#x000A;        r = v;&#x000A;        g = p;&#x000A;        b = q;&#x000A;    }&#x000A;    rgb = [(r * 255).round(), (g * 255).round(), (b * 255).round()];&#x000A;    return rgb.concat(a);&#x000A;  };&#x000A;  hslToRgb = function(hsl) {&#x000A;    var a, b, channel, g, h, hueToRgb, l, p, q, r, rgbMap, s;&#x000A;    h = hsl[0], s = hsl[1], l = hsl[2], a = hsl[3];&#x000A;    h = h % 360;&#x000A;    if (a == null) a = 1;&#x000A;    r = g = b = null;&#x000A;    hueToRgb = function(p, q, hue) {&#x000A;      hue = hue.mod(360);&#x000A;      if (hue < 60) return p + (q - p) * (hue / 60);&#x000A;      if (hue < 180) return q;&#x000A;      if (hue < 240) return p + (q - p) * ((240 - hue) / 60);&#x000A;      return p;&#x000A;    };&#x000A;    if (s === 0) {&#x000A;      r = g = b = l;&#x000A;    } else {&#x000A;      q = (l < 0.5 ? l * (1 + s) : l + s - l * s);&#x000A;      p = 2 * l - q;&#x000A;      r = hueToRgb(p, q, h + 120);&#x000A;      g = hueToRgb(p, q, h);&#x000A;      b = hueToRgb(p, q, h - 120);&#x000A;    }&#x000A;    rgbMap = (function() {&#x000A;      var _i, _len, _ref, _results;&#x000A;      _ref = [r, g, b];&#x000A;      _results = [];&#x000A;      for (_i = 0, _len = _ref.length; _i < _len; _i++) {&#x000A;        channel = _ref[_i];&#x000A;        _results.push((channel * 255).round());&#x000A;      }&#x000A;      return _results;&#x000A;    })();&#x000A;    return rgbMap.concat(a);&#x000A;  };&#x000A;  channelize = function(color, alpha) {&#x000A;    var channel, result;&#x000A;    if (color.channels != null) return color.channels();&#x000A;    if (Object.isArray(color)) {&#x000A;      if (alpha != null) {&#x000A;        alpha = parseFloat(alpha);&#x000A;      } else if (color[3] != null) {&#x000A;        alpha = parseFloat(color[3]);&#x000A;      } else {&#x000A;        alpha = 1;&#x000A;      }&#x000A;      result = ((function() {&#x000A;        var _i, _len, _ref, _results;&#x000A;        _ref = color.slice(0, 3);&#x000A;        _results = [];&#x000A;        for (_i = 0, _len = _ref.length; _i < _len; _i++) {&#x000A;          channel = _ref[_i];&#x000A;          _results.push(parseFloat(channel));&#x000A;        }&#x000A;        return _results;&#x000A;      })()).concat(alpha);&#x000A;    } else {&#x000A;      result = (typeof Color.lookup === "function" ? Color.lookup(color) : void 0) || color.parseHex() || parseRGB(color) || parseHSL(color);&#x000A;      if (alpha != null) result[3] = parseFloat(alpha);&#x000A;    }&#x000A;    return result;&#x000A;  };</code></pre>
+          <pre><code>rayRectangle: function(source, direction, target) {&#x000A;      var areaPQ0, areaPQ1, hit, p0, p1, t, tX, tY, xval, xw, yval, yw, _ref, _ref2;&#x000A;      if (!((target.xw != null) && (target.yw != null))) {&#x000A;        if ((target.width != null) && (target.height != null)) {&#x000A;          xw = target.width / 2;&#x000A;          yw = target.height / 2;&#x000A;          return Collision.rayRectangle(source, direction, {&#x000A;            x: target.x + xw,&#x000A;            y: target.y + yw,&#x000A;            xw: xw,&#x000A;            yw: yw&#x000A;          });&#x000A;        } else {&#x000A;          error("Bounds object isn't a rectangle");&#x000A;          return;&#x000A;        }&#x000A;      }&#x000A;      xw = target.xw;&#x000A;      yw = target.yw;&#x000A;      if (source.x < target.x) {&#x000A;        xval = target.x - xw;&#x000A;      } else {&#x000A;        xval = target.x + xw;&#x000A;      }&#x000A;      if (source.y < target.y) {&#x000A;        yval = target.y - yw;&#x000A;      } else {&#x000A;        yval = target.y + yw;&#x000A;      }&#x000A;      if (direction.x === 0) {&#x000A;        p0 = Point(target.x - xw, yval);&#x000A;        p1 = Point(target.x + xw, yval);&#x000A;        t = (yval - source.y) / direction.y;&#x000A;      } else if (direction.y === 0) {&#x000A;        p0 = Point(xval, target.y - yw);&#x000A;        p1 = Point(xval, target.y + yw);&#x000A;        t = (xval - source.x) / direction.x;&#x000A;      } else {&#x000A;        tX = (xval - source.x) / direction.x;&#x000A;        tY = (yval - source.y) / direction.y;&#x000A;        if ((tX < tY || ((-xw < (_ref = source.x - target.x) && _ref < xw))) && !((-yw < (_ref2 = source.y - target.y) && _ref2 < yw))) {&#x000A;          p0 = Point(target.x - xw, yval);&#x000A;          p1 = Point(target.x + xw, yval);&#x000A;          t = tY;&#x000A;        } else {&#x000A;          p0 = Point(xval, target.y - yw);&#x000A;          p1 = Point(xval, target.y + yw);&#x000A;          t = tX;&#x000A;        }&#x000A;      }&#x000A;      if (t > 0) {&#x000A;        areaPQ0 = direction.cross(p0.subtract(source));&#x000A;        areaPQ1 = direction.cross(p1.subtract(source));&#x000A;        if (areaPQ0 * areaPQ1 < 0) return hit = direction.scale(t).add(source);&#x000A;      }&#x000A;    }&#x000A;  };&#x000A;  return (typeof exports !== "undefined" && exports !== null ? exports : this)["Collision"] = Collision;&#x000A;})();&#x000A;;&#x000A;var CollisionResponse;&#x000A;&#x000A;CollisionResponse = function(I, self) {&#x000A;  if (I == null) I = {};&#x000A;  self.unbind(".Movable");&#x000A;  self.bind('update.Movable', function(elapsedTime) {&#x000A;    var t, unit;&#x000A;    t = (elapsedTime * I.velocity.x).abs();&#x000A;    unit = I.velocity.x.sign();&#x000A;    t.times(function() {&#x000A;      if (self.collide(unit, 0, ".solid")) {&#x000A;        return I.velocity.x = 0;&#x000A;      } else {&#x000A;        return I.x += unit;&#x000A;      }&#x000A;    });&#x000A;    t = (elapsedTime * I.velocity.y).abs();&#x000A;    unit = I.velocity.y.sign();&#x000A;    return t.times(function() {&#x000A;      if (self.collide(0, unit, ".solid")) {&#x000A;        return I.velocity.y = 0;&#x000A;      } else {&#x000A;        return I.y += unit;&#x000A;      }&#x000A;    });&#x000A;  });&#x000A;  return self.extend({&#x000A;    collide: function(xOffset, yOffset, className) {&#x000A;      return engine.find(className).inject(false, function(hit, block) {&#x000A;        return hit || Collision.rectangular(self.bounds(xOffset, yOffset), block.bounds());&#x000A;      });&#x000A;    }&#x000A;  });&#x000A;};&#x000A;;&#x000A;var __slice = Array.prototype.slice;&#x000A;&#x000A;(function() {&#x000A;  var Color, channelize, hslParser, hslToRgb, hsvToRgb, parseHSL, parseRGB, rgbParser;&#x000A;  rgbParser = /^rgba?\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),?\s*(\d?\.?\d*)?\)$/;&#x000A;  hslParser = /^hsla?\((\d{1,3}),\s*(\d?\.?\d*),\s*(\d?\.?\d*),?\s*(\d?\.?\d*)?\)$/;&#x000A;  parseRGB = function(colorString) {&#x000A;    var channel, channels, parsedColor;&#x000A;    if (!(channels = rgbParser.exec(colorString))) return;&#x000A;    parsedColor = (function() {&#x000A;      var _i, _len, _ref, _results;&#x000A;      _ref = channels.slice(1, 5);&#x000A;      _results = [];&#x000A;      for (_i = 0, _len = _ref.length; _i < _len; _i++) {&#x000A;        channel = _ref[_i];&#x000A;        _results.push(parseFloat(channel));&#x000A;      }&#x000A;      return _results;&#x000A;    })();&#x000A;    if (isNaN(parsedColor[3])) parsedColor[3] = 1;&#x000A;    return parsedColor;&#x000A;  };&#x000A;  parseHSL = function(colorString) {&#x000A;    var channel, channels, parsedColor;&#x000A;    if (!(channels = hslParser.exec(colorString))) return;&#x000A;    parsedColor = (function() {&#x000A;      var _i, _len, _ref, _results;&#x000A;      _ref = channels.slice(1, 5);&#x000A;      _results = [];&#x000A;      for (_i = 0, _len = _ref.length; _i < _len; _i++) {&#x000A;        channel = _ref[_i];&#x000A;        _results.push(parseFloat(channel));&#x000A;      }&#x000A;      return _results;&#x000A;    })();&#x000A;    if (isNaN(parsedColor[3])) parsedColor[3] = 1;&#x000A;    return hslToRgb(parsedColor);&#x000A;  };&#x000A;  hsvToRgb = function(hsv) {&#x000A;    var a, b, f, g, h, i, p, q, r, rgb, s, t, v;&#x000A;    r = g = b = null;&#x000A;    h = hsv[0], s = hsv[1], v = hsv[2], a = hsv[3];&#x000A;    if (a == null) a = 1;&#x000A;    i = (h / 60).floor();&#x000A;    f = h / 60 - i;&#x000A;    p = v * (1 - s);&#x000A;    q = v * (1 - f * s);&#x000A;    t = v * (1 - (1 - f) * s);&#x000A;    switch (i % 6) {&#x000A;      case 0:&#x000A;        r = v;&#x000A;        g = t;&#x000A;        b = p;&#x000A;        break;&#x000A;      case 1:&#x000A;        r = q;&#x000A;        g = v;&#x000A;        b = p;&#x000A;        break;&#x000A;      case 2:&#x000A;        r = p;&#x000A;        g = v;&#x000A;        b = t;&#x000A;        break;&#x000A;      case 3:&#x000A;        r = p;&#x000A;        g = q;&#x000A;        b = v;&#x000A;        break;&#x000A;      case 4:&#x000A;        r = t;&#x000A;        g = p;&#x000A;        b = v;&#x000A;        break;&#x000A;      case 5:&#x000A;        r = v;&#x000A;        g = p;&#x000A;        b = q;&#x000A;    }&#x000A;    rgb = [(r * 255).round(), (g * 255).round(), (b * 255).round()];&#x000A;    return rgb.concat(a);&#x000A;  };&#x000A;  hslToRgb = function(hsl) {&#x000A;    var a, b, channel, g, h, hueToRgb, l, p, q, r, rgbMap, s;&#x000A;    h = hsl[0], s = hsl[1], l = hsl[2], a = hsl[3];&#x000A;    h = h % 360;&#x000A;    if (a == null) a = 1;&#x000A;    r = g = b = null;&#x000A;    hueToRgb = function(p, q, hue) {&#x000A;      hue = hue.mod(360);&#x000A;      if (hue < 60) return p + (q - p) * (hue / 60);&#x000A;      if (hue < 180) return q;&#x000A;      if (hue < 240) return p + (q - p) * ((240 - hue) / 60);&#x000A;      return p;&#x000A;    };&#x000A;    if (s === 0) {&#x000A;      r = g = b = l;&#x000A;    } else {&#x000A;      q = (l < 0.5 ? l * (1 + s) : l + s - l * s);&#x000A;      p = 2 * l - q;&#x000A;      r = hueToRgb(p, q, h + 120);&#x000A;      g = hueToRgb(p, q, h);&#x000A;      b = hueToRgb(p, q, h - 120);&#x000A;    }&#x000A;    rgbMap = (function() {&#x000A;      var _i, _len, _ref, _results;&#x000A;      _ref = [r, g, b];&#x000A;      _results = [];&#x000A;      for (_i = 0, _len = _ref.length; _i < _len; _i++) {&#x000A;        channel = _ref[_i];&#x000A;        _results.push((channel * 255).round());&#x000A;      }&#x000A;      return _results;&#x000A;    })();&#x000A;    return rgbMap.concat(a);&#x000A;  };&#x000A;  channelize = function(color, alpha) {&#x000A;    var channel, result;&#x000A;    if (color.channels != null) return color.channels();&#x000A;    if (Object.isArray(color)) {&#x000A;      if (alpha != null) {&#x000A;        alpha = parseFloat(alpha);&#x000A;      } else if (color[3] != null) {&#x000A;        alpha = parseFloat(color[3]);&#x000A;      } else {&#x000A;        alpha = 1;&#x000A;      }&#x000A;      result = ((function() {&#x000A;        var _i, _len, _ref, _results;&#x000A;        _ref = color.slice(0, 3);&#x000A;        _results = [];&#x000A;        for (_i = 0, _len = _ref.length; _i < _len; _i++) {&#x000A;          channel = _ref[_i];&#x000A;          _results.push(parseFloat(channel));&#x000A;        }&#x000A;        return _results;&#x000A;      })()).concat(alpha);&#x000A;    } else {&#x000A;      result = (typeof Color.lookup === "function" ? Color.lookup(color) : void 0) || color.parseHex() || parseRGB(color) || parseHSL(color);&#x000A;      if (alpha != null) result[3] = parseFloat(alpha);&#x000A;    }&#x000A;    return result;&#x000A;  };</code></pre>
         </section>
       </div>
       <hr />
@@ -318,19 +340,24 @@
         <section class='summary'><p>Takes two bounds objects and returns true if they collide (overlap), false otherwise.<br />Bounds objects have x, y, width and height properties.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
-          <p><code><pre><br />player = GameObject<br />  x: 0<br />  y: 0<br />  width: 10<br />  height: 10</p>
+          <pre><code>player = GameObject
+            x: 0
+            y: 0
+            width: 10
+            height: 10
           
-          <p>enemy = GameObject<br />  x: 5<br />  y: 5<br />  width: 10<br />  height: 10</p>
+          enemy = GameObject
+            x: 5
+            y: 5
+            width: 10
+            height: 10
           
-          <p>Collision.rectangular(player, enemy)</p>
+          Collision.rectangular(player, enemy)
+          # =&gt; true
           
-          <h1>=> true</h1>
-          
-          <p>Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})</p>
-          
-          <h1>=> false</h1>
-          
-          <p></pre></code></p>
+          Collision.rectangular(player, {x: 50, y: 40, width: 30, height: 30})
+          # =&gt; false
+          </code></pre>
         </section>
         <section class='parameters'>
           <h3>Parameters</h3>

@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a class='active' href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -73,9 +73,9 @@
     <section class='method_list'>
       <h3>Bindable Methods</h3>
       <div class='methods'>
-        <a href='Bindable.html##bind'>#bind</a>
+        <a href='Bindable.html##off'>#off</a>
+        <a href='Bindable.html##on'>#on</a>
         <a href='Bindable.html##trigger'>#trigger</a>
-        <a href='Bindable.html##unbind'>#unbind</a>
       </div>
     </section>
     <div class='documentation'>
@@ -102,19 +102,64 @@
         </section>
       </div>
       <hr />
-      <a name='#bind'></a>
+      <a name='#off'></a>
       <!-- TODO make sure method_data isn't nil -->
-      <h1>Bindable#bind(event, callback)</h1>
+      <h1>Bindable#off(event, callback)</h1>
+      <div class='description'>
+        <section class='summary'><p>Removes a specific event listener, or all event listeners if<br />no specific listener is given.</p></section>
+        <section class='usage'>
+          <h3>Usage</h3>
+          <pre><code>#  removes the handler coolEventHandler from the event
+          # "someCustomEvent" while leaving the other events intact.
+          yourObject.off "someCustomEvent", coolEventHandler
+          
+          # removes all handlers attached to "anotherCustomEvent" 
+          yourObject.off "anotherCustomEvent"
+          </code></pre>
+        </section>
+        <section class='parameters'>
+          <h3>Parameters</h3>
+          <ul>
+            <li>
+              <span class='param_name'>event</span>
+               -
+              <span class='param_description'>The event to remove the listener from.</span>
+            </li>
+            <li>
+              <span class='param_name'>callback</span>
+               -
+              <span class='param_description'>The listener to remove.</span>
+            </li>
+          </ul>
+        </section>
+        <section class='returns'>
+          <h3>Returns</h3>
+          <p>
+            Type:
+            <a href='.html'></a>
+          </p>
+          <p class='return_description'></p>
+        </section>
+        <section class='source'>
+          <h3>Source</h3>
+          <a class='toggle_source'>Toggle</a>
+          <pre><code>off: function(namespacedEvent, callback) {&#x000A;      var callbacks, event, key, namespace, _ref;&#x000A;      _ref = namespacedEvent.split("."), event = _ref[0], namespace = _ref[1];&#x000A;      if (event) {&#x000A;        eventCallbacks[event] || (eventCallbacks[event] = []);&#x000A;        if (namespace) {&#x000A;          eventCallbacks[event] = eventCallbacks.select(function(callback) {&#x000A;            var _ref2;&#x000A;            return !(((_ref2 = callback.__PIXIE) != null ? _ref2[namespace] : void 0) != null);&#x000A;          });&#x000A;        } else {&#x000A;          if (callback) {&#x000A;            eventCallbacks[event].remove(callback);&#x000A;          } else {&#x000A;            eventCallbacks[event] = [];&#x000A;          }&#x000A;        }&#x000A;      } else if (namespace) {&#x000A;        for (key in eventCallbacks) {&#x000A;          callbacks = eventCallbacks[key];&#x000A;          eventCallbacks[key] = callbacks.select(function(callback) {&#x000A;            var _ref2;&#x000A;            return !(((_ref2 = callback.__PIXIE) != null ? _ref2[namespace] : void 0) != null);&#x000A;          });&#x000A;        }&#x000A;      }&#x000A;      return this;&#x000A;    },</code></pre>
+        </section>
+      </div>
+      <hr />
+      <a name='#on'></a>
+      <!-- TODO make sure method_data isn't nil -->
+      <h1>Bindable#on(event, callback)</h1>
       <div class='description'>
         <section class='summary'><p>Adds a function as an event listener.</p></section>
         <section class='usage'>
           <h3>Usage</h3>
           <pre><code># this will call coolEventHandler after
           # yourObject.trigger "someCustomEvent" is called.
-          yourObject.bind "someCustomEvent", coolEventHandler
+          yourObject.on "someCustomEvent", coolEventHandler
           
           #or
-          yourObject.bind "anotherCustomEvent", -&gt;
+          yourObject.on "anotherCustomEvent", -&gt;
             doSomething()
           </code></pre>
         </section>
@@ -144,7 +189,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>bind: function(namespacedEvent, callback) {&#x000A;      var event, namespace, _ref;&#x000A;      _ref = namespacedEvent.split("."), event = _ref[0], namespace = _ref[1];&#x000A;      if (namespace) {&#x000A;        callback.__PIXIE || (callback.__PIXIE = {});&#x000A;        callback.__PIXIE[namespace] = true;&#x000A;      }&#x000A;      eventCallbacks[event] || (eventCallbacks[event] = []);&#x000A;      eventCallbacks[event].push(callback);&#x000A;      return this;&#x000A;    },</code></pre>
+          <pre><code>on: function(namespacedEvent, callback) {&#x000A;      var event, namespace, _ref;&#x000A;      _ref = namespacedEvent.split("."), event = _ref[0], namespace = _ref[1];&#x000A;      if (namespace) {&#x000A;        callback.__PIXIE || (callback.__PIXIE = {});&#x000A;        callback.__PIXIE[namespace] = true;&#x000A;      }&#x000A;      eventCallbacks[event] || (eventCallbacks[event] = []);&#x000A;      eventCallbacks[event].push(callback);&#x000A;      return this;&#x000A;    },</code></pre>
         </section>
       </div>
       <hr />
@@ -185,52 +230,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>trigger: function() {&#x000A;      var callbacks, event, parameters, self;&#x000A;      event = arguments[0], parameters = 2 <= arguments.length ? __slice.call(arguments, 1) : [];&#x000A;      callbacks = eventCallbacks[event];&#x000A;      if (callbacks && callbacks.length) {&#x000A;        self = this;&#x000A;        return callbacks.each(function(callback) {&#x000A;          return callback.apply(self, parameters);&#x000A;        });&#x000A;      }&#x000A;    }&#x000A;  };&#x000A;};&#x000A;&#x000A;(typeof exports !== "undefined" && exports !== null ? exports : this)["Bindable"] = Bindable;&#x000A;;&#x000A;var CommandStack;&#x000A;&#x000A;CommandStack = function() {&#x000A;  var index, stack;&#x000A;  stack = [];&#x000A;  index = 0;&#x000A;  return {&#x000A;    execute: function(command) {&#x000A;      stack[index] = command;&#x000A;      command.execute();&#x000A;      return stack.length = index += 1;&#x000A;    },&#x000A;    undo: function() {&#x000A;      var command;&#x000A;      if (this.canUndo()) {&#x000A;        index -= 1;&#x000A;        command = stack[index];&#x000A;        command.undo();&#x000A;        return command;&#x000A;      }&#x000A;    },&#x000A;    redo: function() {&#x000A;      var command;&#x000A;      if (this.canRedo()) {&#x000A;        command = stack[index];&#x000A;        command.execute();&#x000A;        index += 1;&#x000A;        return command;&#x000A;      }&#x000A;    },&#x000A;    canUndo: function() {&#x000A;      return index > 0;&#x000A;    },&#x000A;    canRedo: function() {&#x000A;      return stack[index] != null;&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
-        </section>
-      </div>
-      <hr />
-      <a name='#unbind'></a>
-      <!-- TODO make sure method_data isn't nil -->
-      <h1>Bindable#unbind(event, callback)</h1>
-      <div class='description'>
-        <section class='summary'><p>Removes a specific event listener, or all event listeners if<br />no specific listener is given.</p></section>
-        <section class='usage'>
-          <h3>Usage</h3>
-          <pre><code>#  removes the handler coolEventHandler from the event
-          # "someCustomEvent" while leaving the other events intact.
-          yourObject.unbind "someCustomEvent", coolEventHandler
-          
-          # removes all handlers attached to "anotherCustomEvent" 
-          yourObject.unbind "anotherCustomEvent"
-          </code></pre>
-        </section>
-        <section class='parameters'>
-          <h3>Parameters</h3>
-          <ul>
-            <li>
-              <span class='param_name'>event</span>
-               -
-              <span class='param_description'>The event to remove the listener from.</span>
-            </li>
-            <li>
-              <span class='param_name'>callback</span>
-               -
-              <span class='param_description'>The listener to remove.</span>
-            </li>
-          </ul>
-        </section>
-        <section class='returns'>
-          <h3>Returns</h3>
-          <p>
-            Type:
-            <a href='.html'></a>
-          </p>
-          <p class='return_description'></p>
-        </section>
-        <section class='source'>
-          <h3>Source</h3>
-          <a class='toggle_source'>Toggle</a>
-          <pre><code>unbind: function(namespacedEvent, callback) {&#x000A;      var callbacks, event, key, namespace, _ref;&#x000A;      _ref = namespacedEvent.split("."), event = _ref[0], namespace = _ref[1];&#x000A;      if (event) {&#x000A;        eventCallbacks[event] || (eventCallbacks[event] = []);&#x000A;        if (namespace) {&#x000A;          eventCallbacks[event] = eventCallbacks.select(function(callback) {&#x000A;            var _ref2;&#x000A;            return !(((_ref2 = callback.__PIXIE) != null ? _ref2[namespace] : void 0) != null);&#x000A;          });&#x000A;        } else {&#x000A;          if (callback) {&#x000A;            eventCallbacks[event].remove(callback);&#x000A;          } else {&#x000A;            eventCallbacks[event] = [];&#x000A;          }&#x000A;        }&#x000A;      } else if (namespace) {&#x000A;        for (key in eventCallbacks) {&#x000A;          callbacks = eventCallbacks[key];&#x000A;          eventCallbacks[key] = callbacks.select(function(callback) {&#x000A;            var _ref2;&#x000A;            return !(((_ref2 = callback.__PIXIE) != null ? _ref2[namespace] : void 0) != null);&#x000A;          });&#x000A;        }&#x000A;      }&#x000A;      return this;&#x000A;    },</code></pre>
+          <pre><code>trigger: function() {&#x000A;      var callbacks, event, parameters;&#x000A;      event = arguments[0], parameters = 2 <= arguments.length ? __slice.call(arguments, 1) : [];&#x000A;      callbacks = eventCallbacks[event];&#x000A;      if (callbacks && callbacks.length) {&#x000A;        self = this;&#x000A;        return callbacks.each(function(callback) {&#x000A;          return callback.apply(self, parameters);&#x000A;        });&#x000A;      }&#x000A;    }&#x000A;  };&#x000A;};&#x000A;&#x000A;(typeof exports !== "undefined" && exports !== null ? exports : this)["Bindable"] = Bindable;&#x000A;;&#x000A;var CommandStack;&#x000A;&#x000A;CommandStack = function() {&#x000A;  var index, stack;&#x000A;  stack = [];&#x000A;  index = 0;&#x000A;  return {&#x000A;    execute: function(command) {&#x000A;      stack[index] = command;&#x000A;      command.execute();&#x000A;      return stack.length = index += 1;&#x000A;    },&#x000A;    undo: function() {&#x000A;      var command;&#x000A;      if (this.canUndo()) {&#x000A;        index -= 1;&#x000A;        command = stack[index];&#x000A;        command.undo();&#x000A;        return command;&#x000A;      }&#x000A;    },&#x000A;    redo: function() {&#x000A;      var command;&#x000A;      if (this.canRedo()) {&#x000A;        command = stack[index];&#x000A;        command.execute();&#x000A;        index += 1;&#x000A;        return command;&#x000A;      }&#x000A;    },&#x000A;    canUndo: function() {&#x000A;      return index > 0;&#x000A;    },&#x000A;    canRedo: function() {&#x000A;      return stack[index] != null;&#x000A;    }&#x000A;  };&#x000A;};&#x000A;;</code></pre>
         </section>
       </div>
       <hr />

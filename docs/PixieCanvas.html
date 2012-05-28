@@ -10,6 +10,7 @@
   <body>
     <pre></pre>
     <nav>
+      <a href='ActiveBounds.html'>ActiveBounds</a>
       <a href='Ageable.html'>Ageable</a>
       <a href='Array.html'>Array</a>
       <a href='Bindable.html'>Bindable</a>
@@ -17,7 +18,6 @@
       <a href='Bounded.html'>Bounded</a>
       <a href='Camera.html'>Camera</a>
       <a href='Clampable.html'>Clampable</a>
-      <a href='Collidable.html'>Collidable</a>
       <a href='Collision.html'>Collision</a>
       <a href='Color.html'>Color</a>
       <a href='Controllable.html'>Controllable</a>
@@ -31,6 +31,7 @@
       <a href='Expirable.html'>Expirable</a>
       <a href='Fadeable.html'>Fadeable</a>
       <a href='Flickerable.html'>Flickerable</a>
+      <a href='FloatingTextEffect.html'>FloatingTextEffect</a>
       <a href='Follow.html'>Follow</a>
       <a href='Framerate.html'>Framerate</a>
       <a href='Function.html'>Function</a>
@@ -49,7 +50,6 @@
       <a href='Oscillator.html'>Oscillator</a>
       <a class='active' href='PixieCanvas.html'>PixieCanvas</a>
       <a href='Point.html'>Point</a>
-      <a href='PowerCanvas.html'>PowerCanvas</a>
       <a href='Random.html'>Random</a>
       <a href='RegExp.html'>RegExp</a>
       <a href='ResourceLoader.html'>ResourceLoader</a>
@@ -904,7 +904,7 @@
         <section class='source'>
           <h3>Source</h3>
           <a class='toggle_source'>Toggle</a>
-          <pre><code>measureText: function(text) {&#x000A;        return context.measureText(text).width;&#x000A;      },&#x000A;      putImageData: function(imageData, x, y) {&#x000A;        context.putImageData(imageData, x, y);&#x000A;        return this;&#x000A;      },&#x000A;      context: function() {&#x000A;        return context;&#x000A;      },&#x000A;      element: function() {&#x000A;        return canvas;&#x000A;      },&#x000A;      createPattern: function(image, repitition) {&#x000A;        return context.createPattern(image, repitition);&#x000A;      },&#x000A;      clip: function(x, y, width, height) {&#x000A;        context.beginPath();&#x000A;        context.rect(x, y, width, height);&#x000A;        context.clip();&#x000A;        return this;&#x000A;      }&#x000A;    });&#x000A;    contextAttrAccessor = function() {&#x000A;      var attrs;&#x000A;      attrs = 1 <= arguments.length ? __slice.call(arguments, 0) : [];&#x000A;      return attrs.each(function(attr) {&#x000A;        return $canvas[attr] = function(newVal) {&#x000A;          if (newVal != null) {&#x000A;            context[attr] = newVal;&#x000A;            return this;&#x000A;          } else {&#x000A;            return context[attr];&#x000A;          }&#x000A;        };&#x000A;      });&#x000A;    };&#x000A;    canvasAttrAccessor = function() {&#x000A;      var attrs;&#x000A;      attrs = 1 <= arguments.length ? __slice.call(arguments, 0) : [];&#x000A;      return attrs.each(function(attr) {&#x000A;        return $canvas[attr] = function(newVal) {&#x000A;          if (newVal != null) {&#x000A;            canvas[attr] = newVal;&#x000A;            return this;&#x000A;          } else {&#x000A;            return canvas[attr];&#x000A;          }&#x000A;        };&#x000A;      });&#x000A;    };&#x000A;    contextAttrAccessor("font", "globalAlpha", "globalCompositeOperation", "lineWidth", "textAlign");&#x000A;    canvasAttrAccessor("height", "width");&#x000A;    if (canvas != null ? canvas.getContext : void 0) {&#x000A;      context = canvas.getContext('2d');&#x000A;      if (options.init) options.init($canvas);&#x000A;      return $canvas;&#x000A;    }&#x000A;  };&#x000A;})(jQuery);&#x000A;;&#x000A;var __slice = Array.prototype.slice;&#x000A;&#x000A;(function($) {&#x000A;  return $.fn.powerCanvas = function(options) {&#x000A;    var $canvas, canvas, context;&#x000A;    options || (options = {});&#x000A;    canvas = this.get(0);&#x000A;    context = void 0;</code></pre>
+          <pre><code>measureText: function(text) {&#x000A;        return context.measureText(text).width;&#x000A;      },&#x000A;      putImageData: function(imageData, x, y) {&#x000A;        context.putImageData(imageData, x, y);&#x000A;        return this;&#x000A;      },&#x000A;      context: function() {&#x000A;        return context;&#x000A;      },&#x000A;      element: function() {&#x000A;        return canvas;&#x000A;      },&#x000A;      createPattern: function(image, repitition) {&#x000A;        return context.createPattern(image, repitition);&#x000A;      },&#x000A;      clip: function(x, y, width, height) {&#x000A;        context.beginPath();&#x000A;        context.rect(x, y, width, height);&#x000A;        context.clip();&#x000A;        return this;&#x000A;      }&#x000A;    });&#x000A;    contextAttrAccessor = function() {&#x000A;      var attrs;&#x000A;      attrs = 1 <= arguments.length ? __slice.call(arguments, 0) : [];&#x000A;      return attrs.each(function(attr) {&#x000A;        return $canvas[attr] = function(newVal) {&#x000A;          if (newVal != null) {&#x000A;            context[attr] = newVal;&#x000A;            return this;&#x000A;          } else {&#x000A;            return context[attr];&#x000A;          }&#x000A;        };&#x000A;      });&#x000A;    };&#x000A;    canvasAttrAccessor = function() {&#x000A;      var attrs;&#x000A;      attrs = 1 <= arguments.length ? __slice.call(arguments, 0) : [];&#x000A;      return attrs.each(function(attr) {&#x000A;        return $canvas[attr] = function(newVal) {&#x000A;          if (newVal != null) {&#x000A;            canvas[attr] = newVal;&#x000A;            return this;&#x000A;          } else {&#x000A;            return canvas[attr];&#x000A;          }&#x000A;        };&#x000A;      });&#x000A;    };&#x000A;    contextAttrAccessor("font", "globalAlpha", "globalCompositeOperation", "lineWidth", "textAlign");&#x000A;    canvasAttrAccessor("height", "width");&#x000A;    if (canvas != null ? canvas.getContext : void 0) {&#x000A;      context = canvas.getContext('2d');&#x000A;      if (options.init) options.init($canvas);&#x000A;      return $canvas;&#x000A;    }&#x000A;  };&#x000A;})(jQuery);&#x000A;;</code></pre>
         </section>
       </div>
       <hr />
