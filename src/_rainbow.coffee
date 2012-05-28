@@ -8,7 +8,7 @@ Rainbow = (I={}) ->
     "sprite": "rainbow",
     "__CODE": "self.on 'update', ->\n  I.rotation += Math.TAU / 256",
     "uuid": "rainbow",
-    "duration": 1,
+    "duration": 5,
     "fadeOut": true
   }
 
