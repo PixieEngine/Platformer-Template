@@ -51,5 +51,5 @@ $('body').append $ '<iframe />',
  type: "text/html"
  width: App.width
  height: App.height
- src: "https://www.youtube.com/embed/moyHT-OP5ec"
+ src: "http://www.youtube.com/embed/moyHT-OP5ec?wmode=transparent&autoplay=1&controls=0&loop=1"
  frameborder: "0"
