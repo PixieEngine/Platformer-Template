@@ -5,10 +5,11 @@ gameKeys
 window.engine = Engine
   backgroundColor: Color("sky blue").desaturate(.2)
   canvas: $("canvas").pixieCanvas()
-  levels: ['level']
+
+100.times (n) ->
+  engine.add 'Block'
+    x: 32 * n
+    y: App.height - 32 
   
-engine.include 'Engine.Levels', 'Engine.Tilemap'
-  
-engine.nextLevel()
 engine.start()
     
