@@ -6,13 +6,13 @@ Rainbow = (I={}) ->
     "class": "Rainbow",
     "parentClass": "GameObject",
     "sprite": "rainbow",
-    "__CODE": "self.on 'update', ->\n  I.rotation += Math.TAU / 32",
+    "__CODE": "self.on 'update', ->\n  I.rotation += Math.TAU / 256",
     "uuid": "rainbow"
   }
 
   self = GameObject(I)
 
   self.on 'update', ->
-    I.rotation += Math.TAU / 32
+    I.rotation += Math.TAU / 256
 
   return self
