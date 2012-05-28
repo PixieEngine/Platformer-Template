@@ -7,7 +7,9 @@ Rainbow = (I={}) ->
     "parentClass": "GameObject",
     "sprite": "rainbow",
     "__CODE": "self.on 'update', ->\n  I.rotation += Math.TAU / 256",
-    "uuid": "rainbow"
+    "uuid": "rainbow",
+    "duration": 1,
+    "fadeOut": true
   }
 
   self = GameObject(I)
