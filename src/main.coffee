@@ -33,7 +33,7 @@ engine.on 'update', ->
     camera.I.t90 = 0.5
     camera.I.x = target.I.x
     camera.I.y = target.I.y
-  
+      
 $('body').append $ '<iframe />',
  class: "youtube-player"
  css:
