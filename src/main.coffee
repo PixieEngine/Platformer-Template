@@ -13,7 +13,7 @@ window.engine = Engine
   
 engine.add 'Player'
   x: 32
-  y: App.height - 32
+  y: App.height - 80
   
 engine.start()
     
