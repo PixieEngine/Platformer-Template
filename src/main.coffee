@@ -17,3 +17,15 @@ engine.add 'Player'
   
 engine.start()
     
+$('body').append $ '<iframe />',
+ class: "youtube-player"
+ css:
+   position: "fixed"
+   top: 0
+   left: 0
+   zIndex: -1
+ type: "text/html"
+ width: App.width
+ height: App.height
+ src: "http://www.youtube.com/embed/K70mt9UCam0?wmode=transparent&autoplay=1&controls=0&loop=1"
+ frameborder: "0"
