@@ -3,7 +3,7 @@ gameKeys
   z: "Jump"
 
 window.engine = Engine
-  backgroundColor: Color("sky blue").desaturate(.2)
+  backgroundColor: 'transparent'
   canvas: $("canvas").pixieCanvas()
 
 window.textIndex = 0  
