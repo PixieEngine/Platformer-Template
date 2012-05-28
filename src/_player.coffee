@@ -12,7 +12,7 @@ Player = (I={}) ->
     "onWall": false,
     "velocity": "{x: 0, y: 0}",
     "sprite": "balki",
-    "totalStars": 25,
+    "totalStars": 27,
     "stars": 0
   }
 
