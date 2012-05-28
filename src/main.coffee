@@ -6,7 +6,7 @@ window.engine = Engine
   backgroundColor: Color("sky blue").desaturate(.2)
   canvas: $("canvas").pixieCanvas()
 
-300.times (n) ->
+310.times (n) ->
   engine.add 'Block'
     x: 32 * n
     y: App.height - 16
