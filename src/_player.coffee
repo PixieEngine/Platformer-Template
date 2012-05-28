@@ -13,7 +13,8 @@ Player = (I={}) ->
     "velocity": "{x: 0, y: 0}",
     "sprite": "balki",
     "totalStars": 27,
-    "stars": 0
+    "stars": 0,
+    "speed": 1
   }
 
   self = GameObject(I)

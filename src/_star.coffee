@@ -6,7 +6,7 @@ Star = (I={}) ->
     "class": "Star",
     "parentClass": "GameObject",
     "sprite": "star",
-    "__CODE": "self.on 'destroy', ->\n  player = engine.first('Player')\n  \n  player.I.stars += 1",
+    "__CODE": "self.on 'destroy', ->\n  player = engine.first('Player')\n  \n  player.I.stars += 1\n  \n  player.I.speed += 1",
     "uuid": "star"
   }
 
@@ -16,5 +16,7 @@ Star = (I={}) ->
     player = engine.first('Player')
     
     player.I.stars += 1
+    
+    player.I.speed += 1
 
   return self
