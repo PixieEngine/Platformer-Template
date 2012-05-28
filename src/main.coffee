@@ -23,7 +23,7 @@ $('body').append $ '<iframe />',
    position: "fixed"
    top: 0
    left: 0
-   zIndex: -2
+   zIndex: -1
  type: "text/html"
  width: App.width
  height: App.height
