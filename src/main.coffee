@@ -6,6 +6,8 @@ window.engine = Engine
   backgroundColor: Color("sky blue").desaturate(.2)
   canvas: $("canvas").pixieCanvas()
 
+window.textIndex = 0  
+  
 window.load = ->   
   320.times (n) ->
     engine.add 'Block'
