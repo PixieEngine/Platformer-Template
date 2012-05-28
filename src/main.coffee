@@ -12,9 +12,11 @@ load = ->
       x: 32 * n
       y: App.height - 16
     
-  engine.add 'Player'
+  player = engine.add 'Player'
     x: 32
     y: App.height - 80
+    
+  player.I.stars = 0
   
 engine.start()
     
