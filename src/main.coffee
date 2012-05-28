@@ -8,7 +8,7 @@ window.engine = Engine
 
 window.textIndex = 0  
   
-window.load = ->   
+window.reloadGame = ->   
   320.times (n) ->
     engine.add 'Block'
       x: 32 * n
