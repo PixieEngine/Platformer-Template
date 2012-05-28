@@ -9,7 +9,7 @@ window.engine = Engine
 100.times (n) ->
   engine.add 'Block'
     x: 32 * n
-    y: App.height - 32 
+    y: App.height - 16
   
 engine.start()
     
